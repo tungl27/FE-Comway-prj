@@ -1,0 +1,23 @@
+.form-menu{
+    height: 300px;
+    margin-top: 10px;
+    border-left: 3px solid #027DB4;
+    border-bottom: 3px solid #027DB4;
+    box-shadow: 5px 5px 5px #000000;
+}
+
+.form-title{
+    margin: 20px 0px 0px 50px ;
+    font-weight: 600;
+    font-size: larger;
+}
+
+.button{
+    width: 300px;
+    background-color: #169BD5 !important;
+    margin: auto;
+}
+
+.button:hover{
+    background-color: #027DB4 !important;
+}

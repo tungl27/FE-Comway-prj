@@ -3,18 +3,36 @@
     border: 2px solid #02A7F0;
     padding: 2px;
     text-align: center;
-    height: 100px;
-    line-height: 100px;
+    height: 99px;
+    line-height: 99px;
+    width: 1007px;
+    position: relative;
+    margin: auto;
 }
 
 .title {
-    color: #A30014;
-    font-weight: 600;
-    font-size: x-large;
-    margin: 0px;
+    font-family: 'HiraginoSans-W7', 'Hiragino Sans W7', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+    color: rgba(163, 0, 20, 0.5686274509803921);
 }
-.logout{
+
+
+.logout {
     position: absolute;
     right: 20px;
     top: 0px;
+}
+
+.circle {
+    position: absolute;
+    right: 104px;
+    top: 41px;
+}
+
+.stick {
+    position: absolute;
+    right: 113px;
+    top: 30px
 }
