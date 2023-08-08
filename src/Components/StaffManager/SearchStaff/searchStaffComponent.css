@@ -1,0 +1,24 @@
+.searchContainer {
+    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+    border-color: #797979;
+    border-width: 1px;
+    border-style: ridge;
+    width: 100%;
+  }
+  
+  .searchBtn {
+    background-color: #169bd5;
+    border-radius: 4px;
+    color: #ffffff;
+    border-color: #169bd5;
+    font-size: 15px;
+    height: 40px;
+    width: 80px;
+  }
+  
+
+  

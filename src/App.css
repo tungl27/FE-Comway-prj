@@ -1,4 +1,76 @@
-.App {
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --main-blue-color: #169bd5;
+  --error-color: rgb(217, 0, 27);
+  --gray-border-color: #797979;
+  --table-gray-bg-color: #F2F2F2;
+  --table-blue-theme-color: #80FFFF;
+  /* Thêm các biến khác tương tự */
+}
+
+.inputSearch {
+  border-color: #797979;
+  border-width: 1px;
+  border-style: solid;
+
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #797979;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.inputText {
+  border-color: #797979;
+  border-width: 1px;
+  border-style: solid;
+
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #797979;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.error {
+  color: var(--error-color);
+  font-size: 12px;
+}
+
+/* .head {
+  background-color: var(--secondary-color);
+  height: 34px;
+} */
+
+/* styles.css */
+
+.head th {
   text-align: center;
+  border: 1px solid var(--gray-border-color) !important;
+  height: 34px !important;
+  font-size: 14px;
+  background-color: var(--table-gray-bg-color) ;
+}
+
+tbody td {
+  text-align: center;
+  border: 1px solid var(--gray-border-color) !important;
+  height: 30px !important;
+  
 }
 
