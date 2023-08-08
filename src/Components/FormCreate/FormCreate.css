@@ -1,0 +1,35 @@
+.form-create {
+    border-left: 3px solid #027DB4;
+    border-bottom: 3px solid #027DB4;
+    box-shadow: 5px 5px 5px #a09f9f;
+    width: 947px;
+    height: 444px;
+    margin: auto;
+    margin-top: -15px;
+    position: relative;
+}
+
+.form-title{
+    margin: 20px 0px 0px 80px ;
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.message{
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: #00BFBF;
+}
+.inputs-group{
+    width: 510px;
+    margin-left: 80px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+button{
+    background-color: #169BD5 !important;
+    width: 119px;
+    height: 42px;
+    margin: auto;
+}

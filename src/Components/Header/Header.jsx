@@ -8,7 +8,7 @@ export default function Header({ account }) {
         <Fragment>
             <div className="header">
                 <p className="title">
-                    オーダー受注支払合算システム
+                    オーダー実績管理システム
                 </p>
                 <img className="circle" src={circle} alt="" srcSet="" />
                 <img className="stick" src={stick} alt="" srcSet="" />

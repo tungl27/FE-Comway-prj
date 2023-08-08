@@ -1,0 +1,26 @@
+.required:after {
+  content: " *";
+  color: red;
+}
+
+input {
+  width: 314px;
+  height: 36px;
+  background: inherit;
+  background-color: rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(121, 121, 121, 1);
+  border-radius: 5px;
+  font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  text-align: left;
+}
+
+.errorMsg{
+  color: red;
+  font-size: smaller;
+  margin: 0;
+}
