@@ -5,7 +5,7 @@ export default function Formmenu() {
     return (
         <Fragment>
             <div className="container">
-                <div className="form-menu mt-5">
+                <div className="form-menu">
                     <p className="form-title">
                         メニュー画面
                     </p>

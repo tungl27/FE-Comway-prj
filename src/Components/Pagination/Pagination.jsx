@@ -3,17 +3,33 @@ import './Pagination.css'
 import preB from '../../images/u68.svg'
 import forwardButton from '../../images/u67.svg'
 
-export default function Pagination({ activepage, startPage, endPage, setActive }) {
+export default function Pagination({ activepage, totalRecords, pageSize, setActive }) {
 
+    const totalPage = Math.ceil(totalRecords/pageSize)
+    let startPage = 0;
+    let endPage = 0;
+    if(totalPage < 3){
+        startPage = 1;
+        endPage = totalPage;
+    } if(activepage === totalPage ){
+        startPage = activepage - 2
+        endPage = activepage
+    }else if(activepage === 1){
+        startPage = activepage
+        endPage = activepage + 2
+    }else{
+        startPage = activepage - 1
+        endPage = activepage + 1
+    }
     const increPage = () => {
         console.log('increasing')
-        if (activepage < endPage) {
+        if (activepage < totalPage) {
             setActive(activepage + 1)
         }
     }
     const reducePage = () => {
         console.log('decreasing')
-        if (activepage > startPage) {
+        if (activepage > 1) {
             setActive(activepage - 1)
         }
     }
