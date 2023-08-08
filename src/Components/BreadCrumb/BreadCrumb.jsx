@@ -9,7 +9,12 @@ export default function Breadcrumb({ breadcrumbs }) {
                     {breadcrumbs.map((item, index) => {
                         return (
                             <li key={index} >
-                                {item.title} {index < breadcrumbs.length - 1 ? ' > ' : ''}
+                                <p >
+                                    <span className={index < breadcrumbs.length - 1 ? 'text-decor' : ''}>{item.title}</span>
+                                    <span className="icon">
+                                        {index < breadcrumbs.length - 1 ? ' > ' : ''}
+                                    </span>
+                                </p>
                             </li>
                         )
                     })}

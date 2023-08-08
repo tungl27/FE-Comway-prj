@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import './Pagination.css'
 import preB from '../../images/u68.svg'
 import forwardButton from '../../images/u67.svg'

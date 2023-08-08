@@ -8,6 +8,14 @@ li
     color: #81D3F8;
     width: 1007px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 15px;
 } 
+
+.icon{
+    font-size: larger;
+}
+
+.text-decor{
+    text-decoration: underline;
+}
 
