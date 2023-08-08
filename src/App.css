@@ -5,7 +5,7 @@
   --error-color: rgb(217, 0, 27);
   --gray-border-color: #797979;
   --table-gray-bg-color: #f2f2f2;
-  --table-blue-theme-color: #80ffff;
+  --table-blue-theme-color: #e8ffff;
   /* Thêm các biến khác tương tự */
 }
 
@@ -52,6 +52,10 @@
   font-size: 12px;
 }
 
+table {
+  font-size: 14px;
+}
+
 .table-head th {
   text-align: center;
   border: 1px solid var(--gray-border-color) !important;
@@ -64,4 +68,21 @@ tbody td {
   text-align: center;
   border: 1px solid var(--gray-border-color) !important;
   height: 30px !important;
+}
+
+.edit-link,
+.delete-link {
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.delete-link {
+  color: var(--error-color);
+  text-decoration: underline;
+}
+
+.edit-link:hover,
+.delete-link:hover {
+  text-decoration: underline;
 }
