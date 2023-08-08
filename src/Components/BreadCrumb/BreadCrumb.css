@@ -1,0 +1,13 @@
+li
+{
+    list-style-type: none;
+}
+
+.breadcrumb{
+    font-size: smaller;
+    color: #81D3F8;
+    width: 1007px;
+    margin: auto;
+    margin-top: 10px;
+} 
+

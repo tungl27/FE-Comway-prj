@@ -7,7 +7,7 @@ import Pagination from './Components/Pagination/Pagination';
 import { Fragment, useState } from 'react';
 import Breadcrumb from './Components/BreadCrumb/BreadCrumb';
 
-const breadcrumbs = [{title: 'メニュー', url: 'menu'}, {title: 'スタッフ一覧', url:'stafflist'}]
+const breadcrumbs = [{ title: 'メニュー', url: 'menu' }, { title: 'スタッフ一覧', url: 'stafflist' }]
 
 function App() {
 
@@ -15,13 +15,11 @@ function App() {
 
   return (
     <Fragment>
-      <div className='App'>
-        <Header></Header>
-        <Breadcrumb breadcrumbs={breadcrumbs}></Breadcrumb>
-        <Formmenu></Formmenu>
-        <Pagination activepage={active} startPage={2} endPage={4} setActive={setActive}></Pagination>
-        <Footer></Footer>
-      </div>
+      <Header></Header>
+      <Breadcrumb breadcrumbs={breadcrumbs}></Breadcrumb>
+      <Formmenu></Formmenu>
+      <Pagination activepage={active} totalRecords={50} pageSize={5} setActive={setActive}></Pagination>
+      <Footer></Footer>
     </Fragment>
   );
 }
