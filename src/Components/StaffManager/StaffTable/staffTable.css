@@ -1,0 +1,38 @@
+table {
+  font-size: 14px;
+}
+
+.table-head th {
+  text-align: center;
+  border: 1px solid var(--gray-border-color) !important;
+  height: 34px !important;
+  font-size: 14px;
+  background-color: var(--table-gray-bg-color);
+}
+
+tbody td {
+  text-align: center;
+  border: 1px solid var(--gray-border-color) !important;
+  height: 30px !important;
+}
+
+.edit-link,
+.delete-link {
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.delete-link {
+  color: var(--error-color);
+  text-decoration: underline;
+}
+
+.edit-link:hover,
+.delete-link:hover {
+  text-decoration: underline;
+}
+
+.even-row2 {
+  background-color: var(--table-blue-theme-color) !important;
+}
