@@ -11,8 +11,8 @@ export default function Input({ title, value, required, editable, setValue }) {
             <div className="d-flex justify-content-between">
                 <label htmlFor={title} className={required ? 'required' : '' }>{title}</label>
                 <div>
-                    <input id={title} name={title} type="text" value={value} placeholder="" title="" onChange={(e) => onChange(e)} />
-                    <p className="errorMsg">エラーメッセージXXXX</p>
+                    <input className={!editable ? 'read-only' : ''} readOnly={!editable} id={title} name={title} type="text" value={value} placeholder="" title="" onChange={(e) => onChange(e)} />
+                    <p className="errorMsg">{editable && 'エラーメッセージXXXX'}</p>
                 </div>
             </div>
         </Fragment>

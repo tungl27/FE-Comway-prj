@@ -23,4 +23,9 @@ input {
   color: red;
   font-size: smaller;
   margin: 0;
+  height: 20px;
+}
+
+.read-only{
+  background-color: #AAAAAA;
 }
