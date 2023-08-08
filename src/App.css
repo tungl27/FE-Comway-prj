@@ -4,8 +4,8 @@
   --main-blue-color: #169bd5;
   --error-color: rgb(217, 0, 27);
   --gray-border-color: #797979;
-  --table-gray-bg-color: #F2F2F2;
-  --table-blue-theme-color: #80FFFF;
+  --table-gray-bg-color: #f2f2f2;
+  --table-blue-theme-color: #80ffff;
   /* Thêm các biến khác tương tự */
 }
 
@@ -52,25 +52,16 @@
   font-size: 12px;
 }
 
-/* .head {
-  background-color: var(--secondary-color);
-  height: 34px;
-} */
-
-/* styles.css */
-
-.head th {
+.table-head th {
   text-align: center;
   border: 1px solid var(--gray-border-color) !important;
   height: 34px !important;
   font-size: 14px;
-  background-color: var(--table-gray-bg-color) ;
+  background-color: var(--table-gray-bg-color);
 }
 
 tbody td {
   text-align: center;
   border: 1px solid var(--gray-border-color) !important;
   height: 30px !important;
-  
 }
-

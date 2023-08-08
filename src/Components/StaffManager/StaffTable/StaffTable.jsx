@@ -17,7 +17,7 @@ export default function StaffTable() {
     <Fragment>
       <div className="mt-4">
         <table className="" style={{ width: "100%" }}>
-          <thead className="head">
+          <thead className="table-head">
             <tr>
               <th>No</th>
               <th>氏名</th>
@@ -30,7 +30,8 @@ export default function StaffTable() {
             {tableData.map((row, index) => (
               <tr
                 key={row.id}
-                className={index % 2 === 0 ? "even-row" : ""}
+                className={index % 2 === 0 ? "even-row2" : ""}
+                // style={{ backgroundColor: "#80FFFF" }}
               >
                 <td>{row.id}</td>
                 <td>{row.name}</td>
