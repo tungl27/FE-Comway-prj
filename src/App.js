@@ -1,9 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import { Fragment, useState } from 'react';
-import Menu from './pages/Menu';
-import CreateStaff from './pages/CreateStaff';
 import EditViewStaff from './pages/EditViewStaff';
+import CreateStaff from './pages/CreateStaff';
 
 const breadcrumbs = [{ title: 'メニュー', url: 'menu' }, { title: 'スタッフ一覧', url: 'stafflist' }]
 
