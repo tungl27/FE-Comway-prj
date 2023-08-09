@@ -24,8 +24,8 @@ export default function FormEdit() {
                             <Input value={id} required={true} setValue={setId} title={'スタッフID'} editable={false}></Input>
                             <Input value={name} required={true} setValue={setName} title={'苗字'} editable={true}></Input>
                             <Input value={email} required={true} setValue={setEmail} title={'名前'} editable={true}></Input>
-                            <Input value={email} required={false} setValue={setEmail} title={'苗字（ふりがな）'} editable={true}></Input>
-                            <Input value={email} required={false} setValue={setEmail} title={'名前（ふりがな）'} editable={true}></Input>
+                            <Input value={password} required={false} setValue={setPassword} title={'苗字（ふりがな）'} editable={true}></Input>
+                            <Input value={passwordConfirm} required={false} setValue={setPasswordConfirm} title={'名前（ふりがな）'} editable={true}></Input>
                             <Selection title={'職制'} options={options} required={true} selected={0} ></Selection>
                         </div>
                     </div>
