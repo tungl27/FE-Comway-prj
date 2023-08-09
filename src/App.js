@@ -1,7 +1,6 @@
 import './App.css';
 import { Fragment, useState } from 'react';
-import EditViewStaff from './pages/EditViewStaff';
-import CreateStaff from './pages/CreateStaff';
+import EditOrder from './pages/EditOrder';
 
 const breadcrumbs = [{ title: 'メニュー', url: 'menu' }, { title: 'スタッフ一覧', url: 'stafflist' }]
 
@@ -11,7 +10,7 @@ function App() {
 
   return (
     <Fragment>
-      <EditViewStaff breadcrumbs={breadcrumbs}></EditViewStaff>
+      <EditOrder breadcrumbs={breadcrumbs}></EditOrder>
     </Fragment>
   );
 }

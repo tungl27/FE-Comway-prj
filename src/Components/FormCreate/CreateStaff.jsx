@@ -27,7 +27,7 @@ export default function FormCreate() {
                         </div>
                     </div>
                     <div className="text-center"> 
-                        <button type="button" className="btn btn-primary">登録</button>
+                        <button type="button" id="regist" className="btn btn-primary">登録</button>
                     </div>
                     <p className="message">
                         スタッフ登録が完了できました！

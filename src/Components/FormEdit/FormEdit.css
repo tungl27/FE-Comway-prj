@@ -9,6 +9,17 @@
     position: relative;
 }
 
+.form-edit-order {
+    border-left: 3px solid #027DB4;
+    border-bottom: 3px solid #027DB4;
+    box-shadow: 5px 5px 5px #a09f9f;
+    width: 947px;
+    height: 556px;
+    margin: auto;
+    margin-top: -15px;
+    position: relative;
+}
+
 .form-title{
     margin: 20px 0px 0px 80px ;
     font-weight: 600;
@@ -26,6 +37,13 @@
     margin-left: 90px;
     margin-top: 5px;
     margin-bottom: 10px;
+}
+.edit-order-inputs-group{
+    width: 510px;
+    margin-left: 90px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    position: relative;
 }
 #change{
     background-color: #169BD5 !important;
@@ -57,4 +75,16 @@
     width: 119px;
     height: 42px;
     margin: auto;
+}
+
+#unit1{
+    position: absolute;
+    top: 340px;
+    right: -25px;
+}
+
+#unit2{
+    position: absolute;
+    top: 395px;
+    right: -95px;
 }
