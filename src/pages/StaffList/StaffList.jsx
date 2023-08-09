@@ -3,12 +3,17 @@ import "./staffList.css";
 import SearchStaffComponent from "../../Components/StaffManager/SearchStaff/SearchStaffComponent";
 import StaffTable from "../../Components/StaffManager/StaffTable/StaffTable";
 import Pagination from "../../Components/Pagination/Pagination";
+import Header from "../../Components/Header/Header";
+import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 
-export default function StaffList() {
+export default function StaffList({ breadcrumbs }) {
   const [active, setActive] = useState(2);
 
   return (
     <Fragment>
+      <Header />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
+
       <div className=" container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle     ">
           <div className=" row" style={{ borderWidth: 3 }}>
@@ -27,19 +32,17 @@ export default function StaffList() {
             <div className="col-lg-7 ">
               <SearchStaffComponent />
             </div>
-            <div className="col-lg-2  d-flex justify-content-end align-items-end">
+            <div className="col-lg-2  d-flex justify-content-end align-items-end ">
               <span style={{ fontSize: 15 }}>検索件数：10 / 27</span>
             </div>
           </div>
 
-          <div>
-            <StaffTable />
-          </div>
+          <StaffTable />
 
           <Pagination
             activepage={active}
-            startPage={2}
-            endPage={4}
+            totalRecords={50}
+            pageSize={4}
             setActive={setActive}
           ></Pagination>
         </div>
