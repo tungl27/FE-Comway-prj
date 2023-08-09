@@ -1,10 +1,10 @@
 import { Fragment, useState } from "react";
 import Input from "../Input/Input";
+import './FormCreate.css'
 import Selection from "../Selection/Selection";
 
 const options = [{ label: '社員', value: 1 }]
-
-export default function FormEdit() {
+export default function FormCreate() {
     const [name, setName] = useState("山田");
     const [email, setEmail] = useState("太郎");
     const [password, setPassword] = useState("やまだ");
@@ -26,8 +26,8 @@ export default function FormEdit() {
                             <Selection title={'職制'} options={options} required={true} selected={0} ></Selection>
                         </div>
                     </div>
-                    <div className="text-center">
-                        <button type="button" className="btn btn-primary">登録</button>
+                    <div className="text-center"> 
+                        <button type="button" id="regist" className="btn btn-primary">登録</button>
                     </div>
                     <p className="message">
                         スタッフ登録が完了できました！

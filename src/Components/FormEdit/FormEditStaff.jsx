@@ -1,10 +1,12 @@
 import { Fragment, useState } from "react";
 import Input from "../Input/Input";
-import './FormCreate.css'
 import Selection from "../Selection/Selection";
+import './FormEdit.css'
 
 const options = [{ label: '社員', value: 1 }]
-export default function FormCreate() {
+
+export default function FormEdit() {
+    const [id, setId] = useState("０００１２３");
     const [name, setName] = useState("山田");
     const [email, setEmail] = useState("太郎");
     const [password, setPassword] = useState("やまだ");
@@ -13,21 +15,23 @@ export default function FormCreate() {
     return (
         <Fragment>
             <div className="container">
-                <div className="form-create">
+                <div className="form-edit">
                     <div>
                         <p className="form-title">
-                            スタッフ登録画面
+                            スタッフ情報編集画面
                         </p>
                         <div className="inputs-group">
+                            <Input value={id} required={true} setValue={setId} title={'スタッフID'} editable={false}></Input>
                             <Input value={name} required={true} setValue={setName} title={'苗字'} editable={true}></Input>
                             <Input value={email} required={true} setValue={setEmail} title={'名前'} editable={true}></Input>
-                            <Input value={email} required={false} setValue={setEmail} title={'苗字（ふりがな）'} editable={true}></Input>
-                            <Input value={email} required={false} setValue={setEmail} title={'名前（ふりがな）'} editable={true}></Input>
+                            <Input value={password} required={false} setValue={setPassword} title={'苗字（ふりがな）'} editable={true}></Input>
+                            <Input value={passwordConfirm} required={false} setValue={setPasswordConfirm} title={'名前（ふりがな）'} editable={true}></Input>
                             <Selection title={'職制'} options={options} required={true} selected={0} ></Selection>
                         </div>
                     </div>
-                    <div className="text-center"> 
-                        <button type="button" className="btn btn-primary">登録</button>
+                    <div className="text-center">
+                        <button type="button" id="change" className="btn btn-primary">更新</button>
+                        <button type="button" id="cancel" className="btn btn-primary">キャンセル</button>
                     </div>
                     <p className="message">
                         スタッフ登録が完了できました！
