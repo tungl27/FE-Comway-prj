@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import './Selection.css'
 
-export default function Selection({ title, options, required, selected, errorMsg }) {
+export default function Selection({ id, title, options, required, selected, errorMsg }) {
 
     const [input, setInput] = useState(options[selected].value)
 
@@ -13,7 +13,7 @@ export default function Selection({ title, options, required, selected, errorMsg
             <div className="d-flex justify-content-between">
                 <label htmlFor={title}>{title}</label>
                 <div>
-                    <select name={title} value={input} onChange={(e) => onChange(e)}>
+                    <select id={id} name={title} value={input} onChange={(e) => onChange(e)}>
                         {options.map((option, index) => {
                             return <option key={index} value={option.value}>{option.label}</option>
                         })}
