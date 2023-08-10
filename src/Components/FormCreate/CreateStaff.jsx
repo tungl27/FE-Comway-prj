@@ -5,11 +5,18 @@ import Selection from "../Selection/Selection";
 
 const options = [{ label: '社員', value: 1 }]
 export default function FormCreate() {
-    const [name, setName] = useState("山田");
-    const [email, setEmail] = useState("太郎");
-    const [password, setPassword] = useState("やまだ");
-    const [passwordConfirm, setPasswordConfirm] = useState("たろう");
-    const [error, setError] = useState("");
+    const [lastName, setLastName] = useState("山田");
+    const [firstName, setFirstName] = useState("太郎");
+    const [lastNameFurigana, setLastNameFurigana] = useState("やまだ");
+    const [firstNameFurigana, setFirstNameFurigana] = useState("たろう");
+    const [office, setOffice] = useState(0);
+    const [error, setError] = useState({
+        lastName: "エラーメッセージXXXX",
+        firstName: "エラーメッセージXXXX",
+        lastNameFurigana: "エラーメッセージXXXX",
+        firstNameFurigana: "エラーメッセージXXXX",
+        office: "エラーメッセージXXXX"
+    });
     return (
         <Fragment>
             <div className="container">
@@ -19,11 +26,16 @@ export default function FormCreate() {
                             スタッフ登録画面
                         </p>
                         <div className="inputs-group">
-                            <Input value={name} required={true} setValue={setName} title={'苗字'} editable={true}></Input>
-                            <Input value={email} required={true} setValue={setEmail} title={'名前'} editable={true}></Input>
-                            <Input value={email} required={false} setValue={setEmail} title={'苗字（ふりがな）'} editable={true}></Input>
-                            <Input value={email} required={false} setValue={setEmail} title={'名前（ふりがな）'} editable={true}></Input>
-                            <Selection title={'職制'} options={options} required={true} selected={0} ></Selection>
+                            <Input id={'lastname'} value={lastName} required={true} setValue={setLastName} 
+                            title={'苗字'} editable={true} errorMsg={error.lastName}></Input>
+                            <Input id={'firstname'} value={firstName} required={true} setValue={setFirstName} 
+                            title={'名前'} editable={true} errorMsg={error.firstName}></Input>
+                            <Input id={'lastnamefurigana'} value={lastNameFurigana} required={false} setValue={setLastNameFurigana} 
+                            title={'苗字（ふりがな）'} editable={true} errorMsg={error.lastNameFurigana}></Input>
+                            <Input id={'firstnamefurigana'} value={firstNameFurigana} required={false} setValue={setFirstNameFurigana} 
+                            title={'名前（ふりがな）'} editable={true} errorMsg={error.firstNameFurigana}></Input>
+                            <Selection id={'office'} title={'職制'} options={options} required={true} value={office} 
+                            setValue={setOffice} errorMsg={error.office}></Selection>
                         </div>
                     </div>
                     <div className="text-center"> 
