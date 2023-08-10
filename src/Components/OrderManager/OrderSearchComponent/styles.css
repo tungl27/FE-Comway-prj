@@ -1,0 +1,63 @@
+.searchOrderContainer {
+  border-color: #797979;
+  border-width: 1px;
+  border-style: ridge;
+  width: 100%;
+  font-size: 14px;
+}
+
+.search-input-style {
+  width: 100%;
+}
+
+.col-no-padding {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+label input h1 h2 h3 .fontMain {
+  font-family: "HiraginoSans-W3", "Hiragino Sans W3", "Hiragino Sans W4",
+    "Hiragino Sans", sans-serif;
+}
+
+/* .custom-select-search-order {
+  width: 100%;
+} */
+
+#selectOrderSearchId {
+  width: 100%;
+}
+
+.inputText {
+  border-color: #797979;
+  border-width: 1px;
+  border-style: solid;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #797979;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.button-order-search {
+  width: 70px;
+  height: 30px;
+  margin-left: 2px;
+  margin-right: 5px;
+  margin-top: 10px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: var(--main-blue-color);
+  border-color: var(--main-blue-color);
+}
+
+/* .searchOrderContainer .row {
+  padding-bottom: 2px;
+} */
