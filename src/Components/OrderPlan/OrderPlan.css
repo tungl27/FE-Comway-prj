@@ -1,0 +1,177 @@
+.form-order-plan {
+    border-left: 3px solid #027DB4;
+    border-bottom: 3px solid #027DB4;
+    box-shadow: 5px 5px 5px #a09f9f;
+    width: 947px;
+    height: 754px;
+    margin: auto;
+    margin-top: -15px;
+    position: relative;
+}
+
+.order-plan-inputs-group {
+    width: 235px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    margin-top: -5px;
+
+}
+
+label[for=name] {
+    font-size: smaller;
+}
+
+#name {
+    height: 20px;
+    width: 159px;
+    font-size: smaller;
+}
+
+label[for=orderNo] {
+    font-size: smaller;
+}
+
+#orderNo {
+    height: 20px;
+    width: 159px;
+    font-size: smaller;
+}
+
+label[for=customerName] {
+    font-size: smaller;
+}
+
+#customerName {
+    height: 20px;
+    width: 159px;
+    font-size: smaller;
+}
+
+label[for=price] {
+    font-size: smaller;
+}
+
+#price {
+    height: 20px;
+    width: 133px;
+    font-size: smaller;
+    margin-right: 26px;
+}
+
+.form-title {
+    margin: 20px 0px 0px 50px;
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.errorMsg {
+    height: 5px;
+}
+
+.table-cell {
+    width: 100px;
+    height: 78px;
+    border: 1px solid #797979;
+    text-align: center;
+    font-size: 13px;
+    font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.table-header {
+    width: 100px;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    text-decoration: underline;
+}
+
+.table-cell-gap {
+    height: 1px;
+    margin-top: 1px;
+    text-align: center;
+}
+
+.gatu-cell {
+    border: 1px solid #797979;
+    min-width: 106px;
+    height: 30px;
+    font-size: 13px;
+    font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+}
+
+.jikan-cell {
+    padding: 2px;
+    border-left: 1px solid #797979;
+    width: 40px;
+    height: 30px;
+    text-align: left;
+    font-size: 10px;
+    font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.genka-cell {
+    padding: 2px;
+    border-right: 1px solid #797979;
+    width: 66px;
+    height: 30px;
+    text-align: right;
+    font-size: 10px;
+    font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.naiyo {
+    font-size: 12px;
+    font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.first-cell {
+    min-width: 31px;
+    max-height: 38px;
+    border: 1px solid #797979;
+}
+
+.td-cell {
+    text-align: center;
+    border: 1px solid #797979;
+}
+
+.page-body {
+    margin-left: 25px;
+    width: 907px;
+    margin-top: -35px;
+}
+
+.second-table {
+    height: fit-content;
+}
+
+.div-second-table {
+    height: 495px;
+    width: 706px;
+    overflow-x: scroll;
+}
+
+.first-table {
+    margin-top: 42px;
+}
+
+.table-naiyo {
+    height: 39px;
+}
+
+.jisseki {
+    background-color: #80FFFF;
+}
