@@ -39,7 +39,14 @@ export default function StaffTable() {
                 <td style={{ width: "15%" }}>{row.office}</td>
                 <td style={{ width: "20%" }}>
                   <div className="d-flex justify-content-center  ">
-                    <span className="edit-link ">詳細</span>
+                    <span
+                      className="edit-link"
+                      onClick={() => {
+                        console.log("edit staff");
+                      }}
+                    >
+                      詳細
+                    </span>
                     <span className="delete-link">削除</span>
                   </div>
                 </td>

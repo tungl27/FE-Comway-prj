@@ -5,6 +5,7 @@ import StaffTable from "../../Components/StaffManager/StaffTable/StaffTable";
 import Pagination from "../../Components/Pagination/Pagination";
 import Header from "../../Components/Header/Header";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
+import Footer from "../../Components/Footer/Footer";
 
 export default function StaffList({ breadcrumbs }) {
   const [active, setActive] = useState(2);
@@ -15,7 +16,7 @@ export default function StaffList({ breadcrumbs }) {
       <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <div className=" container-fluid d-flex justify-content-center align-items-center">
-        <div className="containerStyle     ">
+        <div className="containerStyle">
           <div className=" row" style={{ borderWidth: 3 }}>
             <div className="col-lg-3  ">
               <h4
@@ -47,6 +48,8 @@ export default function StaffList({ breadcrumbs }) {
           ></Pagination>
         </div>
       </div>
+
+      <Footer/>
     </Fragment>
   );
 }

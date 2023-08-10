@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import './Selection.css'
 
-export default function Selection({ id, title, options, required, selected, errorMsg }) {
+export default function Selection({ id, title, options, required, selected, errorMsg, customStyleSelect  }) {
 
     const [input, setInput] = useState(options[selected].value)
 
@@ -12,7 +12,7 @@ export default function Selection({ id, title, options, required, selected, erro
         <Fragment>
             <div className="d-flex justify-content-between">
                 <label htmlFor={title}>{title}</label>
-                <div>
+                <div className={`${customStyleSelect}`}>
                     <select id={id} name={title} value={input} onChange={(e) => onChange(e)}>
                         {options.map((option, index) => {
                             return <option key={index} value={option.value}>{option.label}</option>
