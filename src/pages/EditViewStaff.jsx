@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import Header from "../Components/Header/Header";
 import Breadcrumb from "../Components/BreadCrumb/BreadCrumb";
 import Footer from "../Components/Footer/Footer";
-import FormEdit from "../Components/FormEdit/FormEdit";
+import FormEdit from "../Components/FormEdit/FormEditStaff";
 import Pagination from "../Components/Pagination/Pagination";
 
 export default function EditViewStaff({breadcrumbs}){
