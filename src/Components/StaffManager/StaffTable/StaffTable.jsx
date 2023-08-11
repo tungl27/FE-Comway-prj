@@ -17,7 +17,7 @@ export default function StaffTable() {
   return (
     <Fragment>
       <div className="mt-4">
-        <table className="" style={{ width: "100%" }}>
+        <table id="tableList" className="" style={{ width: "100%" }}>
           <thead className="table-head">
             <tr>
               <th>No</th>
