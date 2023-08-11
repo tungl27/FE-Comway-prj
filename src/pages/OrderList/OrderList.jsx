@@ -2,12 +2,12 @@ import React, { Fragment, useState } from "react";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Login from "../Login/Login";
-import StaffList from "../StaffList";
+import StaffList from "../StaffList/StaffList";
 import "./orderList.css";
 import Pagination from "../../Components/Pagination/Pagination";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
-import OrderTableComponent from "../../Components/OrderManager/OrderTable";
-import OrderSearchComponent from "../../Components/OrderManager/OrderSearchComponent";
+import OrderTableComponent from "../../Components/OrderManager/OrderTable/OrderTable";
+import OrderSearchComponent from "../../Components/OrderManager/OrderSearchComponent/OrderSearchComponent";
 
 export default function OrderList({ breadcrumbs }) {
   const [active, setActive] = useState(2);

@@ -1,29 +1,30 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./login.css";
 import Footer from "../../Components/Footer/Footer";
+import Header from "../../Components/Header/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigative = useNavigate();
+  const signIn = () => {
+    navigative("/home");
+  };
   return (
-    <div className="container-fluid  ">
-      <div className="loginConponent">
-        <h3 style={{ fontWeight: "bold", paddingTop: 20, marginLeft: 30 }}>
-          ログイン画面
-        </h3>
+    <Fragment>
+      <Header></Header>
+      <div className="container-fluid  ">
+        <div className="loginConponent">
+          <h3 style={{ fontWeight: "bold", paddingTop: 20, marginLeft: 30 }}>
+            ログイン画面
+          </h3>
 
-        <form className="form mt-5">
           <div className="row justify-content-center">
             <div className="col-2  labelText">
               <label>ユーザーID</label>
             </div>
 
             <div className="col-4">
-              <input
-                className="inputText"
-                // id="username"
-                // name="username"
-                type="text"
-                // value=""
-              />
+              <input className="inputText" type="text" />
               <span className="error" style={{ display: "flex", marginTop: 8 }}>
                 エラーメッセージXXXX
               </span>
@@ -53,15 +54,19 @@ export default function Login() {
             <div className="col-2"></div>
 
             <div className="col-4">
-              <button type="button " className="border buttonLogin">
+              <button
+                type="button"
+                onClick={signIn}
+                className="border buttonLogin"
+              >
                 ログイン
               </button>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Fragment>
   );
 }

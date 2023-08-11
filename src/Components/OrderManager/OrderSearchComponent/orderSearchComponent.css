@@ -3,7 +3,10 @@
   border-width: 1px;
   border-style: ridge;
   width: 100%;
+  /* height: 100%; */
   font-size: 14px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .search-input-style {
@@ -13,19 +16,6 @@
 .col-no-padding {
   padding-left: 0px !important;
   padding-right: 0px !important;
-}
-
-label input h1 h2 h3 .fontMain {
-  font-family: "HiraginoSans-W3", "Hiragino Sans W3", "Hiragino Sans W4",
-    "Hiragino Sans", sans-serif;
-}
-
-/* .custom-select-search-order {
-  width: 100%;
-} */
-
-#selectOrderSearchId {
-  width: 100%;
 }
 
 .inputText {
@@ -58,6 +48,33 @@ label input h1 h2 h3 .fontMain {
   border-color: var(--main-blue-color);
 }
 
-/* .searchOrderContainer .row {
-  padding-bottom: 2px;
-} */
+#selectOrderId {
+  width: 100%;
+}
+
+#divComponentId {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#selectedOfficeOrderList {
+  width: 100%;
+  padding: 2px 2px 2px 2px;
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: normal;
+  color: #000000;
+  vertical-align: none;
+  text-align: left;
+  text-transform: none;
+  background-color: transparent;
+  margin: 0em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+  border-radius: 3px;
+}

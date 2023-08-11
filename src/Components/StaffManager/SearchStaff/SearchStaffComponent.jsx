@@ -33,9 +33,7 @@ export default function SearchStaffComponent() {
       <div className="searchContainer">
         <form className="h-100">
           <div className=" row h-50 align-items-center">
-            <label className="col-sm-2 col-form-label d-flex ">
-              氏名
-            </label>
+            <label className="col-sm-2 col-form-label d-flex ">氏名</label>
             <div className="col-sm-7">
               <input
                 type="name"
@@ -52,12 +50,28 @@ export default function SearchStaffComponent() {
           <div className="form-group row h-50 align-items-center ">
             <label className="col-sm-2  d-flex ">職制</label>
             <div className="col-sm-7">
-              <Selection
+              {/* <Selection
                 options={options}
                 selected={0}
-                customStyleSelect=" w-100 d-flex justify-content-center"
+                divContainerId={"selectedOfficeStaffList"}
+                // customStyleSelect=" w-100 d-flex justify-content-center"
                 value={office}
-              ></Selection>
+              ></Selection> */}
+
+              <select
+                name="office"
+                id={"selectedOfficeStaffList"}
+                value={office}
+                onChange={handleChange}
+              >
+                {options.map((option, index) => {
+                  return (
+                    <option key={index} value={option.value}>
+                      {option.label}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
 
             <div className="col-sm-3">
