@@ -1,7 +1,5 @@
 import React, { Fragment, useState } from "react";
-import "./styles.css";
-import Input from "../../Input/Input";
-import Selection from "../../Selection/Selection";
+import "./orderSearchComponent.css";
 
 export default function OrderSearchComponent() {
   const options = [
@@ -34,7 +32,7 @@ export default function OrderSearchComponent() {
 
   return (
     <div
-      className="row  "
+      className="row"
       style={{ fontSize: 14, marginLeft: 0, marginRight: 0 }}
     >
       <div className="col-lg-3 col-no-padding ">
@@ -52,17 +50,11 @@ export default function OrderSearchComponent() {
       </div>
 
       <div
-        className="col-lg-7 searchOrderContainer  "
+        className="col-lg-7 searchOrderContainer  h-100 py-2 "
         style={{ marginLeft: -10, marginRight: 0 }}
       >
-        <form className="h-100 py-1">
-          <div className="row h-50 ">
-            <div
-              className=" col-lg-6 d-flex  px-1 "
-              style={{
-                alignItems: "center",
-              }}
-            >
+          <div className="row  ">
+            <div className=" col-lg-6 d-flex  px-1 align-items-center  ">
               <label style={{ width: "33%" }}>オーダーNo.</label>
               <input
                 value={orderNo}
@@ -76,7 +68,7 @@ export default function OrderSearchComponent() {
               />
             </div>
             <div
-              className=" col-lg-6 d-flex align-items-center   "
+              className=" col-lg-6 d-flex   "
               style={{
                 paddingRight: 20,
                 paddingLeft: 5,
@@ -95,7 +87,7 @@ export default function OrderSearchComponent() {
             </div>
           </div>
 
-          <div className="row h-50   ">
+          <div className="row mt-2  ">
             <div
               className=" col-lg-6 d-flex px-1 h-100"
               style={{
@@ -116,7 +108,7 @@ export default function OrderSearchComponent() {
             </div>
 
             <div
-              className="col-lg-6 d-flex align-items-center h-100"
+              className="col-lg-6 col-md-12 d-flex align-items-center h-100"
               style={{
                 paddingRight: 0,
                 paddingLeft: 5,
@@ -128,25 +120,40 @@ export default function OrderSearchComponent() {
                   width: "65%",
                 }}
               >
-                <Selection
-                  id="selectOrderSearchId"
+                <select
+                  id={"selectedOfficeOrderList"}
+                  value={office}
+                  name="office"
+                  onChange={handleChange}
+                >
+                  {options.map((option, index) => {
+                    return (
+                      <option key={index} value={option.value}>
+                        {option.label}
+                      </option>
+                    );
+                  })}
+                </select>
+                {/* <Selection
                   options={options}
                   selected={0}
-                  customStyleSelect=" w-100 d-flex justify-content-center"
-                ></Selection>
+                  divComponentId={"divComponentId"}
+                  id={"selectOrderId"}
+                  // customStyleSelect=" w-100 d-flex justify-content-center"
+                ></Selection> */}
               </div>
 
               <button
-                className="button-order-search"
+                className="button-order-search border"
+                type="input"
                 onClick={() => {
-                  console.log(projectTitle, orderNo, customerName);
+                  console.log(projectTitle, orderNo, customerName, office);
                 }}
               >
                 検索
               </button>
             </div>
           </div>
-        </form>
       </div>
 
       <div className="col-lg-2  d-flex justify-content-end align-items-end  ">

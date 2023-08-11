@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import "./staffTable.css";
+import { Link } from "react-router-dom";
 export default function StaffTable() {
   const tableData = [
     { id: 1, name: "山田太郎", fullName: "やまだたろう", office: "社員" },
@@ -39,14 +40,17 @@ export default function StaffTable() {
                 <td style={{ width: "15%" }}>{row.office}</td>
                 <td style={{ width: "20%" }}>
                   <div className="d-flex justify-content-center  ">
-                    <span
-                      className="edit-link"
-                      onClick={() => {
-                        console.log("edit staff");
-                      }}
-                    >
-                      詳細
-                    </span>
+                    <Link to={"/staff/detail"}>
+                      <span
+                        // onClick={() => {
+                        //   console.log("Sddddddddd");
+                        // }}
+                        className="edit-o-link"
+                      >
+                        詳細
+                      </span>
+                    </Link>
+
                     <span className="delete-link">削除</span>
                   </div>
                 </td>

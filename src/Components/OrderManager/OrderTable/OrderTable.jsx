@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import "./styles.css";
+import "./orderTable.css";
+import { Link } from "react-router-dom";
 
 export default function OrderTableComponent({ orderList }) {
   return (
@@ -30,16 +31,20 @@ export default function OrderTableComponent({ orderList }) {
                 <td style={{ width: "10%" }}>{row.status}</td>
                 <td style={{ width: "20%" }}>
                   <div className="d-flex justify-content-between px-2">
-                    <span
-                      onClick={() => {
-                        console.log("Sddddddddd");
-                      }}
-                      className="edit-o-link"
-                    >
-                      詳細
-                    </span>
+                    <Link to={"/order/detail"}>
+                      <span
+                        // onClick={() => {
+                        //   console.log("Sddddddddd");
+                        // }}
+                        className="edit-o-link"
+                      >
+                        詳細
+                      </span>
+                    </Link>
                     <span className="delete-o-link">削除</span>
-                    <span className="result-o-link">実績入力</span>
+                    <Link to={"/order/actual"}>
+                      <span className="result-o-link">実績入力</span>
+                    </Link>
                   </div>
                 </td>
               </tr>
