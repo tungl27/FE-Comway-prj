@@ -1,6 +1,6 @@
-table {
+/* table {
   font-size: 14px;
-}
+} */
 
 .table-head th {
   text-align: center;
@@ -10,7 +10,7 @@ table {
   background-color: var(--table-gray-bg-color);
 }
 
-tbody td {
+#tableList td {
   text-align: center;
   border: 1px solid var(--gray-border-color) !important;
   height: 30px !important;
