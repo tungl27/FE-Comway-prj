@@ -42,7 +42,7 @@ function App() {
               />
 
               <Route
-                path="/order"
+                path="/order/list"
                 element={<OrderList />}
               />
               <Route
