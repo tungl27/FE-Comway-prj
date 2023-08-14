@@ -20,7 +20,7 @@
     position: relative;
 }
 
-.form-title{
+.form-title-create{
     margin: 20px 0px 0px 80px ;
     font-weight: 600;
     font-size: x-large;
@@ -32,7 +32,7 @@
     right: 25px;
     color: #00BFBF;
 }
-.inputs-group{
+.staff-create-inputs-group{
     width: 510px;
     margin-left: 80px;
     margin-top: 10px;

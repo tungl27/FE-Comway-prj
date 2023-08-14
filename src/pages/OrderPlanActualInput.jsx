@@ -1,8 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 import BreadCrumb from '../Components/BreadCrumb/BreadCrumb'
 import OrderPlan from "../Components/OrderPlan/OrderPlan";
+import { BreadcrumbsContext } from "../State/BreadcrumbContext";
 
 const data = [
     {
@@ -630,7 +631,9 @@ const data = [
     }]
 },
 ]
-export default function OrderPlanActualInput({ breadcrumbs }) {
+export default function OrderPlanActualInput() {
+
+    const breadcrumbs = useContext(BreadcrumbsContext)
     return (
         <Fragment>
             <Header></Header>

@@ -64,10 +64,6 @@ label[for=price] {
     font-size: x-large;
 }
 
-.errorMsg {
-    height: 5px;
-}
-
 .table-cell {
     width: 100px;
     height: 78px;
@@ -97,7 +93,7 @@ label[for=price] {
 
 .gatu-cell {
     border: 1px solid #797979;
-    min-width: 106px;
+    min-width: 112px;
     height: 30px;
     font-size: 13px;
     font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
@@ -174,4 +170,17 @@ label[for=price] {
 
 .jisseki {
     background-color: #80FFFF;
+}
+
+#erorrorderNo{
+    height: 5px;
+}
+#erorrcustomerName{
+    height: 5px;
+}
+#erorrname{
+    height: 5px;
+}
+#erorrprice{
+    height: 5px;
 }

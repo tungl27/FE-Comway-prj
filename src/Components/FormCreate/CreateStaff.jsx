@@ -22,19 +22,19 @@ export default function FormCreate() {
             <div className="container">
                 <div className="form-create">
                     <div>
-                        <p className="form-title">
+                        <p className="form-title-create">
                             スタッフ登録画面
                         </p>
-                        <div className="inputs-group">
-                            <Input id={'lastname'} value={lastName} required={true} setValue={setLastName} 
+                        <div className="staff-create-inputs-group">
+                            <Input id={'lastname-create'} value={lastName} required={true} setValue={setLastName} 
                             title={'苗字'} editable={true} errorMsg={error.lastName}></Input>
-                            <Input id={'firstname'} value={firstName} required={true} setValue={setFirstName} 
+                            <Input id={'firstname-create'} value={firstName} required={true} setValue={setFirstName} 
                             title={'名前'} editable={true} errorMsg={error.firstName}></Input>
-                            <Input id={'lastnamefurigana'} value={lastNameFurigana} required={false} setValue={setLastNameFurigana} 
+                            <Input id={'lastnamefurigana-create'} value={lastNameFurigana} required={false} setValue={setLastNameFurigana} 
                             title={'苗字（ふりがな）'} editable={true} errorMsg={error.lastNameFurigana}></Input>
-                            <Input id={'firstnamefurigana'} value={firstNameFurigana} required={false} setValue={setFirstNameFurigana} 
+                            <Input id={'firstnamefurigana-create'} value={firstNameFurigana} required={false} setValue={setFirstNameFurigana} 
                             title={'名前（ふりがな）'} editable={true} errorMsg={error.firstNameFurigana}></Input>
-                            <Selection id={'office'} title={'職制'} options={options} required={true} value={office} 
+                            <Selection id={'office-create'} title={'職制'} options={options} required={true} value={office} 
                             setValue={setOffice} errorMsg={error.office}></Selection>
                         </div>
                     </div>

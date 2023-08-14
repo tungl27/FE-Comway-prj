@@ -1,15 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
-import Login from "../Login/Login";
-import StaffList from "../StaffList/StaffList";
 import "./orderList.css";
 import Pagination from "../../Components/Pagination/Pagination";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 import OrderTableComponent from "../../Components/OrderManager/OrderTable/OrderTable";
 import OrderSearchComponent from "../../Components/OrderManager/OrderSearchComponent/OrderSearchComponent";
+import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
 
-export default function OrderList({ breadcrumbs }) {
+export default function OrderList() {
+  const breadcrumbs = useContext(BreadcrumbsContext)
   const [active, setActive] = useState(2);
 
   const orderList = [
