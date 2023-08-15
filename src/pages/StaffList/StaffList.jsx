@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useEffect, useState } from "react";
 import "./staffList.css";
 import SearchStaffComponent from "../../Components/StaffManager/SearchStaff/SearchStaffComponent";
 import StaffTable from "../../Components/StaffManager/StaffTable/StaffTable";
@@ -9,6 +9,7 @@ import Footer from "../../Components/Footer/Footer";
 import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
 import axios from "axios";
 import { GET_STAFF_LIST } from "../../theme/configApi";
+import { Link } from 'react-router-dom'
 
 export default function StaffList() {
   const breadcrumbs = useContext(BreadcrumbsContext);
@@ -56,10 +57,38 @@ export default function StaffList() {
           <SearchStaffComponent />
           <StaffTable
             activePage={activePage}
-            tableData={tableData}
+            tableData={tableData} />
+          <div className=" row" style={{ borderWidth: 3 }}>
+            <div className="col-lg-3  ">
+              <h4
+                style={{
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  marginTop: 5,
+                }}
+              >
+                スタッフ一覧画面
+              </h4>
+              <Link to={'/staff/new'}>
+                <button className="regisBtn border">新規登録</button>
+              </Link>
+            </div>
+            <div className="col-lg-7 ">
+              <SearchStaffComponent />
+            </div>
+            <div className="col-lg-2  d-flex justify-content-end align-items-end ">
+              <span style={{ fontSize: 15 }}>検索件数：10 / 27</span>
+            </div>
+          </div>
+
+          <StaffTable activePage={activePage} tableData={tableData} pageSize={pageSize} />
+
+          <Pagination
+            activepage={activePage}
+            totalRecords={totalRecords}
             pageSize={pageSize}
           />
-          
+
           {totalRecords > 10 && (
             <Pagination
               activepage={activePage}
