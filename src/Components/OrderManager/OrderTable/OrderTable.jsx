@@ -1,20 +1,69 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./orderTable.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { DELETE_ORDER } from "../../../theme/configApi";
+import Dialog from "../../Popup/DialogConfirm";
+import { Button, Modal } from "react-bootstrap";
+import DialogConfirm from "../../Popup/DialogConfirm";
 
-export default function OrderTableComponent({ orderList }) {
+export default function OrderTableComponent({
+  activePage,
+  tableData,
+  pageSize,
+  deleteOrder,
+}) {
+  const [curentData, setCurent] = useState([]);
+
+  useEffect(() => {
+    const startIndexData = (activePage - 1) * pageSize;
+    const endIndexData = activePage * pageSize;
+    setCurent(tableData.slice(startIndexData, endIndexData));
+  }, [activePage, tableData]);
+
+  // const dialogRef = useRef();
+  // const handleOpenModal = () => {
+  //   dialogRef.current.handleShowModal();
+  // };
+
+  // state delelte
+  const [showPopup, setShowPopup] = useState(false);
+  const [deletedId, setDeletedId] = useState();
+
+  const handlDeleteSeleted = (id) => {
+    setDeletedId(id);
+    setShowPopup(true);
+  };
+
+  function statusConvert(statusId) {
+    // 0: active, 1: inactive, 2: pending, 3: completed, 4: cancelled
+    switch (statusId) {
+      case 0:
+        return "活動";
+      case 1:
+        return "不活動";
+      case 2:
+        return "保留";
+      case 3:
+        return "完了";
+      case 4:
+        return "キャンセル";
+      default:
+        return "";
+    }
+  }
   return (
     <Fragment>
       <div className="mt-4">
-        <table id="tableList" className="" style={{ width: "100%" }}>
+        <table className="tableList" style={{ width: "100%" }}>
           <thead className="table-head">
             <tr>
-              <th>No</th>
-              <th>オーダーNo.</th>
-              <th>案件名</th>
-              <th>顧客名</th>
-              <th>ステータス</th>
-              <th>
+              <th style={{ width: "5%" }}>No</th>
+              <th style={{ width: "15%" }}>オーダーNo.</th>
+              <th style={{ width: "30%" }}>案件名</th>
+              <th style={{ width: "20%" }}>顧客名</th>
+              <th style={{ width: "10%" }}>ステータス</th>
+              <th style={{ width: "20%" }}>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 ></div>
@@ -22,26 +71,24 @@ export default function OrderTableComponent({ orderList }) {
             </tr>
           </thead>
           <tbody>
-            {orderList.map((row, index) => (
+            {curentData.map((row, index) => (
               <tr key={index} className={index % 2 === 0 ? "even-row2" : ""}>
-                <td style={{ width: "5%" }}>{row.no}</td>
-                <td style={{ width: "15%" }}>{row.orderNo}</td>
-                <td style={{ width: "30%" }}>{row.projectName}</td>
-                <td style={{ width: "20%" }}>{row.customerName}</td>
-                <td style={{ width: "10%" }}>{row.status}</td>
-                <td style={{ width: "20%" }}>
+                <td>{(activePage - 1) * pageSize + index + 1}</td>
+                <td>{row.order_number}</td>
+                <td>{row.project_name}</td>
+                <td>{row.client_name}</td>
+                <td> {statusConvert(row.status)}</td>
+                <td>
                   <div className="d-flex justify-content-between px-2">
                     <Link to={"/order/detail"}>
-                      <span
-                        // onClick={() => {
-                        //   console.log("Sddddddddd");
-                        // }}
-                        className="edit-o-link"
-                      >
-                        詳細
-                      </span>
+                      <span className="edit-o-link">詳細</span>
                     </Link>
-                    <span className="delete-o-link">削除</span>
+                    <span
+                      className="delete-o-link"
+                      onClick={() => handlDeleteSeleted(row.id)}
+                    >
+                      削除
+                    </span>
                     <Link to={"/order/actual"}>
                       <span className="result-o-link">実績入力</span>
                     </Link>
@@ -52,6 +99,14 @@ export default function OrderTableComponent({ orderList }) {
           </tbody>
         </table>
       </div>
+
+      <DialogConfirm
+        show={showPopup}
+        onClose={() => setShowPopup(false)}
+        acceptAction={() => deleteOrder(deletedId)}
+        title="Confirm Transaction"
+        body="選択した注文情報を削除しますか"
+      ></DialogConfirm>
     </Fragment>
   );
 }

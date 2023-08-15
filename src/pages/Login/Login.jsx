@@ -3,12 +3,36 @@ import "./login.css";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import { async } from "q";
+import axios from "axios";
 
 export default function Login() {
   const navigative = useNavigate();
-  const signIn = () => {
-    navigative("/home");
+  const signIn = async () => {
+
+
+    try {
+      navigative("/home");
+      // const response = await axios.post("http://127.0.0.1:8000/Login", {
+      //   userID: "",
+      //   Password: "",
+      // });
+
+      navigative("/home");
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        if (error.response.status === 400) {
+          // Handle forbidden error
+          console.error( error.response.data.error);
+        } else {
+          // Handle other errors
+          console.error("An error occurred:", error.message);
+        }
+      }
+    }
   };
+
   return (
     <Fragment>
       <Header></Header>
