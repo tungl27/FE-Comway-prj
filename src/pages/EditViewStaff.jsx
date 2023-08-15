@@ -5,10 +5,17 @@ import Footer from "../Components/Footer/Footer";
 import FormEdit from "../Components/FormEdit/FormEditStaff";
 import Pagination from "../Components/Pagination/Pagination";
 import { useLocation } from "react-router-dom";
-import { BreadcrumbsContext } from "../State/BreadcrumbContext";
+import { BreadcrumbsContext, SetBreadcrumbsContext } from "../State/BreadcrumbContext";
 
 export default function EditViewStaff() {
+    const SetBreadcrumbs = useContext(SetBreadcrumbsContext)
+
     const breadcrumbs = useContext(BreadcrumbsContext)
+    breadcrumbs.push({
+        title: "スタッフ情報編集",
+        url: "/staff/view"
+    })
+    SetBreadcrumbs(breadcrumbs)
 
     const params = useLocation().search
     const productId = new URLSearchParams(params).get("id");

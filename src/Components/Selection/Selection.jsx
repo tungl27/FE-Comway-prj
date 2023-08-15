@@ -11,9 +11,10 @@ export default function Selection({ id, title, options, required, value, errorMs
             <div className="d-flex justify-content-between">
                 <label htmlFor={title}>{title}</label>
                 <div>
-                    <select id={id} name={title} value={value} onChange={(e) => onChange(e)}>
+                    <select title={title} id={id} name={title} value={value} onChange={(e) => onChange(e)}>
+                        <option value={''}></option>
                         {options.map((option, index) => {
-                            return <option key={index} value={option.value}>{option.label}</option>
+                            return <option key={index} value={option.value} >{option.label}</option>
                         })}
                     </select>
                     <p className="errorMsg">{errorMsg}</p>

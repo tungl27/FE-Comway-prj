@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import "./staffList.css";
 import SearchStaffComponent from "../../Components/StaffManager/SearchStaff/SearchStaffComponent";
 import StaffTable from "../../Components/StaffManager/StaffTable/StaffTable";
@@ -6,7 +6,8 @@ import Pagination from "../../Components/Pagination/Pagination";
 import Header from "../../Components/Header/Header";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 import Footer from "../../Components/Footer/Footer";
-import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
+import { BreadcrumbsContext, SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
+import { Link } from "react-router-dom";
 
 const tableData = [
   { id: 1, name: "山田太郎", fullName: "やまだたろう", office: "社員" },
@@ -33,8 +34,14 @@ const totalRecords = tableData.length
 export default function StaffList() {
   const [activePage, setActivePage] = useState(1);
 
+  const SetBreadcrumbs = useContext(SetBreadcrumbsContext)
+
   const breadcrumbs = useContext(BreadcrumbsContext)
-  console.log(breadcrumbs)
+  breadcrumbs.push({
+    title: "スタッフ一覧",
+    url: "/staff/list"
+  })
+  SetBreadcrumbs(breadcrumbs)
 
   return (
     <Fragment>
@@ -54,7 +61,9 @@ export default function StaffList() {
               >
                 スタッフ一覧画面
               </h4>
-              <button className="regisBtn border">新規登録</button>
+              <Link to={'/staff/new'}>
+                <button className="regisBtn border">新規登録</button>
+              </Link>
             </div>
             <div className="col-lg-7 ">
               <SearchStaffComponent />
@@ -64,7 +73,7 @@ export default function StaffList() {
             </div>
           </div>
 
-          <StaffTable activePage={activePage} tableData={tableData} pageSize={pageSize}/>
+          <StaffTable activePage={activePage} tableData={tableData} pageSize={pageSize} />
 
           <Pagination
             activepage={activePage}
@@ -75,7 +84,7 @@ export default function StaffList() {
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </Fragment>
   );
 }

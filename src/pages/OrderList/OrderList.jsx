@@ -6,11 +6,17 @@ import Pagination from "../../Components/Pagination/Pagination";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 import OrderTableComponent from "../../Components/OrderManager/OrderTable/OrderTable";
 import OrderSearchComponent from "../../Components/OrderManager/OrderSearchComponent/OrderSearchComponent";
-import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
+import { BreadcrumbsContext, SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
 
 export default function OrderList() {
-  const breadcrumbs = useContext(BreadcrumbsContext)
   const [active, setActive] = useState(2);
+  const SetBreadcrumbs = useContext(SetBreadcrumbsContext)
+  const breadcrumbs = useContext(BreadcrumbsContext)
+  breadcrumbs.push({
+    title: "オーダー一覧",
+    url: "/order/list"
+  })
+  SetBreadcrumbs(breadcrumbs)
 
   const orderList = [
     {
@@ -84,6 +90,7 @@ export default function OrderList() {
       status: "実行中",
     },
   ];
+
 
   return (
     <Fragment>
