@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import "./orderList.css";
@@ -7,83 +7,49 @@ import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 import OrderTableComponent from "../../Components/OrderManager/OrderTable/OrderTable";
 import OrderSearchComponent from "../../Components/OrderManager/OrderSearchComponent/OrderSearchComponent";
 import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
+import axios from "axios";
+import { DELETE_ORDER, GET_ORDER_LIST } from "../../theme/configApi";
+import Dialog from "../../Components/Popup/DialogConfirm";
+import { Tab } from "react-bootstrap";
 
 export default function OrderList() {
-  const breadcrumbs = useContext(BreadcrumbsContext)
-  const [active, setActive] = useState(2);
+  const breadcrumbs = useContext(BreadcrumbsContext);
 
-  const orderList = [
-    {
-      no: 1,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名",
-      status: "実行中",
-    },
-    {
-      no: 2,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名1",
-      status: "新規中",
-    },
-    {
-      no: 3,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名2",
-      status: "キャンセル",
-    },
-    {
-      no: 4,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名3",
-      status: "実行中",
-    },
-    {
-      no: 5,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名4",
-      status: "実行中",
-    },
-    {
-      no: 6,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名",
-      status: "実行中",
-    },
-    {
-      no: 7,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名",
-      status: "実行中",
-    },
-    {
-      no: 8,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名",
-      status: "実行中",
-    },
-    {
-      no: 9,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名",
-      status: "実行中",
-    },
-    {
-      no: 10,
-      orderNo: "CIS2023–019",
-      projectName: "全社支払合算システム機能",
-      customerName: "顧客名",
-      status: "実行中",
-    },
-  ];
+  const [tableData, setTableData] = useState([]);
+  const [activePage, setActivePage] = useState(1);
+  const [totalRecords, setTotalRecord] = useState(0);
+  const pageSize = 10;
+  
+  const totalPage = Math.ceil(tableData.length / pageSize);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(GET_ORDER_LIST);
+      setTableData(response.data);
+      const totalRecord = response.data.length; // Số lượng bản ghi trong response.data
+      setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const deleteOrder = async (orderID) => {
+    try {
+      const response = await axios.post(DELETE_ORDER, {
+        Id_User_Login: 0,
+        Id_Order: orderID,
+        Condition_verify: true,
+      });
+      fetchData();
+
+    } catch (error) {
+      console.error("Error delete data:");
+    }
+  };
 
   return (
     <Fragment>
@@ -94,13 +60,19 @@ export default function OrderList() {
         <div className="containerStyle  ">
           <OrderSearchComponent />
 
-          <OrderTableComponent orderList={orderList} />
+          <OrderTableComponent
+            deleteOrder={deleteOrder}
+            tableData={tableData}
+            activePage={activePage}
+            pageSize={pageSize}
+          />
 
           <Pagination
-            activepage={active}
-            startPage={2}
-            endPage={4}
-            setActive={setActive}
+            activepage={activePage}
+            totalRecords={totalRecords}
+            totalPage={totalPage}
+            pageSize={pageSize}
+            setActive={setActivePage}
           ></Pagination>
         </div>
       </div>

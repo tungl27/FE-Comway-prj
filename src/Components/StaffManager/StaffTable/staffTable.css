@@ -2,30 +2,37 @@
   font-size: 14px;
 } */
 
-.table-head th {
+.tableList {
+  font-family: "HiraginoSans-W7", "Hiragino Sans W7", "Hiragino Sans W4",
+    "Hiragino Sans", sans-serif;
+  font-style: normal;
+  font-size: 13px;
   text-align: center;
-  border: 1px solid var(--gray-border-color) !important;
-  height: 34px !important;
+}
+
+.tableList th {
+  border: 1px solid var(--gray-border-color);
+  height: 34px;
   font-size: 14px;
   background-color: var(--table-gray-bg-color);
 }
 
-#tableList td {
-  text-align: center;
-  border: 1px solid var(--gray-border-color) !important;
-  height: 30px !important;
+.tableList td {
+  border: 1px solid var(--gray-border-color);
+  height: 30px;
 }
 
 .edit-link,
 .delete-link {
   cursor: pointer;
-  margin-right: 10px;
-  margin-left: 10px;
+  /* margin-right: 10px; */
+  /* margin-left: 10px; */
 }
 
 .delete-link {
   color: var(--error-color);
   text-decoration: underline;
+  margin-left: 30px;
 }
 
 .edit-link:hover,
