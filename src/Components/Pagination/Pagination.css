@@ -1,30 +1,28 @@
 .button-group {
-    margin: auto;
+  margin: auto;
 }
 
 #preButton {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
-
 .stepButton {
-    margin-left: 4px;
-    margin-right: 4px;
-    border-radius: 4px;
-    background-color: #FFFFFF;
-    border: 1px solid #797979;
-    height: 100%;
-    width: 30px;
-    font-size: smaller;
-    height: 24px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: 1px solid #797979;
+  height: 100%;
+  width: 30px;
+  font-size: smaller;
+  height: 24px;
 }
 
 .active {
-    background-color: #81D3F8;
+  background-color: #81d3f8;
 }
 
-
 .button-group {
-    margin: auto;
+  margin: auto;
 }

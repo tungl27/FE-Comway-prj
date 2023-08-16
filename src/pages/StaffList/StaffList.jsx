@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import "./staffList.css";
 import SearchStaffComponent from "../../Components/StaffManager/SearchStaff/SearchStaffComponent";
 import StaffTable from "../../Components/StaffManager/StaffTable/StaffTable";
@@ -54,10 +54,14 @@ export default function StaffList() {
 
       <div className=" container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle">
+
+
           <SearchStaffComponent />
-          <StaffTable
+          {/* <StaffTable
             activePage={activePage}
             tableData={tableData} />
+
+
           <div className=" row" style={{ borderWidth: 3 }}>
             <div className="col-lg-3  ">
               <h4
@@ -79,7 +83,7 @@ export default function StaffList() {
             <div className="col-lg-2  d-flex justify-content-end align-items-end ">
               <span style={{ fontSize: 15 }}>検索件数：10 / 27</span>
             </div>
-          </div>
+          </div> */}
 
           <StaffTable activePage={activePage} tableData={tableData} pageSize={pageSize} />
 

@@ -1,40 +1,54 @@
 import React, { Fragment, useState } from "react";
 import "./orderSearchComponent.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { SEARCH_ORDER_LIST } from "../../../theme/configApi";
 
-export default function OrderSearchComponent() {
+export default function OrderSearchComponent({
+  searchFillter,
+  setSearchFiller,
+  fetchData,
+  setActivePage
+
+}) {
   const options = [
-    { label: "活動", value: 0 },
-    { label: "不活動", value: 1 },
+    { label: "", value: "" },
+    { label: "実行中", value: 0 },
+    { label: "非活性", value: 1 },
     { label: "保留", value: 2 },
     { label: "完了", value: 3 },
     { label: "キャンセル", value: 4 },
   ];
 
-  const [searchFillter, setSearchFiller] = useState({
+  const [stateSearch, setStateSearch] = useState({
     orderNo: "",
-    customerName: "",
-    projectTitle: "",
-    office: "0",
+    clientName: "",
+    projectName: "",
+    status: "0",
   });
+  const { orderNo, clientName, projectName, status } = stateSearch;
 
-  const { orderNo, customerName, projectTitle, office } = searchFillter;
-
-  const updateFilter = (data) =>
-    setSearchFiller((prevData) => ({ ...prevData, ...data }));
+  // const updateFilter = (data) =>
+  // setStateSearch((prevData) => ({ ...prevData, ...data }));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSearchFiller((prevData) => ({
+    setStateSearch((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
+  const actionSearch = () => {
+    setSearchFiller(stateSearch);
+    fetchData(stateSearch);
+    setActivePage(1)
+  };
+
   return (
     <div
       className="row"
-      style={{ fontSize: 14, marginLeft: 0, marginRight: 0 }}
+      style={{ fontSize: 13, marginLeft: 0, marginRight: 0 }}
     >
       <div className="col-lg-3 col-no-padding ">
         <h4
@@ -46,7 +60,7 @@ export default function OrderSearchComponent() {
           オーダー一覧画面
         </h4>
         <Link to={"/order/new"}>
-          <button className="regisBtn  " style={{ marginTop: 10 }}>
+          <button className="regisBtn" style={{ marginTop: 10 }}>
             新規登録
           </button>
         </Link>
@@ -58,7 +72,7 @@ export default function OrderSearchComponent() {
       >
         <div className="row  ">
           <div className=" col-lg-6 d-flex  px-1 align-items-center  ">
-            <label style={{ width: "33%" }}>オーダーNo.</label>
+            <label style={{ width: "33%", fontSize: 13 }}>オーダーNo.</label>
             <input
               value={orderNo}
               name="orderNo"
@@ -71,21 +85,21 @@ export default function OrderSearchComponent() {
             />
           </div>
           <div
-            className=" col-lg-6 d-flex   "
+            className=" col-lg-6 d-flex align-items-center   "
             style={{
               paddingRight: 20,
               paddingLeft: 5,
             }}
           >
-            <label style={{ fontSize: 14, width: "20%" }}>顧客名</label>
+            <label className=" label_custom_right">顧客名</label>
             <input
               type="text"
               placeholder=""
-              name="customerName"
-              value={customerName}
+              name="clientName"
+              value={clientName}
               onChange={handleChange}
               className="inputText"
-              style={{ width: "80%" }}
+              style={{ width: "70%" }}
             />
           </div>
         </div>
@@ -100,8 +114,8 @@ export default function OrderSearchComponent() {
             <label style={{ width: "33%" }}>案件名</label>
             <input
               type="text"
-              name="projectTitle"
-              value={projectTitle}
+              name="projectName"
+              value={projectName}
               onChange={handleChange}
               placeholder=""
               className="inputText"
@@ -113,20 +127,20 @@ export default function OrderSearchComponent() {
           <div
             className="col-lg-6 col-md-12 d-flex align-items-center h-100"
             style={{
-              paddingRight: 0,
-              paddingLeft: 5,
+              marginLeft: -3,
+              padding: 0,
             }}
           >
-            <label style={{ fontSize: 14, width: "15%" }}>職制</label>
+            <label style={{ fontSize: 12, width: "25%" }}>ステータス</label>
             <div
               style={{
-                width: "65%",
+                width: "50%",
               }}
             >
               <select
                 id={"selectedOfficeOrderList"}
-                value={office}
-                name="office"
+                value={status}
+                name="status"
                 onChange={handleChange}
               >
                 {options.map((option, index) => {
@@ -137,20 +151,16 @@ export default function OrderSearchComponent() {
                   );
                 })}
               </select>
-              {/* <Selection
-                  options={options}
-                  selected={0}
-                  divComponentId={"divComponentId"}
-                  id={"selectOrderId"}
-                  // customStyleSelect=" w-100 d-flex justify-content-center"
-                ></Selection> */}
             </div>
 
             <button
+              style={{
+                width: "25%",
+              }}
               className="button-order-search border"
               type="input"
               onClick={() => {
-                console.log(searchFillter);
+                actionSearch();
               }}
             >
               検索
