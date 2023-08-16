@@ -6,15 +6,15 @@ import InputCalenda from '../Input/InputCalenda'
 
 const options = [{ label: '新規', value: 1 }]
 
-export default function FormEditOrder() {
+export default function FormEditOrder({ProductID}) {
     const [id, setId] = useState("０００１２３");
     const [name, setName] = useState("全社支払合算システム機能");
     const [orderNo, setOrderNo] = useState("CIS2023–020");
     const [customerName, setCustomeName] = useState("トーテス");
     const [orderDate, setOrderDate] = useState("2023-08-04");
     const [status, setStatus] = useState(0);
-    const [price, setPrice] = useState("4,854,000");
-    const [unit, setUnit] = useState("4,573");
+    const [price, setPrice] = useState("4854000");
+    const [unit, setUnit] = useState("4573");
     const [error, setError] = useState({
         name: "エラーメッセージXXXX",
         orderNo: "エラーメッセージXXXX",

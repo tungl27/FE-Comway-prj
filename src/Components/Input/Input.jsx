@@ -4,7 +4,8 @@ import './Input.css'
 export default function Input({ id, title, value, required, editable, setValue, errorMsg, setErrorMsg }) {
 
     const onChange = (e) => {
-        setValue(e.target.value)
+        const value = e.target.value.toString().replaceAll(',', '')
+        setValue(value)
     }
     return (
         <Fragment>
