@@ -6,6 +6,7 @@ import { DELETE_ORDER } from "../../../theme/configApi";
 import Dialog from "../../Popup/DialogConfirm";
 import { Button, Modal } from "react-bootstrap";
 import DialogConfirm from "../../Popup/DialogConfirm";
+import statusConvert from "../../../utils/convertStatus";
 
 export default function OrderTableComponent({
   activePage,
@@ -21,11 +22,6 @@ export default function OrderTableComponent({
     setCurent(tableData.slice(startIndexData, endIndexData));
   }, [activePage, tableData]);
 
-  // const dialogRef = useRef();
-  // const handleOpenModal = () => {
-  //   dialogRef.current.handleShowModal();
-  // };
-
   // state delelte
   const [showPopup, setShowPopup] = useState(false);
   const [deletedId, setDeletedId] = useState();
@@ -35,23 +31,7 @@ export default function OrderTableComponent({
     setShowPopup(true);
   };
 
-  function statusConvert(statusId) {
-    // 0: active, 1: inactive, 2: pending, 3: completed, 4: cancelled
-    switch (statusId) {
-      case 0:
-        return "活動";
-      case 1:
-        return "不活動";
-      case 2:
-        return "保留";
-      case 3:
-        return "完了";
-      case 4:
-        return "キャンセル";
-      default:
-        return "";
-    }
-  }
+
   return (
     <Fragment>
       <div className="mt-4">

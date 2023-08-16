@@ -9,7 +9,7 @@ import Footer from "../../Components/Footer/Footer";
 import { BreadcrumbsContext, SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
 import axios from "axios";
 import { GET_STAFF_LIST } from "../../theme/configApi";
-
+import { Link } from "react-router-dom";
 const tableData = [
   { id: 1, name: "山田太郎", fullName: "やまだたろう", office: "社員" },
   { id: 2, name: "弘黒金", fullName: "ひろしくろがね", office: "London" },
@@ -70,7 +70,9 @@ export default function StaffList() {
 
       <div className=" container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle">
+
           <SearchStaffComponent />
+
           <StaffTable activePage={activePage} tableData={tableData} pageSize={pageSize} />
           {totalRecords > 10 && (
             <Pagination
