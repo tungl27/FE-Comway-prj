@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "./Pagination.css";
 import preB from "../../images/u68.svg";
 import forwardButton from "../../images/u67.svg";
@@ -7,9 +7,23 @@ export default function Pagination({
   activepage,
   totalRecords,
   setActive,
-  pageSize
+  pageSize,
 }) {
-  const totalPage = Math.ceil(totalRecords / pageSize)
+  const [totalPage, setTotalPage] = useState(
+    Math.ceil(totalRecords / pageSize)
+  );
+
+  useEffect(() => {
+    setTotalPage(Math.ceil(totalRecords / pageSize));
+  }, [totalRecords, pageSize]);
+
+  useEffect(() => {
+    // Kiểm tra nếu dữ liệu trên trang hiện tại không còn đủ
+    if (totalRecords > 0 && activepage > totalPage && activepage > 1) {
+      setActive(activepage - 1); // Nhảy về trang trước đó
+    }
+  }, [totalPage]);
+
   let pageRange = [];
   for (let i = 0; i < 3; i++) {
     if (activepage === 1 && i <= totalPage) {

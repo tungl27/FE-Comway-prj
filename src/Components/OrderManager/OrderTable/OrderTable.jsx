@@ -84,7 +84,7 @@ export default function OrderTableComponent({
         show={showPopup}
         onClose={() => setShowPopup(false)}
         acceptAction={() => deleteOrder(deletedId)}
-        title="Confirm Transaction"
+        title="Confirm"
         body="選択した注文情報を削除しますか"
       ></DialogConfirm>
     </Fragment>

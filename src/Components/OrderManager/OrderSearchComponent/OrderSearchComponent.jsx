@@ -24,7 +24,7 @@ export default function OrderSearchComponent({
     orderNo: "",
     clientName: "",
     projectName: "",
-    status: "0",
+    status: "",
   });
   const { orderNo, clientName, projectName, status } = stateSearch;
 

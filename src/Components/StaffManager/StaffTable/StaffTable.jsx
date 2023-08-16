@@ -1,36 +1,27 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./staffTable.css";
 import { Link } from "react-router-dom";
+import DialogConfirm from "../../Popup/DialogConfirm";
+import staffTypeConvert from "../../../utils/staffTypeConvert";
 
-export default function StaffTable({ activePage, tableData, pageSize }) {
-  // const ref = useRef(tableData);
-  // const startIndexData = (activePage - 1) * pageSize;
-  // const endIndexData = activePage * pageSize;
-  // ref.current = tableData.slice(startIndexData, endIndexData);
-  // console.log(activePage);
+export default function StaffTable({ activePage, tableData, pageSize, deleteStaff }) {
 
-  // const ref = useRef([]);
   const [curentData, setCurent] = useState([]);
+
+  // state delelte
+  const [showPopup, setShowPopup] = useState(false);
+  const [deletedStaffId, setDeletedStaffId] = useState();
+
+  const handlDeleteSeleted = (id) => {
+    setDeletedStaffId(id);
+    setShowPopup(true);
+  };
 
   useEffect(() => {
     const startIndexData = (activePage - 1) * pageSize;
     const endIndexData = activePage * pageSize;
-    // ref.current = tableData.slice(startIndexData, endIndexData);
     setCurent(tableData.slice(startIndexData, endIndexData));
-    // console.log(ref.current);
   }, [activePage, tableData]);
-
-  function staffTypeConvert(typeId) {
-    // 0: staff , 1: partner
-    switch (typeId) {
-      case 0:
-        return "社員";
-      case 1:
-        return "パートナー";
-      default:
-        return "";
-    }
-  }
 
   return (
     <Fragment>
@@ -46,7 +37,6 @@ export default function StaffTable({ activePage, tableData, pageSize }) {
             </tr>
           </thead>
           <tbody>
-            {/* {ref.current.map((row, index) => ( */}
             {curentData.map((row, index) => (
               <tr key={row.id} className={index % 2 === 0 ? "even-row2" : ""}>
                 <td>{(activePage - 1) * pageSize + index + 1}</td>
@@ -59,7 +49,12 @@ export default function StaffTable({ activePage, tableData, pageSize }) {
                       <span className="edit-o-link">詳細</span>
                     </Link>
 
-                    <span className="delete-link">削除</span>
+                    <span
+                      className="delete-link"
+                      onClick={() => handlDeleteSeleted(row.id)}
+                    >
+                      削除
+                    </span>
                   </div>
                 </td>
               </tr>
@@ -67,6 +62,14 @@ export default function StaffTable({ activePage, tableData, pageSize }) {
           </tbody>
         </table>
       </div>
+
+      <DialogConfirm
+        show={showPopup}
+        onClose={() => setShowPopup(false)}
+        acceptAction={() => deleteStaff(deletedStaffId)}
+        title="Confirm"
+        body="選択した注文情報を削除しますか"
+      ></DialogConfirm>
     </Fragment>
   );
 }

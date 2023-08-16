@@ -26,17 +26,9 @@
 }
 
 .endPag {
-  /* display: flex; */
-  /* align-items: flex-end; */
-  /* align-content: end; */
-  /* justify-content: end; */
-  /* justify-items: flex-end; */
-
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 55px;
-  /* justify-content: center; */
-  /* align-items: center; */
 }

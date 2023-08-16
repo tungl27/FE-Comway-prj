@@ -4,15 +4,12 @@
   border-width: 3px !important;
   border-top: 0px;
   border-right: 0px;
-  /* width: 65%; */
-  /* height: 530px; */
   min-height: 527px;
   width: 955px;
   padding-top: 10px;
   padding-left: 35px;
   padding-right: 35px;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
-  /* padding-bottom: 20px; */
 }
 
 .regisBtn {
@@ -25,4 +22,12 @@
   height: 42px;
   width: 120px;
   margin-top: 20px;
+}
+
+.absoulute-panigation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
 }
