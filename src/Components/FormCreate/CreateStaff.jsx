@@ -5,6 +5,7 @@ import Selection from "../Selection/Selection";
 import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
+import { CREATE_STAFF } from "../../theme/configApi";
 
 const options = [{ label: '社員', value: 1 }, { label: '社員', value: 12 }]
 export default function FormCreate() {
@@ -13,13 +14,15 @@ export default function FormCreate() {
     const [lastNameFurigana, setLastNameFurigana] = useState("やまだ");
     const [firstNameFurigana, setFirstNameFurigana] = useState("たろう");
     const [office, setOffice] = useState('');
+    const [message, setMessage] = useState('');
     const [error, setError] = useState({
-        lastName: "エラーメッセージXXXX",
-        firstName: "エラーメッセージXXXX",
-        lastNameFurigana: "エラーメッセージXXXX",
-        firstNameFurigana: "エラーメッセージXXXX",
-        office: "エラーメッセージXXXX"
+        lastName: "",
+        firstName: "",
+        lastNameFurigana: "",
+        firstNameFurigana: "",
+        office: ""
     });
+
 
     const submitHandler = async () => {
         let errorLastName = ''
@@ -65,8 +68,8 @@ export default function FormCreate() {
             ...error, lastName: errorLastName, firstName: errorFirstName,
             lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, office: errorOffice
         })
-        if ((errorLastName ?? errorFirstName ?? errorLastNameFurigana ?? errorLastNameFurigana ?? errorOffice) === '') {
-            await axios.post("http://127.0.0.1:8000/Staff_Create", {
+        if (!(errorLastName ?? errorFirstName ?? errorLastNameFurigana ?? errorLastNameFurigana ?? errorOffice) !== '') {
+            await axios.post(CREATE_STAFF, {
                 "last_name": lastName,
                 "first_name": firstName,
                 "last_name_furigana": lastNameFurigana,
@@ -77,10 +80,25 @@ export default function FormCreate() {
                 "Condition_Staff_List": true,
                 "IDLoginUser": localStorage.getItem("IDLoginUser")
             }).then((respone) => {
-                console.log(respone)
+                if (respone.data === 'New Staff is created') {
+                    setMessage(process.env.REACT_APP_CREATE_STAFF_SUCCESS)
+                    setLastName('')
+                    setFirstName('')
+                    setLastNameFurigana('')
+                    setFirstNameFurigana('')
+                    setOffice('')
+                }
+            }).catch((err) => {
+                console.log(err)
             })
         }
     }
+    useEffect(() => {
+        const id = setTimeout(() => {
+            setMessage('')
+        }, 5000);
+        return () => clearTimeout(id)
+    }, [message])
     return (
         <Fragment>
             <div className="container">
@@ -106,7 +124,7 @@ export default function FormCreate() {
                         <button type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
                     </div>
                     <p className="message">
-                        スタッフ登録が完了できました！
+                        {message}
                     </p>
                 </div>
             </div>

@@ -1,7 +1,7 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import './BreadCrumb.css'
 import { useNavigate } from "react-router-dom";
-import { SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
+import { BreadcrumbsContext, SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
 import ReactModal from "react-modal";
 
 const customStyles = {
@@ -16,27 +16,74 @@ const customStyles = {
 };
 
 const modelPlace = ['/staff/new', '/staff/view', 'order/new', 'order/view']
-export default function Breadcrumb({ breadcrumbs }) {
+export default function Breadcrumb() {
     const [showModal, setShowModal] = useState(false)
     const [index, setIndex] = useState(0)
-    
-    const SetBreadcrumb = useContext(SetBreadcrumbsContext)
+    let breadcrumbs = [
+        { title: "メニュー", url: "/home" }
+        // { title: "スタッフ一覧", url: "stafflist" },
+    ];
+    const url = window.location.href
+    const path = url.split('/')
+    for (const p of path) {
+        if (p === 'staff') {
+            breadcrumbs.push({
+                title: "スタッフ一覧",
+                url: "/staff/list"
+            })
+        } else
+            if (p === 'new') {
+                breadcrumbs.push({
+                    title: "スタッフ登録",
+                    url: "/staff/new"
+                })
+            } else
+                if (p === 'detail') {
+                    breadcrumbs.push({
+                        title: "スタッフ情報編集",
+                        url: "/staff/detail"
+                    })
+                } else
+                    if (p === 'order') {
+                        breadcrumbs.push({
+                            title: "オーダー一覧",
+                            url: "/order/list"
+                        })
+                    } else
+                        if (p === 'new') {
+                            breadcrumbs.push({
+                                title: "オーダー登録",
+                                url: "/order/new"
+                            })
+                        } else
+                            if (p === 'detail') {
+                                breadcrumbs.push({
+                                    title: "オーダー情報編集",
+                                    url: "/order/detail"
+                                })
+                            }
+    }
 
+    console.log(path)
     const navigate = useNavigate()
     const doModal = (index) => {
-        console.log(breadcrumbs[[breadcrumbs.length - 1]].url)
-        if(modelPlace.indexOf(breadcrumbs[breadcrumbs.length - 1].url) > -1){
+        // console.log(breadcrumbs[[breadcrumbs.length - 1]].url)
+        if (modelPlace.indexOf(breadcrumbs[breadcrumbs.length - 1].url) > -1 && index < breadcrumbs.length - 1) {
             setShowModal(true)
             setIndex(index)
-        }else{
-            move()
+        } else if (index < breadcrumbs.length - 1) {
+            move(index)
         }
     }
-    const move = () => {
+
+    const move = (index) => {
         if (index < breadcrumbs.length - 1) {
             navigate(breadcrumbs[index].url)
-            const newBreadcrumbs = breadcrumbs.slice(0, index + 1)
-            SetBreadcrumb(newBreadcrumbs)
+        }
+    }
+    const directTo = () => {
+        if (index < breadcrumbs.length - 1) {
+            navigate(breadcrumbs[index].url)
         }
     }
     return (
@@ -61,7 +108,7 @@ export default function Breadcrumb({ breadcrumbs }) {
                 <p>Do you want to save edited data?</p>
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => move()}>No</button>
+                    <button className="btn btn-secondary" onClick={() => directTo()}>No</button>
                 </div>
             </ReactModal>
         </Fragment>
