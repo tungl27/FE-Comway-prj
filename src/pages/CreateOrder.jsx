@@ -7,18 +7,10 @@ import { BreadcrumbsContext, SetBreadcrumbsContext } from "../State/BreadcrumbCo
 
 export default function CreateOrder() {
 
-    const SetBreadcrumbs = useContext(SetBreadcrumbsContext)
-
-    const breadcrumbs = useContext(BreadcrumbsContext)
-    breadcrumbs.push({
-        title: "スタッフ登録",
-        url: "/order/new"
-    })
-    SetBreadcrumbs(breadcrumbs)
     return (
         <Fragment>
             <Header></Header>
-            <Breadcrumb breadcrumbs={breadcrumbs}></Breadcrumb>
+            <Breadcrumb ></Breadcrumb>
             <FormCreateOrder></FormCreateOrder>
             <Footer></Footer>
         </Fragment>
