@@ -6,14 +6,30 @@ import Pagination from "../../Components/Pagination/Pagination";
 import Header from "../../Components/Header/Header";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 import Footer from "../../Components/Footer/Footer";
-import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
+import { BreadcrumbsContext, SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
 import axios from "axios";
 import { GET_STAFF_LIST } from "../../theme/configApi";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+const tableData = [
+  { id: 1, name: "山田太郎", fullName: "やまだたろう", office: "社員" },
+  { id: 2, name: "弘黒金", fullName: "ひろしくろがね", office: "London" },
+  { id: 3, name: "大山崎", fullName: "おおやまみさき", office: "London" },
+  { id: 4, name: "Jane dsddsadad", fullName: 30, office: "London" },
+  { id: 5, name: "Jane", fullName: 30, office: "London" },
+  { id: 6, name: "Jane", fullName: 30, office: "London" },
+  { id: 7, name: "Jane", fullName: 30, office: "London" },
+  { id: 8, name: "John", fullName: 25, office: "New York" },
+  { id: 9, name: "Jane", fullName: 30, office: "London" },
+  { id: 10, name: "Jane", fullName: 30, office: "London" },
+  { id: 11, name: "Jane", fullName: 30, office: "London" },
+  { id: 12, name: "Jane", fullName: 30, office: "London" },
+  { id: 13, name: "Jane", fullName: 30, office: "London" },
+  { id: 14, name: "Jane", fullName: 30, office: "London" },
+  { id: 15, name: "Jane", fullName: 30, office: "London" },
+  { id: 16, name: "Jane", fullName: 30, office: "London" },
+];
 
 export default function StaffList() {
-  const breadcrumbs = useContext(BreadcrumbsContext);
-
   const [tableData, setTableData] = useState([]);
 
   const [activePage, setActivePage] = useState(1);
@@ -50,18 +66,16 @@ export default function StaffList() {
   return (
     <Fragment>
       <Header />
-      <Breadcrumb breadcrumbs={breadcrumbs} />
+      <Breadcrumb />
 
       <div className=" container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle">
 
 
           <SearchStaffComponent />
-          {/* <StaffTable
+          <StaffTable
             activePage={activePage}
             tableData={tableData} />
-
-
           <div className=" row" style={{ borderWidth: 3 }}>
             <div className="col-lg-3  ">
               <h4
@@ -83,16 +97,9 @@ export default function StaffList() {
             <div className="col-lg-2  d-flex justify-content-end align-items-end ">
               <span style={{ fontSize: 15 }}>検索件数：10 / 27</span>
             </div>
-          </div> */}
+          </div>
 
           <StaffTable activePage={activePage} tableData={tableData} pageSize={pageSize} />
-
-          <Pagination
-            activepage={activePage}
-            totalRecords={totalRecords}
-            pageSize={pageSize}
-          />
-
           {totalRecords > 10 && (
             <Pagination
               activepage={activePage}

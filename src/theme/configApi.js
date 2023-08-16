@@ -9,3 +9,4 @@ export const GET_ORDER_LIST = getApiUrl("/Show_order_list");
 export const DELETE_STAFF = getApiUrl("/Staff_Detail_Edit");
 export const DELETE_ORDER = getApiUrl("/Delete_order");
 export const SEARCH_ORDER_LIST = getApiUrl("/Search_order_list");
+export const CREATE_STAFF = getApiUrl("/Staff_Create");

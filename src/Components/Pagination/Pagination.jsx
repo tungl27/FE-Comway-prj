@@ -6,36 +6,19 @@ import forwardButton from "../../images/u67.svg";
 export default function Pagination({
   activepage,
   totalRecords,
-  pageSize,
   setActive,
-  totalPage,
+  pageSize
 }) {
-  //   const totalPage = Math.ceil(totalRecords / pageSize);
-
-  //   INSERT INTO `laravel`.`t_-- projects` (`created_at`, `project_name`, `order_number`, `client_name`, `status`, `order_income`, `internal_unit_price`, `del_flg`, `created_user`, `updated_user`) VALUES ('', '324', '32', '32', '0', '3123', '3123', '0', '0', '0');
-
-  //   SET SQL_SAFE_UPDATES = 0;
-  //   UPDATE `laravel`.`t_projects` SET `del_flg` = '0';
-  //   SET SQL_SAFE_UPDATES = 1;
-
-  let startPage = 0;
-  let endPage = 0;
-  if (totalPage < 3) {
-    startPage = 1;
-    endPage = totalPage;
-  } else if (activepage === totalPage) {
-    startPage = activepage - 2;
-    endPage = activepage;
-  } else if (activepage === 1) {
-    startPage = activepage;
-    endPage = activepage + 2;
-  } else {
-    startPage = activepage - 1;
-    endPage = activepage + 1;
-  }
+  const totalPage = Math.ceil(totalRecords / pageSize)
   let pageRange = [];
-  for (let i = startPage; i <= endPage; i++) {
-    pageRange.push(i);
+  for (let i = 0; i < 3; i++) {
+    if (activepage === 1 && i <= totalPage) {
+      pageRange.push(i + 1);
+    } else if (activepage < totalPage) {
+      pageRange.push(activepage - 1 + i);
+    } else if (activepage === totalPage) {
+      pageRange.push(activepage - 2 + i);
+    }
   }
   const increPage = () => {
     console.log("increasing");
@@ -50,11 +33,11 @@ export default function Pagination({
     }
   };
 
-//   useEffect(() => {
-//     if (totalPage < activepage) {
-//       setActive(totalPage);
-//     }
-//   }, [totalPage]);
+  //   useEffect(() => {
+  //     if (totalPage < activepage) {
+  //       setActive(totalPage);
+  //     }
+  //   }, [totalPage]);
   return (
     <Fragment>
       {totalRecords > 10 && (
