@@ -55,7 +55,7 @@ export default function StaffTable({ activePage, tableData, pageSize }) {
                 <td>{staffTypeConvert(row.staff_type)}</td>
                 <td>
                   <div className="d-flex justify-content-center  ">
-                    <Link to={"/staff/detail"}>
+                    <Link to={"/staff/detail?id=" + row.id}>
                       <span className="edit-o-link">詳細</span>
                     </Link>
 

@@ -9,10 +9,10 @@ import { CREATE_STAFF } from "../../theme/configApi";
 
 const options = [{ label: '社員', value: 1 }, { label: '社員', value: 12 }]
 export default function FormCreate() {
-    const [lastName, setLastName] = useState("山田");
-    const [firstName, setFirstName] = useState("太郎");
-    const [lastNameFurigana, setLastNameFurigana] = useState("やまだ");
-    const [firstNameFurigana, setFirstNameFurigana] = useState("たろう");
+    const [lastName, setLastName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastNameFurigana, setLastNameFurigana] = useState("");
+    const [firstNameFurigana, setFirstNameFurigana] = useState("");
     const [office, setOffice] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState({
@@ -23,7 +23,6 @@ export default function FormCreate() {
         office: ""
     });
 
-
     const submitHandler = async () => {
         let errorLastName = ''
         let errorFirstName = ''
@@ -31,36 +30,36 @@ export default function FormCreate() {
         let errorFirstNameFurigana = ''
         let errorOffice = ''
         if (lastName === '') {
-            errorLastName = "This item is required!"
+            errorLastName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!iskanji(lastName)) {
-            errorLastName = "Only input 2byte Kanji character!"
+            errorLastName = process.env.REACT_APP_REQUIRED_2_BYTE_KANJI_ERROR
         } else {
             errorLastName = ""
         }
         if (firstName === '') {
-            errorFirstName = "This item is required!"
+            errorFirstName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!iskanji(firstName)) {
-            errorFirstName = "Only input 2byte Kanji character!"
+            errorFirstName = process.env.REACT_APP_REQUIRED_2_BYTE_KANJI_ERROR
         } else {
             errorFirstName = ""
         }
 
         if (lastNameFurigana === '') {
-            errorLastNameFurigana = "This item is required!"
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(lastNameFurigana)) {
-            errorLastNameFurigana = "Only input 2 byte Hiragana character!"
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
         } else {
             errorLastNameFurigana = ""
         }
         if (firstNameFurigana === '') {
-            errorFirstNameFurigana = "This item is required!"
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(firstNameFurigana)) {
-            errorFirstNameFurigana = "Only input 2 byte Hiragana character!"
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
         } else {
             errorFirstNameFurigana = ""
         }
         if (office === '') {
-            errorOffice = "This item must be selected!"
+            errorOffice = process.env.REACT_APP_REQUIRED_SELECTED_ERROR
         } else {
             errorOffice = ""
         }

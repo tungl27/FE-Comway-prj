@@ -2,24 +2,106 @@ import { Fragment, useState } from "react";
 import Input from "../Input/Input";
 import Selection from "../Selection/Selection";
 import './FormEdit.css'
+import iskanji from "../../utils/validateKanji";
+import isHiragana from "../../utils/validataHiragana";
+import axios from "axios";
+import { CREATE_STAFF } from "../../theme/configApi";
 
 const options = [{ label: '社員', value: 1 }]
 
-export default function FormEdit() {
+export default function FormEdit({ staffID }) {
     const [id, setId] = useState("０００１２３");
     const [lastName, setLastName] = useState("山田");
     const [firstName, setFirstName] = useState("太郎");
     const [lastNameFurigana, setLastNameFurigana] = useState("やまだ");
     const [firstNameFurigana, setFirstNameFurigana] = useState("たろう");
-    const [office, setOffice] = useState(0);
+    const [office, setOffice] = useState('');
+    const [message, setMessage] = useState('');
     const [error, setError] = useState({
-        id: "エラーメッセージXXXX",
-        lastName: "エラーメッセージXXXX",
-        firstName: "エラーメッセージXXXX",
-        lastNameFurigana: "エラーメッセージXXXX",
-        firstNameFurigana: "エラーメッセージXXXX",
-        office: "エラーメッセージXXXX"
+        id: "",
+        lastName: "",
+        firstName: "",
+        lastNameFurigana: "",
+        firstNameFurigana: "",
+        office: ""
     });
+
+    const submitHandler = async () => {
+        let errorLastName = ''
+        let errorFirstName = ''
+        let errorLastNameFurigana = ''
+        let errorFirstNameFurigana = ''
+        let errorOffice = ''
+        if (lastName === '') {
+            errorLastName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
+        } else if (!iskanji(lastName)) {
+            errorLastName = process.env.REACT_APP_REQUIRED_2_BYTE_KANJI_ERROR
+        } else {
+            errorLastName = ""
+        }
+        if (firstName === '') {
+            errorFirstName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
+        } else if (!iskanji(firstName)) {
+            errorFirstName = process.env.REACT_APP_REQUIRED_2_BYTE_KANJI_ERROR
+        } else {
+            errorFirstName = ""
+        }
+
+        if (lastNameFurigana === '') {
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
+        } else if (!isHiragana(lastNameFurigana)) {
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+        } else {
+            errorLastNameFurigana = ""
+        }
+        if (firstNameFurigana === '') {
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
+        } else if (!isHiragana(firstNameFurigana)) {
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+        } else {
+            errorFirstNameFurigana = ""
+        }
+        if (office === '') {
+            errorOffice = process.env.REACT_APP_REQUIRED_SELECTED_ERROR
+        } else {
+            errorOffice = ""
+        }
+        setError({
+            ...error, lastName: errorLastName, firstName: errorFirstName,
+            lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, office: errorOffice
+        })
+        if (!(errorLastName ?? errorFirstName ?? errorLastNameFurigana ?? errorLastNameFurigana ?? errorOffice) !== '') {
+            await axios.post(CREATE_STAFF, {
+                "last_name": lastName,
+                "first_name": firstName,
+                "last_name_furigana": lastNameFurigana,
+                "first_name_furigana": firstNameFurigana,
+                "office": office,
+                "Condtion_verify": false,
+                "Condition_menu": false,
+                "Condition_Staff_List": true,
+                "IDLoginUser": localStorage.getItem("IDLoginUser")
+            }).then((respone) => {
+                if (respone.data === 'New Staff is created') {
+                    setMessage(process.env.REACT_APP_CREATE_STAFF_SUCCESS)
+                    setLastName('')
+                    setFirstName('')
+                    setLastNameFurigana('')
+                    setFirstNameFurigana('')
+                    setOffice('')
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
+    }
+
+    const staffInfo = async () => {
+        await axios.post(CREATE_STAFF, { StaffID: staffID, IDLoginUser: localStorage.getItem('IDLoginUser') }).then(respone => {
+            return respone.data
+        })
+    }
+    const staff = staffInfo()
     return (
         <Fragment>
             <div className="container">
@@ -44,11 +126,11 @@ export default function FormEdit() {
                         </div>
                     </div>
                     <div className="text-center">
-                        <button type="button" id="change" className="btn btn-primary">更新</button>
+                        <button type="button" id="change" className="btn btn-primary" onClick={() => submitHandler()}>更新</button>
                         <button type="button" id="cancel" className="btn btn-primary">キャンセル</button>
                     </div>
                     <p className="message">
-                        スタッフ登録が完了できました！
+                        {message}
                     </p>
                 </div>
             </div>
