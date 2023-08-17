@@ -5,11 +5,10 @@ import axios from "axios";
 import { SEARCH_ORDER_LIST } from "../../../theme/configApi";
 
 export default function OrderSearchComponent({
-  searchFillter,
   setSearchFiller,
   fetchData,
-  setActivePage
-
+  setActivePage,
+  totalRecords,
 }) {
   const options = [
     { label: "", value: "" },
@@ -42,7 +41,7 @@ export default function OrderSearchComponent({
   const actionSearch = () => {
     setSearchFiller(stateSearch);
     fetchData(stateSearch);
-    setActivePage(1)
+    setActivePage(1);
   };
 
   return (
@@ -72,7 +71,12 @@ export default function OrderSearchComponent({
       >
         <div className="row  ">
           <div className=" col-lg-6 d-flex  px-1 align-items-center  ">
-            <label style={{ width: "33%", fontSize: 13 }}>オーダーNo.</label>
+            <label
+              className="col-md-12 col-lg-12"
+              style={{ width: "33%", fontSize: 13 }}
+            >
+              オーダーNo.
+            </label>
             <input
               value={orderNo}
               name="orderNo"
@@ -170,7 +174,7 @@ export default function OrderSearchComponent({
       </div>
 
       <div className="col-lg-2  d-flex justify-content-end align-items-end  ">
-        <span style={{ fontSize: 15 }}>検索件数：27件</span>
+        <span style={{ fontSize: 15 }}>検索件数：{totalRecords || 0} 件</span>
       </div>
     </div>
   );

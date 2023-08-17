@@ -41,7 +41,7 @@ export default function StaffTable({ activePage, tableData, pageSize, deleteStaf
               <tr key={row.id} className={index % 2 === 0 ? "even-row2" : ""}>
                 <td>{(activePage - 1) * pageSize + index + 1}</td>
                 <td>{`${row.last_name}${row.first_name}`}</td>
-                <td>{`${row.first_name_furigana}${row.last_name_furigana}`}</td>
+                <td>{`${row.last_name_furigana}${row.first_name_furigana}`}</td>
                 <td>{staffTypeConvert(row.staff_type)}</td>
                 <td>
                   <div className="d-flex justify-content-center  ">

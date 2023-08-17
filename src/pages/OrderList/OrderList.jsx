@@ -44,7 +44,6 @@ export default function OrderList() {
       });
 
       setTableData(response.data);
-      console.log(response.data);
 
       const totalRecord = response.data.length; // Số lượng bản ghi trong response.data
       setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
@@ -60,7 +59,7 @@ export default function OrderList() {
         Id_Order: orderID,
         Condition_verify: true,
       });
-      fetchData();
+      fetchData(searchFillter);
     } catch (error) {
       console.error("Error delete data:");
     }
@@ -74,10 +73,10 @@ export default function OrderList() {
       <div className=" container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle d-flex flex-column  position-relative  ">
           <OrderSearchComponent
-            searchFillter={searchFillter}
             setSearchFiller={setSearchFiller}
             fetchData={fetchData}
             setActivePage={setActivePage}
+            totalRecords={totalRecords}
           />
 
           <div style={{ marginBottom: 55 }}>
