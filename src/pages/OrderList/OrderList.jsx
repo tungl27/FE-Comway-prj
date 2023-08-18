@@ -54,9 +54,12 @@ export default function OrderList() {
 
   const deleteOrder = async (orderID) => {
     try {
+
+      const id_login = localStorage.getItem("admin_id");
+
       const response = await axios.post(DELETE_ORDER, {
         Id_User_Login: 0,
-        Id_Order: orderID,
+        Id_Order: id_login,
         Condition_verify: true,
       });
       fetchData(searchFillter);

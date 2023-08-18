@@ -89,8 +89,16 @@ export default function Login() {
         setError(errors);
 
         // Neu thanh khong co loi nao
-        if (Object.keys(errors).length === 0) {
-          localStorage.setItem("admin_id", JSON.stringify(resData[1]));
+        const mesengerSus = resData?.message || ""; 
+        if (
+          Object.keys(errors).length === 0 &&
+          mesengerSus === "Successfully"
+        ) {
+          localStorage.setItem(
+            "admin_id",
+            resData?.IDLoginUser 
+            // JSON.stringify()
+          );
           navigative("/home");
         }
       } catch (error) {}
