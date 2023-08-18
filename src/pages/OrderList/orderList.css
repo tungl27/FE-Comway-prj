@@ -5,8 +5,9 @@
   border-top: 0px;
   border-right: 0px;
   /* width: 65%; */
-  min-height: 527px;
+  min-height: 535px;
   width: 955px;
+  max-width: 955px;
   padding-top: 10px;
   padding-left: 35px;
   padding-right: 35px;
@@ -26,17 +27,9 @@
 }
 
 .endPag {
-  /* display: flex; */
-  /* align-items: flex-end; */
-  /* align-content: end; */
-  /* justify-content: end; */
-  /* justify-items: flex-end; */
-
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 55px;
-  /* justify-content: center; */
-  /* align-items: center; */
 }

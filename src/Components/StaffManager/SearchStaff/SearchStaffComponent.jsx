@@ -1,35 +1,38 @@
 import React, { Fragment, useState } from "react";
 import "./searchStaffComponent.css";
-import Selection from "../../Selection/Selection";
 import { Link } from "react-router-dom";
 
-export default function SearchStaffComponent() {
+export default function SearchStaffComponent({
+  setSearchFiller,
+  fetchData,
+  setActivePage,
+  totalRecords,
+}) {
   const options = [
+    { label: "", value: "" },
     { label: "社員", value: "0" },
     { label: "パートナー", value: "1" },
   ];
 
-  const [searchFillter, setSearchFiller] = useState({
-    fullName: "",
-    staffType: "0",
+  const [stateSearch, setStateSearch] = useState({
+    nameSearch: "",
+    staffType: "",
   });
 
-  const { fullName, staffType } = searchFillter;
-
-  const updateFilter = (data) =>
-    setSearchFiller((prevData) => ({ ...prevData, ...data }));
+  const { nameSearch, staffType } = stateSearch;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSearchFiller((prevData) => ({
+    setStateSearch((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const searchAction = () => {
-    // Nếu tạo thành th
-    console.log(searchFillter);
+  const actionSearch = () => {
+    setSearchFiller(stateSearch);
+    fetchData(stateSearch);
+    setActivePage(1);
   };
 
   return (
@@ -57,9 +60,8 @@ export default function SearchStaffComponent() {
                 <input
                   type="name"
                   className=" inputSearch"
-                  id="fullName"
-                  name="fullName"
-                  value={fullName}
+                  name="nameSearch"
+                  value={nameSearch}
                   placeholder="山田太郎"
                   onChange={handleChange}
                 />
@@ -69,14 +71,6 @@ export default function SearchStaffComponent() {
             <div className=" row  align-items-center ">
               <label className="col-sm-2  d-flex ">職制</label>
               <div className="col-sm-7">
-                {/* <Selection
-                 options={options}
-                 selected={0}
-                 divContainerId={"selectedOfficeStaffList"}
-                  customStyleSelect=" w-100 d-flex justify-content-center"
-                 value={office}
-               ></Selection> */}
-
                 <select
                   name="staffType"
                   id={"selectedOfficeStaffList"}
@@ -94,7 +88,10 @@ export default function SearchStaffComponent() {
               </div>
 
               <div className="col-sm-3">
-                <button className="searchBtn border" onClick={searchAction}>
+                <button
+                  className="searchBtn border"
+                  onClick={() => actionSearch()}
+                >
                   検索
                 </button>
               </div>
@@ -102,7 +99,7 @@ export default function SearchStaffComponent() {
           </div>
         </div>
         <div className="col-lg-2  d-flex justify-content-end align-items-end ">
-          <span style={{ fontSize: 15 }}>検索件数：10 / 27</span>
+          <span style={{ fontSize: 15 }}>検索件数：{totalRecords || 0} 件</span>
         </div>
       </div>
     </Fragment>
