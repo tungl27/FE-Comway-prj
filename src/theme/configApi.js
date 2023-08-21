@@ -11,3 +11,7 @@ export const DELETE_ORDER = getApiUrl("/Delete_order");
 export const SEARCH_ORDER_LIST = getApiUrl("/Search_order_list");
 export const CREATE_STAFF = getApiUrl("/Staff_Create");
 export const CREATE_ORDER = getApiUrl("/Order_Create");
+export const GET_STAFF_BY_ID = getApiUrl("/GetStaffID");
+export const GET_ORDER_BY_ID = getApiUrl("/GetOrderByID");
+export const EDIT_STAFF = getApiUrl("/Staff_Detail_Edit");
+export const EDIT_ORDER = getApiUrl("/Order_Edit_Detail");

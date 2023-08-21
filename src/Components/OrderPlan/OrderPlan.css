@@ -86,7 +86,7 @@ label[for=price] {
 }
 
 .table-cell-gap {
-    height: 1px;
+    height: 3px;
     margin-top: 1px;
     text-align: center;
 }
@@ -94,6 +94,7 @@ label[for=price] {
 .gatu-cell {
     border: 1px solid #797979;
     min-width: 112px;
+    max-width: 112px;
     height: 30px;
     font-size: 13px;
     font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
@@ -105,6 +106,7 @@ label[for=price] {
 .jikan-cell {
     padding: 2px;
     border-left: 1px solid #797979;
+    border-bottom: 1px solid #797979;
     width: 40px;
     height: 30px;
     text-align: left;
@@ -117,6 +119,7 @@ label[for=price] {
 .genka-cell {
     padding: 2px;
     border-right: 1px solid #797979;
+    border-bottom: 1px solid #797979;
     width: 66px;
     height: 30px;
     text-align: right;
@@ -131,11 +134,14 @@ label[for=price] {
     font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
     font-weight: 300;
     font-style: normal;
+    width: 56px;
+    max-width: 56px;
+    overflow-x: hidden;
 }
 
 .first-cell {
     min-width: 31px;
-    max-height: 38px;
+    max-height: 38px !important;
     border: 1px solid #797979;
 }
 
@@ -157,11 +163,10 @@ label[for=price] {
 .div-second-table {
     height: 495px;
     width: 706px;
-    overflow-x: scroll;
 }
 
 .first-table {
-    margin-top: 42px;
+    margin-top: 43px;
 }
 
 .table-naiyo {
@@ -172,15 +177,112 @@ label[for=price] {
     background-color: #80FFFF;
 }
 
-#erorrorderNo{
+#erorrorderNo {
     height: 5px;
 }
-#erorrcustomerName{
+
+#erorrcustomerName {
     height: 5px;
 }
-#erorrname{
+
+#erorrname {
     height: 5px;
 }
-#erorrprice{
+
+#erorrprice {
     height: 5px;
+}
+
+.empty-header {
+    height: 65px;
+}
+
+.scroll-table {
+    overflow-x: scroll;
+    height: fit-content;
+}
+
+.table-gap {
+    display: block;
+    margin-top: 1px;
+}
+
+.gap-row {
+    height: 39px;
+}
+
+.table-blue {
+    background-color: #80FFFF;
+
+}
+
+.table-orange {
+    background-color: #FACD91;
+    border: 2px solid #797979;
+}
+
+.col-shadow {
+    box-shadow: 5px 5px 5px #000000;
+    border: 0px solid #797979;
+    width: 28px;
+    position: relative;
+    z-index: 3;
+}
+
+.tables-flex {
+    position: relative;
+    top: -724px;
+    right: -353px;
+    width: 516px;
+}
+
+.table-top {
+    font-family: 'HiraginoSans-W3', 'Hiragino Sans W3', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+    font-size: 13px;
+    width: 230px;
+}
+
+.td-cell-2 {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    border: 2px solid #797979;
+}
+
+.absolute-img1 {
+    position: absolute;
+    top: 155px;
+    left: -2px;
+}
+
+.absolute-img2 {
+    position: absolute;
+    top: 165px;
+    left: 9px;
+}
+
+.div-button {
+    margin-top: 30px;
+}
+
+.vertical-scroll-table {
+    display: table-caption;
+    height: 473px;
+    overflow-y: auto
+}
+
+.hide-scroll-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.header-last-table {
+    padding-right: 10px;
+}
+
+.show-scroll-bar {
+    display: block;
+    padding-right: 15px;
 }

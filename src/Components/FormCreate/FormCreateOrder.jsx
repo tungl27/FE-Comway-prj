@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import './FormCreate.css'
 import InputCalenda from "../Input/InputCalenda";
@@ -12,16 +12,17 @@ import addComma from "../../utils/addComma";
 
 
 
-const options = [{ label: '社員', value: 1 }]
+const options = [{ label: '実行中', value: 0 }, { label: '非活性', value: 1 }, { label: '保留', value: 2 }, { label: '完了', value: 3 }, { label: 'キャンセル', value: 4 }]
 
 export default function CreateOrder() {
+    const refButton = useRef(null)
     const [name, setName] = useState("全社支払合算機能");
     const [orderNo, setOrderNo] = useState("CIS2023–020");
     const [customerName, setCustomeName] = useState("トーテス");
     const [orderDate, setOrderDate] = useState("2023-08-04");
     const [status, setStatus] = useState('');
-    const [price, setPrice] = useState("4854000");
-    const [unit, setUnit] = useState("4573");
+    const [orderIncome, setOrderIncome] = useState("4854000");
+    const [internalUnitPrice, setInternalUnitPrice] = useState("4573");
     const [message, setMessage] = useState("");
     const [error, setError] = useState({
         name: "",
@@ -29,8 +30,8 @@ export default function CreateOrder() {
         customerName: "",
         orderDate: "",
         status: "",
-        price: "",
-        unit: "",
+        orderIncome: "",
+        internalUnitPrice: "",
     });
 
     const submitHandler = async () => {
@@ -39,8 +40,8 @@ export default function CreateOrder() {
         let errorCustomerName = ''
         let errorOrderDate = ''
         let errorStatus = ''
-        let errorPrice = ''
-        let errorUnit = ''
+        let errorOrderIncome = ''
+        let errorInternalUnitPrice = ''
         console.log(!iskanji(name), 'kajiname')
         if (name === '') {
             errorName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
@@ -69,50 +70,59 @@ export default function CreateOrder() {
         } else {
             errorStatus = ""
         }
-        if (price === '') {
-            errorPrice = process.env.REACT_APP_REQUIRED_FIELD_ERROR
+        if (orderIncome === '') {
+            errorOrderIncome = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkDate(orderDate)) {
-            errorPrice = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
         } else {
-            errorPrice = ""
+            errorOrderIncome = ""
         }
-        if (unit === '') {
-            errorUnit = process.env.REACT_APP_REQUIRED_FIELD_ERROR
+        if (internalUnitPrice === '') {
+            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkNumber(orderDate)) {
-            errorUnit = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
         } else {
-            errorUnit = ""
+            errorInternalUnitPrice = ""
         }
         setError({
             ...error, name: errorName, orderNo: errorOrderNo,
-            customerName: errorCustomerName, orderDate: errorOrderDate, status: errorStatus, price: errorPrice, unit: errorUnit
+            customerName: errorCustomerName, orderDate: errorOrderDate, status: errorStatus, orderIncome: errorOrderIncome, internalUnitPrice: errorInternalUnitPrice
         })
-        if (!(errorName ?? errorOrderNo ?? errorCustomerName ?? errorOrderDate ?? errorStatus ?? errorPrice ?? errorUnit) !== '') {
+        if (!(errorName ?? errorOrderNo ?? errorCustomerName ?? errorOrderDate ?? errorStatus ?? errorOrderIncome ?? errorInternalUnitPrice) !== '') {
             const formdata = new FormData()
             formdata.append('project_name', name)
             formdata.append('order_number', orderNo)
             formdata.append('client_name', customerName)
             formdata.append('order_date', orderDate)
             formdata.append('status', status)
-            formdata.append('order_income', price)
-            formdata.append('internal_unit_price', unit)
+            formdata.append('order_income', orderIncome)
+            formdata.append('internal_unit_price', internalUnitPrice)
             formdata.append('IDLoginUser', localStorage.getItem('IDLoginUser'))
             await axios.post(CREATE_ORDER, formdata).then((respone) => {
-                if (respone.data === 'New Staff is created') {
+                if (respone.data.message === 'New Project ID is successfully inserted!') {
                     setMessage(process.env.REACT_APP_CREATE_ORDER_SUCCESS)
                     setName('')
                     setOrderNo('')
                     setCustomeName('')
                     setOrderDate('')
                     setStatus('')
-                    setPrice('')
-                    setUnit('')
+                    setOrderIncome('')
+                    setInternalUnitPrice('')
+                    refButton.current.disabled = true
                 }
             }).catch((err) => {
                 console.log(err)
             })
         }
     }
+
+    useEffect(() => {
+        const id = setTimeout(() => {
+            setMessage('')
+            refButton.current.disabled = false
+        }, 5000);
+        return () => clearTimeout(id)
+    }, [message])
     return (
         <Fragment>
             <div className="container">
@@ -127,12 +137,12 @@ export default function CreateOrder() {
                             <Input id={'order-customerName'} value={customerName} required={false} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
                             <InputCalenda id={'orderDate'} value={orderDate} required={false} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
                             <Selection id={'status'} title={'ステータス'} options={options} required={true} value={status} errorMsg={error.status} setValue={setStatus} ></Selection>
-                            <Input id={'order-price'} value={addComma(price)} required={false} setValue={setPrice} title={'受注額'} editable={true} errorMsg={error.price}></Input> <span id="unit1">円</span>
-                            <Input id={'unit'} value={addComma(unit)} required={false} setValue={setUnit} title={'社内単金'} editable={true} errorMsg={error.unit}></Input><span id="unit2">円/Manhour</span>
+                            <Input id={'order-orderIncome'} value={addComma(orderIncome)} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input> <span id="internalUnitPrice1">円</span>
+                            <Input id={'internalUnitPrice'} value={addComma(internalUnitPrice)} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitPrice2">円/Manhour</span>
                         </div>
                     </div>
                     <div className="text-center">
-                        <button type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
+                        <button ref={refButton} type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
                     </div>
                     <p className="message">
                         {message}

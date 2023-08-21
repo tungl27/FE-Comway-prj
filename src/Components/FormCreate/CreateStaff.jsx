@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import './FormCreate.css'
 import Selection from "../Selection/Selection";
@@ -7,28 +7,31 @@ import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF } from "../../theme/configApi";
 
-const options = [{ label: '社員', value: 1 }, { label: '社員', value: 12 }]
+const options = [{ label: '一般', value: 0 }, { label: 'パートナー', value: 1 }]
+
 export default function FormCreate() {
     const [lastName, setLastName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastNameFurigana, setLastNameFurigana] = useState("");
     const [firstNameFurigana, setFirstNameFurigana] = useState("");
-    const [office, setOffice] = useState('');
+    const [staff_type, setStaff_type] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState({
         lastName: "",
         firstName: "",
         lastNameFurigana: "",
         firstNameFurigana: "",
-        office: ""
+        staff_type: ""
     });
+
+    const refButton = useRef(null)
 
     const submitHandler = async () => {
         let errorLastName = ''
         let errorFirstName = ''
         let errorLastNameFurigana = ''
         let errorFirstNameFurigana = ''
-        let errorOffice = ''
+        let errorstaff_type = ''
         if (lastName === '') {
             errorLastName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!iskanji(lastName)) {
@@ -58,22 +61,22 @@ export default function FormCreate() {
         } else {
             errorFirstNameFurigana = ""
         }
-        if (office === '') {
-            errorOffice = process.env.REACT_APP_REQUIRED_SELECTED_ERROR
+        if (staff_type === '') {
+            errorstaff_type = process.env.REACT_APP_REQUIRED_SELECTED_ERROR
         } else {
-            errorOffice = ""
+            errorstaff_type = ""
         }
         setError({
             ...error, lastName: errorLastName, firstName: errorFirstName,
-            lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, office: errorOffice
+            lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, staff_type: errorstaff_type
         })
-        if (!(errorLastName ?? errorFirstName ?? errorLastNameFurigana ?? errorLastNameFurigana ?? errorOffice) !== '') {
+        if (!(errorLastName ?? errorFirstName ?? errorLastNameFurigana ?? errorLastNameFurigana ?? errorstaff_type) !== '') {
             await axios.post(CREATE_STAFF, {
                 "last_name": lastName,
                 "first_name": firstName,
                 "last_name_furigana": lastNameFurigana,
                 "first_name_furigana": firstNameFurigana,
-                "office": office,
+                "staff_type": staff_type,
                 "Condtion_verify": false,
                 "Condition_menu": false,
                 "Condition_Staff_List": true,
@@ -85,7 +88,8 @@ export default function FormCreate() {
                     setFirstName('')
                     setLastNameFurigana('')
                     setFirstNameFurigana('')
-                    setOffice('')
+                    setStaff_type('')
+                    refButton.current.disabled = true
                 }
             }).catch((err) => {
                 console.log(err)
@@ -95,6 +99,7 @@ export default function FormCreate() {
     useEffect(() => {
         const id = setTimeout(() => {
             setMessage('')
+            refButton.current.disabled = false
         }, 5000);
         return () => clearTimeout(id)
     }, [message])
@@ -115,12 +120,12 @@ export default function FormCreate() {
                                 title={'苗字（ふりがな）'} editable={true} errorMsg={error.lastNameFurigana}></Input>
                             <Input id={'firstnamefurigana-create'} value={firstNameFurigana} required={false} setValue={setFirstNameFurigana}
                                 title={'名前（ふりがな）'} editable={true} errorMsg={error.firstNameFurigana}></Input>
-                            <Selection id={'office-create'} title={'職制'} options={options} required={true} value={office}
-                                setValue={setOffice} errorMsg={error.office}></Selection>
+                            <Selection id={'staff_type-create'} title={'職制'} options={options} required={true} value={staff_type}
+                                setValue={setStaff_type} errorMsg={error.staff_type}></Selection>
                         </div>
                     </div>
                     <div className="text-center">
-                        <button type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
+                        <button ref={refButton} type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
                     </div>
                     <p className="message">
                         {message}

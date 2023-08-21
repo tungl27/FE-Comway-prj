@@ -59,13 +59,13 @@
     margin: auto;
 }
 
-#unit1{
+#internalUnitPrice1{
     position: absolute;
     top: 285px;
     right: -25px;
 }
 
-#unit2{
+#internalUnitPrice2{
     position: absolute;
     top: 340px;
     right: -95px;

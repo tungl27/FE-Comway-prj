@@ -15,7 +15,7 @@ const customStyles = {
     },
 };
 
-const modelPlace = ['/staff/new', '/staff/view', 'order/new', 'order/view']
+const modelPlace = ['/staff/new', '/staff/detail', 'order/new', 'order/detail']
 export default function Breadcrumb() {
     const [showModal, setShowModal] = useState(false)
     const [index, setIndex] = useState(0)
@@ -61,7 +61,20 @@ export default function Breadcrumb() {
                                     title: "オーダー情報編集",
                                     url: "/order/detail"
                                 })
-                            }
+                            } else
+                                if (p === 'actual') {
+                                    breadcrumbs.push({
+                                        title: "オーダー登録",
+                                        url: "/order/actual"
+                                    })
+                                }
+                                else
+                                    if (p.startsWith('detail')) {
+                                        breadcrumbs.push({
+                                            title: "スタッフ情報編集",
+                                            url: "/staff/detail"
+                                        })
+                                    }
     }
 
     console.log(path)
