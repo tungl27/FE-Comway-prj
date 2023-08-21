@@ -63,6 +63,7 @@ export default function StaffList() {
         id: staffId,
         id_login: id_login,
         Condition: true,
+        IDLoginUser: localStorage.getItem("admin_id"),
       });
       fetchData(searchFillter);
     } catch (error) {

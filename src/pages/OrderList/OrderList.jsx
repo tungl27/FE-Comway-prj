@@ -61,6 +61,8 @@ export default function OrderList() {
         Id_User_Login: 0,
         Id_Order: id_login,
         Condition_verify: true,
+        IDLoginUser: localStorage.getItem("admin_id"),
+
       });
       fetchData(searchFillter);
     } catch (error) {
