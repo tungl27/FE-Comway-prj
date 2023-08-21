@@ -7,10 +7,7 @@ import Header from "../../Components/Header/Header";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
-import {
-  DELETE_STAFF,
-  SEARCH_STAFF_LIST,
-} from "../../theme/configApi";
+import { DELETE_STAFF, SEARCH_STAFF_LIST } from "../../theme/configApi";
 
 export default function StaffList() {
   // State table
@@ -39,14 +36,18 @@ export default function StaffList() {
       //   status: searchValue?.status || "",
       // });
 
-      console.log(searchValueParams);
-      const searchParams = new URLSearchParams(searchValueParams);
+      const params = {
+        name: searchValueParams.nameSearch,
+        staff_type: searchValueParams.staffType,
+      };
+      const searchParams = new URLSearchParams(params);
+
       const url = `${SEARCH_STAFF_LIST}?${searchParams.toString()}`;
       const response = await axios.get(url);
+      setTableData(response.data?.staffs);
+      setTableData(response.data?.staffs);
 
-      setTableData(response.data);
-      console.log(response.data);
-      const totalRecord = response.data.length; //Số lượng bản ghi trong response.data
+      const totalRecord = response.data?.staffs.length; //Số lượng bản ghi trong response.data
       setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -55,14 +56,17 @@ export default function StaffList() {
 
   const deleteStaff = async (staffId) => {
     try {
+      const id_login = localStorage.getItem("admin_id");
+
       const response = await axios.post(DELETE_STAFF, {
         id: staffId,
-        id_login: 0,
+        id_login: id_login,
         Condition: true,
       });
       fetchData(searchFillter);
     } catch (error) {
       console.error("Error delete staff data:");
+      console.log(error.response.data);
     }
   };
 
