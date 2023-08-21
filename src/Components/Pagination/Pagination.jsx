@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "./Pagination.css";
 import preB from "../../images/u68.svg";
 import forwardButton from "../../images/u67.svg";
@@ -7,27 +7,67 @@ export default function Pagination({
   activepage,
   totalRecords,
   setActive,
-  pageSize
+  pageSize,
 }) {
-  const totalPage = Math.ceil(totalRecords / pageSize)
+  const [totalPage, setTotalPage] = useState(
+    Math.ceil(totalRecords / pageSize)
+  );
+
+  useEffect(() => {
+    setTotalPage(Math.ceil(totalRecords / pageSize));
+  }, [totalRecords, pageSize]);
+
+  useEffect(() => {
+    // Kiểm tra nếu dữ liệu trên trang hiện tại không còn đủ
+    if (totalRecords > 0 && activepage > totalPage && activepage > 1) {
+      setActive(activepage - 1); // Nhảy về trang trước đó
+    }
+  }, [totalPage]);
+
+  // let pageRange = [];
+  // for (let i = 0; i < 3; i++) {
+  //   if (activepage === 1 && i <= totalPage) {
+  //     pageRange.push(i + 1);
+  //   } else if (activepage < totalPage ) {
+  //     pageRange.push(activepage - 1 + i);
+  //   } else if (activepage === totalPage) {
+  //     pageRange.push(activepage - 2 + i);
+  //   }
+  // }
+
+  // const [pageRange, setPageRange] = useState([]);
+
+  // useEffect(() => {
   let pageRange = [];
-  for (let i = 0; i < 3; i++) {
-    if (activepage === 1 && i <= totalPage) {
-      pageRange.push(i + 1);
-    } else if (activepage < totalPage) {
-      pageRange.push(activepage - 1 + i);
+
+  if (activepage <= totalPage) {
+    if (activepage === 1) {
+      for (let i = 0; i < 3 && i < totalPage; i++) {
+        pageRange.push(i + 1);
+      }
+    } else if (activepage > 1 && activepage < totalPage) {
+      for (let i = -1; i <= 1; i++) {
+        if (activepage + i > 0 && activepage + i <= totalPage) {
+          pageRange.push(activepage + i);
+        }
+      }
+    } else if (activepage === totalPage && activepage === 2) {
+      pageRange.push(1, 2);
     } else if (activepage === totalPage) {
-      pageRange.push(activepage - 2 + i);
+      for (let i = -2; i <= 0 && activepage + i > 0; i++) {
+        pageRange.push(activepage + i);
+      }
     }
   }
+
   const increPage = () => {
-    console.log("increasing");
+    // console.log("increasing");
     if (activepage < totalPage) {
       setActive(activepage + 1);
     }
   };
   const reducePage = () => {
-    console.log("decreasing");
+    // console.log("decreasing");
     if (activepage > 1) {
       setActive(activepage - 1);
     }
@@ -59,7 +99,9 @@ export default function Pagination({
                   "stepButton" + (activepage === range ? " active" : "")
                 }
                 value={range}
-                onClick={() => setActive(range)}
+                onClick={() => {
+                  setActive(range);
+                }}
               >
                 {range}
               </button>

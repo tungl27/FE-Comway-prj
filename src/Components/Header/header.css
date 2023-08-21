@@ -1,38 +1,122 @@
 .header {
-    background-color: #F2F2F2;
-    border: 2px solid #02A7F0;
-    padding: 2px;
-    text-align: center;
-    height: 99px;
-    line-height: 99px;
+  background-color: #f2f2f2;
+  border: 2px solid #02a7f0;
+  padding: 2px;
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+  width: 1007px;
+
+  position: relative;
+  margin: auto;
+  display: flex;
+  /* padding-bottom: 0px; */
+  margin-bottom: 0px;
+}
+
+@media only screen and (min-width: 0px) {
+  .header {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .header {
     width: 1007px;
-    position: relative;
-    margin: auto;
+  }
 }
 
-.title {
-    font-family: 'HiraginoSans-W7', 'Hiragino Sans W7', 'Hiragino Sans W4', 'Hiragino Sans', sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 25px;
-    color: rgba(163, 0, 20, 0.5686274509803921);
+.titleHeader {
+  font-family: "HiraginoSans-W7", "Hiragino Sans W7", "Hiragino Sans W4",
+    "Hiragino Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 25px;
+  color: rgba(163, 0, 20, 0.5686274509803921);
+  width: 100%;
 }
 
-
-.logout {
-    position: absolute;
-    right: 20px;
-    top: 0px;
+.logoutLable {
+  position: absolute;
+  right: 20px;
+  top: 0px;
 }
 
 .circle {
-    position: absolute;
-    right: 104px;
-    top: 41px;
+  position: absolute;
+  top: 40px;
+  left: 10px;
 }
 
 .stick {
-    position: absolute;
-    right: 113px;
-    top: 30px
+  position: absolute;
+  left: 20px;
+  top: 30px;
 }
+
+.logoutButton {
+  width: 150px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+.iconLogout {
+  position: relative;
+  width: 50px;
+  height: 100%;
+}
+
+/* .header {
+  background-color: #f2f2f2;
+  border: 2px solid #02a7f0;
+  padding: 2px;
+  text-align: center;
+  height: 99px;
+  line-height: 99px;
+  width: 1007px;
+  position: relative;
+  margin: auto;
+}
+
+@media only screen and (min-width: 0px) {
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .header {
+    width: 1007px;
+  }
+}
+
+.title {
+  font-family: "HiraginoSans-W7", "Hiragino Sans W7", "Hiragino Sans W4",
+    "Hiragino Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 25px;
+  color: rgba(163, 0, 20, 0.5686274509803921);
+}
+
+.logout {
+  position: absolute;
+  right: 20px;
+  top: 0px;
+}
+
+.circle {
+  position: absolute;
+  right: 104px;
+  top: 41px;
+}
+
+.stick {
+  position: absolute;
+  right: 113px;
+  top: 30px;
+} */

@@ -10,11 +10,14 @@ import EditViewStaff from "./pages/EditViewStaff";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Menu from "./pages/Menu";
-import { BreadcrumbsContext, SetBreadcrumbsContext } from "./State/BreadcrumbContext";
+import {
+  BreadcrumbsContext,
+  SetBreadcrumbsContext,
+} from "./State/BreadcrumbContext";
+import Protected from "./theme/Protected";
 
 const breadcrumb = [
-  { title: "メニュー", url: "/home" }
-  // { title: "スタッフ一覧", url: "stafflist" },
+  { title: "メニュー", url: "/home" },
 ];
 
 function App() {
@@ -28,37 +31,29 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/home" element={<Protected Cmp={Menu} />} />
+              <Route path="/staff/list" element={<Protected Cmp={StaffList} />} />
+              <Route path="/staff/new" element={<Protected Cmp={CreateStaff} />} />
+              <Route path="/staff/detail" element={<Protected Cmp={EditViewStaff} />} />
+
+              <Route path="/order/list" element={<Protected Cmp={OrderList} />} />
+              <Route path="/order/new" element={<Protected Cmp={CreateOrder} />} />
+              <Route path="/order/detail" element={<Protected Cmp={EditOrder} />} />
+
+              <Route path="/order/actual" element={<Protected Cmp={OrderPlanActualInput} />} />
+
+              {/* <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/home" element={<Menu />} />
-              <Route
-                path="/staff/list"
-                element={<StaffList />}
-              />
-              <Route
-                path="/staff/new"
-                element={<CreateStaff />}
-              />
-              <Route
-                path="/staff/detail"
-                element={<EditViewStaff />}
-              />
+              <Route path="/staff/list" element={<StaffList />} />
+              <Route path="/staff/new" element={<CreateStaff />} />
+              <Route path="/staff/detail" element={<EditViewStaff />} />
 
-              <Route
-                path="/order/list"
-                element={<OrderList />}
-              />
-              <Route
-                path="/order/new"
-                element={<CreateOrder />}
-              />
-              <Route
-                path="/order/detail"
-                element={<EditOrder />}
-              />
+              <Route path="/order/list" element={<OrderList />} />
+              <Route path="/order/new" element={<CreateOrder />} />
+              <Route path="/order/detail" element={<EditOrder />} />
 
-              <Route
-                path="/order/actual"
-                element={<OrderPlanActualInput />}
-              />
+              <Route path="/order/actual" element={<OrderPlanActualInput />} /> */}
             </Routes>
           </BrowserRouter>
         </SetBreadcrumbsContext.Provider>

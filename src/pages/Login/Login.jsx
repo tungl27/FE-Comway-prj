@@ -1,83 +1,171 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import "./login.css";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import { useNavigate } from "react-router-dom";
-import { async } from "q";
 import axios from "axios";
+import { LOGIN } from "../../theme/configApi";
 
 export default function Login() {
   const navigative = useNavigate();
+
+  const [stateLogin, setStateLogin] = useState({
+    userID: "",
+    Password: "",
+  });
+
+  const { userID, Password } = stateLogin;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setStateLogin((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const [errorMsg, setError] = useState({
+    errorUserID: "",
+    errorPassword: "",
+  });
+
+  function validateInput(data) {
+    const { userID, Password } = data;
+    const errors = {};
+    if (userID.trim() === "") {
+      errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID;
+    }
+
+    if (Password.trim() === "") {
+      errors.errorPassword = process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD;
+    }
+
+    return errors;
+  }
+
   const signIn = async () => {
+    let errorInput = validateInput(stateLogin);
+    setError(errorInput);
 
+    if (Object.keys(errorInput).length === 0) {
+      try {
+        const errors = {};
 
-    try {
-      navigative("/home");
-      // const response = await axios.post("http://127.0.0.1:8000/Login", {
-      //   userID: "",
-      //   Password: "",
-      // });
+        const response = await axios.post(LOGIN, {
+          userID,
+          Password,
+        });
 
-      navigative("/home");
-    } catch (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        if (error.response.status === 400) {
-          // Handle forbidden error
-          console.error( error.response.data.error);
-        } else {
-          // Handle other errors
-          console.error("An error occurred:", error.message);
+        let resData = response.data;
+
+        switch (resData) {
+          case "UserID and PasswordLogin are required": {
+            errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID;
+            errors.Password = process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD;
+            break;
+          }
+          case "UserIDLogin is not exist": {
+            errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID;
+            break;
+          }
+          case "PasswordLogin is required": {
+            errors.Password = process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD;
+            break;
+          }
+          case "UserIDLogin is not exist": {
+            errors.errorUserID = process.env.REACT_APP_LOGIN_ERROR_ID_NOT_EXIST;
+            break;
+          }
+          case "UserID is not available": {
+            errors.errorUserID =
+              process.env.REACT_APP_LOGIN_ERROR_ID_NOT_AVAILABLE;
+            break;
+          }
+          case "Password is incorrect": {
+            errors.errorPassword = process.env.REACT_APP_LOGIN_ERROR_PW_WRONG;
+            break;
+          }
         }
-      }
+        setError(errors);
+
+        // Neu thanh khong co loi nao
+        const mesengerSus = resData?.message || ""; 
+        if (
+          Object.keys(errors).length === 0 &&
+          mesengerSus === "Successfully"
+        ) {
+          localStorage.setItem(
+            "admin_id",
+            resData?.IDLoginUser 
+            // JSON.stringify()
+          );
+          navigative("/home");
+        }
+      } catch (error) {}
     }
   };
 
   return (
     <Fragment>
-      <Header></Header>
-      <div className="container-fluid  ">
-        <div className="loginConponent">
-          <h3 style={{ fontWeight: "bold", paddingTop: 20, marginLeft: 30 }}>
-            ログイン画面
-          </h3>
+      <Header isLoginPage={true}></Header>
+      <div className="container-fluid   d-flex flex-column align-items-center ">
+        <div className="loginConponent ">
+          <h3 className="titleHeaderLogin">ログイン画面</h3>
 
-          <div className="row justify-content-center">
-            <div className="col-2  labelText">
+          <div className="row  justify-content-center ">
+            <div className=" col-10 col-lg-2  labelText">
               <label>ユーザーID</label>
             </div>
 
-            <div className="col-4">
-              <input className="inputText" type="text" />
-              <span className="error" style={{ display: "flex", marginTop: 8 }}>
-                エラーメッセージXXXX
-              </span>
+            <div className="col-10 col-lg-4">
+              <input
+                className="inputText"
+                name="userID"
+                type="text"
+                value={userID}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="row no-gutters justify-content-center">
+            <div className="col-10 col-lg-2 "></div>
+
+            <div className="col-10  col-lg-4 errorDiv">
+              <span className="errorText">{errorMsg.errorUserID}</span>
             </div>
           </div>
           <br />
 
           <div className="row justify-content-center">
-            <div className="col-2  labelText">
+            <div className="col-10 col-lg-2  labelText">
               <label>パスワード</label>
             </div>
 
-            <div className="col-4">
+            <div className="col-10  col-lg-4">
               <input
                 className="inputText "
-                // id="password"
-                // name="password"
+                value={Password}
+                onChange={handleChange}
+                name="Password"
                 type="text"
-                // value=""
               />
-              <span className="error">エラーメッセージXXXX</span>
+            </div>
+          </div>
+
+          <div className="row justify-content-center">
+            <div className="col-10 col-lg-2"></div>
+
+            <div className="col-10  col-lg-4 errorDiv">
+              <span className="errorText"> {errorMsg.errorPassword}</span>
             </div>
           </div>
           <br />
 
           <div className="row justify-content-center">
-            <div className="col-2"></div>
+            <div className="col-10 col-lg-2"></div>
 
-            <div className="col-4">
+            <div className="col-10  col-lg-4">
               <button
                 type="button"
                 onClick={signIn}

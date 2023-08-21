@@ -8,13 +8,7 @@ import OrderTableComponent from "../../Components/OrderManager/OrderTable/OrderT
 import OrderSearchComponent from "../../Components/OrderManager/OrderSearchComponent/OrderSearchComponent";
 import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
 import axios from "axios";
-import {
-  DELETE_ORDER,
-  GET_ORDER_LIST,
-  SEARCH_ORDER_LIST,
-} from "../../theme/configApi";
-import Dialog from "../../Components/Popup/DialogConfirm";
-import { Tab } from "react-bootstrap";
+import { DELETE_ORDER, SEARCH_ORDER_LIST } from "../../theme/configApi";
 
 export default function OrderList() {
   const breadcrumbs = useContext(BreadcrumbsContext);
@@ -29,10 +23,9 @@ export default function OrderList() {
   });
 
   // State phan trang
-  const [activePage, setActivePage] = useState(2);
-  const [totalRecords, setTotalRecord] = useState(0);
+  const [activePage, setActivePage] = useState(1);
+  const [totalRecords, setTotalRecord] = useState(1);
   const pageSize = 10;
-  const totalPage = Math.ceil(tableData.length / pageSize);
 
   useEffect(() => {
     fetchData(searchFillter);
@@ -40,10 +33,18 @@ export default function OrderList() {
 
   const fetchData = async (searchValue) => {
     try {
-      const searchParams = new URLSearchParams(searchValue);
-      const url = `${SEARCH_ORDER_LIST}?${searchParams.toString()}`;
-      const response = await axios.get(url);
+      // const searchParams = new URLSearchParams(searchValue);
+      // const url = `${SEARCH_ORDER_LIST}?${searchParams.toString()}`;
+      // const response = await axios.get(url);
+      const response = await axios.post(SEARCH_ORDER_LIST, {
+        order_number: searchValue?.orderNo || "",
+        project_name: searchValue?.projectName || "",
+        client_name: searchValue?.clientName || "",
+        status: searchValue?.status || "",
+      });
+
       setTableData(response.data);
+
       const totalRecord = response.data.length; // Số lượng bản ghi trong response.data
       setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
     } catch (error) {
@@ -53,12 +54,15 @@ export default function OrderList() {
 
   const deleteOrder = async (orderID) => {
     try {
+
+      const id_login = localStorage.getItem("admin_id");
+
       const response = await axios.post(DELETE_ORDER, {
         Id_User_Login: 0,
-        Id_Order: orderID,
+        Id_Order: id_login,
         Condition_verify: true,
       });
-      fetchData();
+      fetchData(searchFillter);
     } catch (error) {
       console.error("Error delete data:");
     }
@@ -72,10 +76,10 @@ export default function OrderList() {
       <div className=" container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle d-flex flex-column  position-relative  ">
           <OrderSearchComponent
-            searchFillter={searchFillter}
             setSearchFiller={setSearchFiller}
             fetchData={fetchData}
             setActivePage={setActivePage}
+            totalRecords={totalRecords}
           />
 
           <div style={{ marginBottom: 55 }}>
@@ -84,14 +88,14 @@ export default function OrderList() {
               tableData={tableData}
               activePage={activePage}
               pageSize={pageSize}
+              totalRecords
             />
           </div>
 
-          <div className="border endPag">
+          <div className="endPag">
             <Pagination
               activepage={activePage}
               totalRecords={totalRecords}
-              totalPage={totalPage}
               pageSize={pageSize}
               setActive={setActivePage}
             ></Pagination>
