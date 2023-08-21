@@ -28,7 +28,6 @@ export default function StaffList() {
 
   const fetchData = async (searchValueParams) => {
     try {
-      // const response = await axios.get(GET_STAFF_LIST);
       // const response = await axios.post(SEARCH_ORDER_LIST, {
       //   order_number: searchValue?.orderNo || "",
       //   project_name: searchValue?.projectName || "",
@@ -39,15 +38,17 @@ export default function StaffList() {
       const params = {
         name: searchValueParams.nameSearch,
         staff_type: searchValueParams.staffType,
+        IDLoginUser: localStorage.getItem("admin_id"),
       };
-      const searchParams = new URLSearchParams(params);
 
-      const url = `${SEARCH_STAFF_LIST}?${searchParams.toString()}`;
-      const response = await axios.get(url);
-      setTableData(response.data?.staffs);
-      setTableData(response.data?.staffs);
+      const response = await axios.post(SEARCH_STAFF_LIST, params);
 
-      const totalRecord = response.data?.staffs.length; //Số lượng bản ghi trong response.data
+      // const searchParams = new URLSearchParams(params);
+      // const url = `${SEARCH_STAFF_LIST}?${searchParams.toString()}`;
+      // const response = await axios.get(url);
+
+      setTableData(response.data);
+      const totalRecord = response.data?.length; //Số lượng bản ghi trong response.data
       setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -65,7 +66,7 @@ export default function StaffList() {
       });
       fetchData(searchFillter);
     } catch (error) {
-      console.error("Error delete staff data:");
+      console.log("Error delete staff data:");
       console.log(error.response.data);
     }
   };

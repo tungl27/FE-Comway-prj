@@ -41,6 +41,7 @@ export default function OrderList() {
         project_name: searchValue?.projectName || "",
         client_name: searchValue?.clientName || "",
         status: searchValue?.status || "",
+        IDLoginUser: localStorage.getItem("admin_id"),
       });
 
       setTableData(response.data);
@@ -54,7 +55,6 @@ export default function OrderList() {
 
   const deleteOrder = async (orderID) => {
     try {
-
       const id_login = localStorage.getItem("admin_id");
 
       const response = await axios.post(DELETE_ORDER, {
