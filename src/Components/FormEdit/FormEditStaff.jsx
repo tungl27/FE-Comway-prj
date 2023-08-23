@@ -1,21 +1,47 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import Selection from "../Selection/Selection";
 import './FormEdit.css'
 import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
-import { CREATE_STAFF } from "../../theme/configApi";
+import { CREATE_STAFF, EDIT_STAFF, GET_STAFF_BY_ID } from "../../theme/configApi";
+import { useNavigate } from "react-router-dom";
 
-const options = [{ label: '社員', value: 1 }]
+const options = [{ label: '一般', value: 0 }, { label: 'パートナー', value: 1 }]
 
-export default function FormEdit({ staffID }) {
-    const [id, setId] = useState("０００１２３");
-    const [lastName, setLastName] = useState("山田");
-    const [firstName, setFirstName] = useState("太郎");
-    const [lastNameFurigana, setLastNameFurigana] = useState("やまだ");
-    const [firstNameFurigana, setFirstNameFurigana] = useState("たろう");
-    const [office, setOffice] = useState('');
+export default function FormEdit({ staffId }) {
+    const refButton = useRef(null)
+    const navigate = useNavigate()
+    const [staffInfo, setStaffInfo] = useState({})
+
+
+    useEffect(() => {
+        const staffInfo = async () => {
+            console.log(staffId)
+            await axios.post(GET_STAFF_BY_ID, { "StaffID": staffId, IDLoginUser: localStorage.getItem('IDLoginUser') }).then(respone => {
+                setStaffInfo(respone.data)
+                console.log(respone.data)
+            })
+        }
+        staffInfo()
+    }, [])
+
+    useEffect(() => {
+        setId(staffInfo.id)
+        setLastName(staffInfo.last_name)
+        setFirstName(staffInfo.first_name)
+        setLastNameFurigana(staffInfo.last_name_furigana)
+        setFirstNameFurigana(staffInfo.first_name_furigana)
+        setStaff_type(staffInfo.staff_type)
+    }, [staffInfo])
+
+    const [id, setId] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastNameFurigana, setLastNameFurigana] = useState("");
+    const [firstNameFurigana, setFirstNameFurigana] = useState("");
+    const [staff_type, setStaff_type] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState({
         id: "",
@@ -23,7 +49,7 @@ export default function FormEdit({ staffID }) {
         firstName: "",
         lastNameFurigana: "",
         firstNameFurigana: "",
-        office: ""
+        staff_type: ""
     });
 
     const submitHandler = async () => {
@@ -31,7 +57,7 @@ export default function FormEdit({ staffID }) {
         let errorFirstName = ''
         let errorLastNameFurigana = ''
         let errorFirstNameFurigana = ''
-        let errorOffice = ''
+        let errorstaff_type = ''
         if (lastName === '') {
             errorLastName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!iskanji(lastName)) {
@@ -61,34 +87,39 @@ export default function FormEdit({ staffID }) {
         } else {
             errorFirstNameFurigana = ""
         }
-        if (office === '') {
-            errorOffice = process.env.REACT_APP_REQUIRED_SELECTED_ERROR
+        if (staff_type === '') {
+            errorstaff_type = process.env.REACT_APP_REQUIRED_SELECTED_ERROR
         } else {
-            errorOffice = ""
+            errorstaff_type = ""
         }
         setError({
             ...error, lastName: errorLastName, firstName: errorFirstName,
-            lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, office: errorOffice
+            lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, staff_type: errorstaff_type
         })
-        if (!(errorLastName ?? errorFirstName ?? errorLastNameFurigana ?? errorLastNameFurigana ?? errorOffice) !== '') {
-            await axios.post(CREATE_STAFF, {
+        if (!(errorLastName ?? errorFirstName ?? errorLastNameFurigana ?? errorLastNameFurigana ?? errorstaff_type) !== '') {
+            await axios.post(EDIT_STAFF, {
                 "last_name": lastName,
                 "first_name": firstName,
                 "last_name_furigana": lastNameFurigana,
                 "first_name_furigana": firstNameFurigana,
-                "office": office,
+                "staff_type": staff_type,
                 "Condtion_verify": false,
                 "Condition_menu": false,
                 "Condition_Staff_List": true,
-                "IDLoginUser": localStorage.getItem("IDLoginUser")
+                "IDLoginUser": localStorage.getItem("IDLoginUser"),
+                "ID_Staff_Edit": staffId,
+                "Condition_verify": true,
+                "Condition_menu": false,
+                "Condition_staff_list": false
             }).then((respone) => {
-                if (respone.data === 'New Staff is created') {
+                if (respone.data === 'Staff is edited') {
                     setMessage(process.env.REACT_APP_CREATE_STAFF_SUCCESS)
-                    setLastName('')
-                    setFirstName('')
-                    setLastNameFurigana('')
-                    setFirstNameFurigana('')
-                    setOffice('')
+                    refButton.current.disabled = true
+                    setTimeout(() => {
+                        setMessage('')
+                        refButton.current.disabled = false
+                        navigate('/staff/list')
+                    }, 5000);
                 }
             }).catch((err) => {
                 console.log(err)
@@ -96,12 +127,6 @@ export default function FormEdit({ staffID }) {
         }
     }
 
-    const staffInfo = async () => {
-        await axios.post(CREATE_STAFF, { StaffID: staffID, IDLoginUser: localStorage.getItem('IDLoginUser') }).then(respone => {
-            return respone.data
-        })
-    }
-    const staff = staffInfo()
     return (
         <Fragment>
             <div className="container">
@@ -121,13 +146,13 @@ export default function FormEdit({ staffID }) {
                                 title={'苗字（ふりがな）'} editable={true} errorMsg={error.lastNameFurigana}></Input>
                             <Input id={'firstnamefurigana'} value={firstNameFurigana} required={false} setValue={setFirstNameFurigana}
                                 title={'名前（ふりがな）'} editable={true} errorMsg={error.firstNameFurigana}></Input>
-                            <Selection id={'office'} title={'職制'} options={options} required={true} value={office}
-                                setValue={setOffice} errorMsg={error.office}></Selection>
+                            <Selection id={'staff_type'} title={'職制'} options={options} required={true} value={staff_type}
+                                setValue={setStaff_type} errorMsg={error.staff_type}></Selection>
                         </div>
                     </div>
                     <div className="text-center">
-                        <button type="button" id="change" className="btn btn-primary" onClick={() => submitHandler()}>更新</button>
-                        <button type="button" id="cancel" className="btn btn-primary">キャンセル</button>
+                        <button type="button" id="change" className="btn btn-primary" onClick={() => submitHandler()} ref={refButton}>更新</button>
+                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => navigate('/staff/list')}>キャンセル</button>
                     </div>
                     <p className="message">
                         {message}

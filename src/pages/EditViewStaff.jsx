@@ -12,13 +12,11 @@ export default function EditViewStaff() {
     const params = useLocation().search
     const staffId = new URLSearchParams(params).get("id");
     console.log(staffId); // 159
-    const [activepage, setActivepage] = useState(2)
     return (
         <Fragment>
             <Header></Header>
             <Breadcrumb ></Breadcrumb>
-            <FormEdit id={staffId}></FormEdit>
-            <Pagination activepage={activepage} totalRecords={53} pageSize={6} setActive={setActivepage} ></Pagination>
+            <FormEdit staffId={staffId}></FormEdit>
             <Footer></Footer>
         </Fragment>
     )
