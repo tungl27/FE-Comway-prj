@@ -42,6 +42,7 @@ export default function StaffList() {
       };
 
       const response = await axios.post(SEARCH_STAFF_LIST, params);
+      console.log(response.data);
 
       // const searchParams = new URLSearchParams(params);
       // const url = `${SEARCH_STAFF_LIST}?${searchParams.toString()}`;
@@ -63,8 +64,9 @@ export default function StaffList() {
         id: staffId,
         id_login: id_login,
         Condition: true,
-        IDLoginUser: localStorage.getItem("admin_id"),
+        IDLoginUser: id_login,
       });
+
       fetchData(searchFillter);
     } catch (error) {
       console.log("Error delete staff data:");
