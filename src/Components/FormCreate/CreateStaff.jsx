@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
-import "./FormCreate.css";
+import './FormCreate.css'
 import Selection from "../Selection/Selection";
 import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
@@ -132,20 +132,6 @@ export default function FormCreate() {
                     </p>
                 </div>
             </div>
-          </div>
-          <div className="text-center">
-            <button
-              type="button"
-              id="regist"
-              className="btn btn-primary"
-              onClick={() => submitHandler()}
-            >
-              登録
-            </button>
-          </div>
-          <p className="message">{message}</p>
-        </div>
-      </div>
-    </Fragment>
-  );
+        </Fragment>
+    )
 }

@@ -10,8 +10,8 @@ export default function Login() {
   const navigative = useNavigate();
 
   const [stateLogin, setStateLogin] = useState({
-    userID: "",
-    Password: "",
+    userID: "2",
+    Password: "123456",
   });
 
   const { userID, Password } = stateLogin;
