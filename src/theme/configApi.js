@@ -16,3 +16,4 @@ export const GET_STAFF_BY_ID = getApiUrl("/GetStaffID");
 export const GET_ORDER_BY_ID = getApiUrl("/GetOrderByID");
 export const EDIT_STAFF = getApiUrl("/Staff_Detail_Edit");
 export const EDIT_ORDER = getApiUrl("/Order_Edit_Detail");
+export const GET_ACTUAL_PLAN = getApiUrl("/plant");
