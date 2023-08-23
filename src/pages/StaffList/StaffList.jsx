@@ -38,7 +38,7 @@ export default function StaffList() {
       const params = {
         name: searchValueParams.nameSearch,
         staff_type: searchValueParams.staffType,
-        IDLoginUser: localStorage.getItem("admin_id"),
+        IDLoginUser: localStorage.getItem("IDLoginUser"),
       };
 
       const response = await axios.post(SEARCH_STAFF_LIST, params);
@@ -58,7 +58,7 @@ export default function StaffList() {
 
   const deleteStaff = async (staffId) => {
     try {
-      const id_login = localStorage.getItem("admin_id");
+      const id_login = localStorage.getItem("IDLoginUser");
 
       const response = await axios.post(DELETE_STAFF, {
         id: staffId,

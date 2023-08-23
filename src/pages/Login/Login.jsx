@@ -37,7 +37,8 @@ export default function Login() {
     }
 
     if (Password.trim() === "") {
-      errors.errorPassword = process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD + "BEFORE";
+      errors.errorPassword =
+        process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD + "BEFORE";
     }
 
     return errors;
@@ -88,17 +89,17 @@ export default function Login() {
           }
         }
         setError(errors);
-        console.log(resData)
+        console.log(resData);
 
         // Neu thanh khong co loi nao
-        const mesengerSus = resData?.message || ""; 
+        const mesengerSus = resData?.message || "";
         if (
           Object.keys(errors).length === 0 &&
           mesengerSus === "Successfully"
         ) {
           localStorage.setItem(
-            "admin_id",
-            resData?.IDLoginUser 
+            "IDLoginUser",
+            resData?.IDLoginUser
             // JSON.stringify()
           );
           navigative("/home");

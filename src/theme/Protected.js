@@ -6,7 +6,7 @@ export default function Protected(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem("admin_id")) {
+    if (!localStorage.getItem("IDLoginUser")) {
       navigate("/login");
     }
   }, []);
