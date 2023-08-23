@@ -9,7 +9,7 @@ export default function Header({ account, isLoginPage = false }) {
 
   const navigative = useNavigate();
   const logoutAction = () => {
-    localStorage.removeItem("admin_id");
+    localStorage.removeItem("IDLoginUser");
     navigative("/login");
   };
   return (

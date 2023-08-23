@@ -33,11 +33,12 @@ export default function Login() {
     const { userID, Password } = data;
     const errors = {};
     if (userID.trim() === "") {
-      errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID;
+      errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID + "BEFORE";
     }
 
     if (Password.trim() === "") {
-      errors.errorPassword = process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD;
+      errors.errorPassword =
+        process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD + "BEFORE";
     }
 
     return errors;
@@ -48,6 +49,7 @@ export default function Login() {
     setError(errorInput);
 
     if (Object.keys(errorInput).length === 0) {
+      // if( true) {
       try {
         const errors = {};
 
@@ -65,7 +67,7 @@ export default function Login() {
             break;
           }
           case "UserIDLogin is not exist": {
-            errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID;
+            errors.errorUserID = process.env.REACT_APP_LOGIN_ERROR_ID_NOT_EXIST;
             break;
           }
           case "PasswordLogin is required": {
@@ -87,16 +89,17 @@ export default function Login() {
           }
         }
         setError(errors);
+        console.log(resData);
 
         // Neu thanh khong co loi nao
-        const mesengerSus = resData?.message || ""; 
+        const mesengerSus = resData?.message || "";
         if (
           Object.keys(errors).length === 0 &&
           mesengerSus === "Successfully"
         ) {
           localStorage.setItem(
-            "admin_id",
-            resData?.IDLoginUser 
+            "IDLoginUser",
+            resData?.IDLoginUser
             // JSON.stringify()
           );
           navigative("/home");

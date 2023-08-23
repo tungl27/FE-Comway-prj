@@ -41,6 +41,7 @@ export default function OrderList() {
         project_name: searchValue?.projectName || "",
         client_name: searchValue?.clientName || "",
         status: searchValue?.status || "",
+        IDLoginUser: localStorage.getItem("IDLoginUser"),
       });
 
       setTableData(response.data);
@@ -54,13 +55,12 @@ export default function OrderList() {
 
   const deleteOrder = async (orderID) => {
     try {
-
-      const id_login = localStorage.getItem("admin_id");
+      const id_login = localStorage.getItem("IDLoginUser");
 
       const response = await axios.post(DELETE_ORDER, {
-        Id_User_Login: 0,
-        Id_Order: id_login,
-        Condition_verify: true,
+        Id_User_Login: id_login,
+        Id_Order: orderID,
+        IDLoginUser: id_login,
       });
       fetchData(searchFillter);
     } catch (error) {

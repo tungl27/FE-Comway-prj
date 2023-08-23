@@ -60,7 +60,7 @@ export default function OrderTableComponent({
                 <td> {statusConvert(row.status)}</td>
                 <td>
                   <div className="d-flex justify-content-between px-2">
-                    <Link to={"/order/detail"}>
+                    <Link to={"/order/detail?id=" + row.id}>
                       <span className="edit-o-link">詳細</span>
                     </Link>
                     <span
@@ -69,7 +69,7 @@ export default function OrderTableComponent({
                     >
                       削除
                     </span>
-                    <Link to={"/order/actual"}>
+                    <Link to={"/order/actual?id=" + row.id}>
                       <span className="result-o-link">実績入力</span>
                     </Link>
                   </div>
