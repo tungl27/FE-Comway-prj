@@ -7,7 +7,7 @@ import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF } from "../../theme/configApi";
 
-const options = [{ label: '一般', value: 0 }, { label: 'パートナー', value: 1 }]
+const options = [{ label: '社員', value: 0 }, { label: 'パートナー', value: 1 }]
 
 export default function FormCreate() {
     const [lastName, setLastName] = useState("");

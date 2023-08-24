@@ -88,3 +88,15 @@
     top: 395px;
     right: -95px;
 }
+
+#internalUnitOrderEdit1{
+    position: absolute;
+    top: 340px;
+    right: -35px;
+}
+
+#internalUnitOrderEdit2{
+    position: absolute;
+    top: 400px;
+    right: -105px;
+}

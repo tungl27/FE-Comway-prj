@@ -10,7 +10,8 @@ import axios from "axios";
 import { CREATE_ORDER, EDIT_ORDER, GET_ORDER_BY_ID } from "../../theme/configApi";
 import { useNavigate } from "react-router-dom";
 
-const options = [{ label: '新規', value: 1 }]
+// const options = [{ label: '新規', value: 1 }]
+const options = [{ label: '実行中', value: 0 }, { label: '非活性', value: 1 }, { label: '保留', value: 2 }, { label: '完了', value: 3 }, { label: 'キャンセル', value: 4 }]
 
 export default function FormEditOrder({ OrderID }) {
     const [orderInfo, setOrderInfo] = useState({})
@@ -131,7 +132,7 @@ export default function FormEditOrder({ OrderID }) {
                     setTimeout(() => {
                         refButton.current.disabled = false
                         navigate('/order/list')
-                    }, 5000);
+                    }, 1);
                 }
             }).catch((err) => {
                 console.log(err)
@@ -154,13 +155,13 @@ export default function FormEditOrder({ OrderID }) {
                             <Input id={'edit-order-customerName'} value={customerName} required={false} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
                             <InputCalenda id={'orderDate'} value={orderDate} required={false} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
                             <Selection id={'status'} title={'ステータス'} options={options} required={true} value={status} errorMsg={error.status} setValue={setStatus}></Selection>
-                            <Input id={'edit-order-orderIncome'} value={orderIncome} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitPrice1">円</span>
-                            <Input id={'internalUnitPrice'} value={internalUnitPrice} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitPrice2">円/Manhour</span>
+                            <Input id={'edit-order-orderIncome'} value={orderIncome} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitOrderEdit1">円</span>
+                            <Input id={'internalUnitPrice'} value={internalUnitPrice} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitOrderEdit2">円/Manhour</span>
                         </div>
                     </div>
                     <div className="text-center">
                         <button ref={refButton} type="button" id="change" className="btn btn-primary" onClick={() => submitHandler()}>更新</button>
-                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => navigate('order/list')}>キャンセル</button>
+                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => navigate('/order/list')}>キャンセル</button>
                     </div>
                     <p className="message">
                         {message}

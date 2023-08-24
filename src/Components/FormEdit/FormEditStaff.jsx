@@ -8,7 +8,7 @@ import axios from "axios";
 import { CREATE_STAFF, EDIT_STAFF, GET_STAFF_BY_ID } from "../../theme/configApi";
 import { useNavigate } from "react-router-dom";
 
-const options = [{ label: '一般', value: 0 }, { label: 'パートナー', value: 1 }]
+const options = [{ label: '社員', value: 0 }, { label: 'パートナー', value: 1 }]
 
 export default function FormEdit({ staffId }) {
     const refButton = useRef(null)
@@ -112,7 +112,7 @@ export default function FormEdit({ staffId }) {
                 "Condition_menu": false,
                 "Condition_staff_list": false
             }).then((respone) => {
-                if (respone.data === 'Staff is edited') {
+                if (respone.data?.message === 'Staff is edited') {
                     setMessage(process.env.REACT_APP_CREATE_STAFF_SUCCESS)
                     refButton.current.disabled = true
                     setTimeout(() => {
