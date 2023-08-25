@@ -46,7 +46,7 @@ export default function CreateOrder() {
         if (name === '') {
             errorName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!iskanji(name)) {
-            errorName = process.env.REACT_APP_REQUIRED_2_BYTE_KANJI_ERROR
+            errorName = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorName = ""
         }
@@ -73,14 +73,14 @@ export default function CreateOrder() {
         if (orderIncome === '') {
             errorOrderIncome = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkDate(orderDate)) {
-            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
         } else {
             errorOrderIncome = ""
         }
         if (internalUnitPrice === '') {
             errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkNumber(orderDate)) {
-            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorInternalUnitPrice = ""
         }

@@ -63,42 +63,82 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
     }
 
     const newStaff = () => {
-        data.details = [{
-            "planActualData": {
-                "id": '',
-                "project_id": data.projectData.id,
-                "this_year_04_plan": '',
-                "this_year_04_actual": '',
-                "this_year_05_plan": '',
-                "this_year_05_actual": '',
-                "this_year_06_plan": '',
-                "this_year_06_actual": '',
-                "this_year_07_plan": '',
-                "this_year_07_actual": '',
-                "this_year_08_plan": '',
-                "this_year_08_actual": '',
-                "this_year_09_plan": '',
-                "this_year_09_actual": '',
-                "this_year_10_plan": '',
-                "this_year_10_actual": '',
-                "this_year_11_plan": '',
-                "this_year_11_actual": '',
-                "this_year_12_plan": '',
-                "this_year_12_actual": '',
-                "nextyear_01_plan": '',
-                "nextyear_01_actual": '',
-                "nextyear_02_plan": '',
-                "nextyear_02_actual": '',
-                "nextyear_03_plan": '',
-                "nextyear_03_actual": '',
-                "del_flg": 0,
-            },
-            "staffData": {
-                "staff_id": data.remainingStaffs[0].staff_id,
-                "staff_type": data.remainingStaffs[0].staff_type,
-            }, 'goukei':
-                { 'yoteiGenka': '', 'yoteiJikan': '', 'jissekiJikan': '', 'jissekiGenka': '' }
-        }, ...data.details]
+        if (data.details) {
+            data.details = [{
+                "planActualData": {
+                    "id": '',
+                    "project_id": data.projectData.id,
+                    "this_year_04_plan": '',
+                    "this_year_04_actual": '',
+                    "this_year_05_plan": '',
+                    "this_year_05_actual": '',
+                    "this_year_06_plan": '',
+                    "this_year_06_actual": '',
+                    "this_year_07_plan": '',
+                    "this_year_07_actual": '',
+                    "this_year_08_plan": '',
+                    "this_year_08_actual": '',
+                    "this_year_09_plan": '',
+                    "this_year_09_actual": '',
+                    "this_year_10_plan": '',
+                    "this_year_10_actual": '',
+                    "this_year_11_plan": '',
+                    "this_year_11_actual": '',
+                    "this_year_12_plan": '',
+                    "this_year_12_actual": '',
+                    "nextyear_01_plan": '',
+                    "nextyear_01_actual": '',
+                    "nextyear_02_plan": '',
+                    "nextyear_02_actual": '',
+                    "nextyear_03_plan": '',
+                    "nextyear_03_actual": '',
+                    "del_flg": 0,
+                },
+                "staffData": {
+                    "staff_id": data.remainingStaffs[0].staff_id,
+                    "staff_type": data.remainingStaffs[0].staff_type,
+                }, 'goukei':
+                    { 'yoteiGenka': '', 'yoteiJikan': '', 'jissekiJikan': '', 'jissekiGenka': '' }
+            }, ...data.details]
+        }
+        else {
+            data.details = [{
+                "planActualData": {
+                    "id": '',
+                    "project_id": data.projectData.id,
+                    "this_year_04_plan": '',
+                    "this_year_04_actual": '',
+                    "this_year_05_plan": '',
+                    "this_year_05_actual": '',
+                    "this_year_06_plan": '',
+                    "this_year_06_actual": '',
+                    "this_year_07_plan": '',
+                    "this_year_07_actual": '',
+                    "this_year_08_plan": '',
+                    "this_year_08_actual": '',
+                    "this_year_09_plan": '',
+                    "this_year_09_actual": '',
+                    "this_year_10_plan": '',
+                    "this_year_10_actual": '',
+                    "this_year_11_plan": '',
+                    "this_year_11_actual": '',
+                    "this_year_12_plan": '',
+                    "this_year_12_actual": '',
+                    "nextyear_01_plan": '',
+                    "nextyear_01_actual": '',
+                    "nextyear_02_plan": '',
+                    "nextyear_02_actual": '',
+                    "nextyear_03_plan": '',
+                    "nextyear_03_actual": '',
+                    "del_flg": 0,
+                },
+                "staffData": {
+                    "staff_id": data.remainingStaffs[0].staff_id,
+                    "staff_type": data.remainingStaffs[0].staff_type,
+                }, 'goukei':
+                    { 'yoteiGenka': '', 'yoteiJikan': '', 'jissekiJikan': '', 'jissekiGenka': '' }
+            }]
+        }
         setData({ ...data })
     }
 
@@ -172,10 +212,10 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                             )
                                         }
                                     })}
-                                    <tr>
+                                    {!data.details && <tr>
                                         <td className="table-cell-gap" ></td>
                                         <td className="table-cell-gap" ></td>
-                                    </tr>
+                                    </tr>}
                                     <tr>
                                         <td className="table-cell" colSpan={2}>合計</td>
                                     </tr>
@@ -249,8 +289,8 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                             <td className="genka-cell">社内  <br />原価</td>
                                         </tr>
                                     </thead>
-                                    {data.details && <tbody className="vertical-scroll-table hide-scroll-bar" onScroll={(e) => { onSc(e) }}>
-                                        {data.details.map((detail, index) => {
+                                    {<tbody className="vertical-scroll-table hide-scroll-bar" onScroll={(e) => { onSc(e) }}>
+                                        {data.details && data.details.map((detail, index) => {
                                             return (
                                                 <>
                                                     <tr className="table-naiyo table-column">
@@ -477,56 +517,56 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                         })}
                                         <tr className="table-cell-gap"></tr>
                                         <tr className="table-naiyo table-column">
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan04gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka04gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan05gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka05gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan06gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka06gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan07gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka07gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan08gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka08gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan09gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka09gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan10gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka10gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan11gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka11gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan12gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka12gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan01gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka01gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan02gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka02gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikan03gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenka03gatu}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan04gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka04gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan05gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka05gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan06gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka06gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan07gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka07gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan08gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka08gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan09gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka09gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan10gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka10gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan11gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka11gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan12gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka12gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan01gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka01gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan02gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka02gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikan03gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenka03gatu : ''}</td>
                                         </tr>
                                         <tr className="table-naiyo jisseki table-colum">
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan04gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka04gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan05gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka05gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan06gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka06gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan07gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka07gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan08gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka08gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan09gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka09gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan10gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka10gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan11gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka11gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan12gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka12gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan01gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka01gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan02gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka02gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikan03gatu}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenka03gatu}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan04gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka04gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan05gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka05gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan06gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka06gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan07gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka07gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan08gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka08gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan09gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka09gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan10gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka10gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan11gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka11gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan12gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka12gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan01gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka01gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan02gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka02gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikan03gatu : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenka03gatu : ''}</td>
                                         </tr>
                                     </tbody>}
                                 </table>
@@ -540,7 +580,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                             <td className="genka-cell">社内  <br />原価</td>
                                         </tr>
                                     </thead>
-                                    {data.details && <tbody className="vertical-scroll-table" onScroll={(e) => { onSc(e) }}>
+                                    {<tbody className="vertical-scroll-table" onScroll={(e) => { onSc(e) }}>
                                         {data.details && data.details.map((detail, index) => {
                                             return (<>
                                                 <tr key={index + 'sumyotei'} className="table-naiyo table-column" >
@@ -555,12 +595,12 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                         })}
                                         <tr className="table-cell-gap"></tr>
                                         <tr className="gap-row table-naiyo table-column" >
-                                            <td className="naiyo td-cell">{data.goukei.yoteiJikanGoukei}</td>
-                                            <td className="naiyo td-cell">{data.goukei.yoteiGenkaGoukei}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiJikanGoukei : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.yoteiGenkaGoukei : ''}</td>
                                         </tr >
                                         <tr className="gap-row table-naiyo jisseki table-colum">
-                                            <td className="naiyo td-cell">{data.goukei.jissekiJikanGoukei}</td>
-                                            <td className="naiyo td-cell">{data.goukei.jissekiGenkaGoukei}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiJikanGoukei : ''}</td>
+                                            <td className="naiyo td-cell">{data.goukei ? data.goukei.jissekiGenkaGoukei : ''}</td>
                                         </tr>
                                     </tbody>}
                                 </table>
@@ -569,7 +609,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                     </div>
                     <div className="text-center div-button">
                         <button type="button" id="change" className="btn btn-primary" onClick={() => handleSubmit()}>登録</button>
-                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => {setShowModal(true)}}>キャンセル</button>
+                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => { setShowModal(true) }}>キャンセル</button>
                     </div>
                     {data.projectData && data.goukei && <div className="tables-flex d-flex justify-content-between">
                         <table className="table-top">
@@ -587,11 +627,11 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                 </tr>
                                 <tr>
                                     <td className="table-blue td-cell-2">計画済予算(C)</td>
-                                    <td className="td-cell-2">{data.goukei.yoteiJikanGoukei * data.projectData.internal_unit_price}</td>
+                                    <td className="td-cell-2">{data.goukei ? data.goukei.yoteiJikanGoukei : 0 * data.projectData.internal_unit_price}</td>
                                 </tr>
                                 <tr>
                                     <td className="table-blue td-cell-2">計画粗利(D)</td>
-                                    <td className="td-cell-2">{(data.projectData.order_income * 0.9) - data.goukei.yoteiJikanGoukei * data.projectData.internal_unit_price}</td>
+                                    <td className="td-cell-2">{(data.projectData.order_income * 0.9) - data.goukei ? data.goukei.yoteiJikanGoukei : 0 * data.projectData.internal_unit_price}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -602,7 +642,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                 <tr>
                                     <td rowSpan={4} className="table-orange col-shadow">予定</td>
                                     <td className="table-orange">使用済工数 (E)</td>
-                                    <td className="td-cell-2">{data.goukei.jissekiJikanGoukei * data.projectData.internal_unit_price}</td>
+                                    <td className="td-cell-2">{data.goukei ? data.goukei.jissekiJikanGoukei : 0 * data.projectData.internal_unit_price}</td>
                                 </tr>
                                 <tr>
                                     <td className="table-orange">計画比(F)</td>
@@ -614,7 +654,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                 </tr>
                                 <tr>
                                     <td className="table-orange">実行予算残(H)</td>
-                                    <td className="td-cell-2">{data.projectData.order_income * 0.9 - (data.goukei.jissekiJikanGoukei * data.projectData.internal_unit_price) + data.ritu.kousuuZan}</td>
+                                    <td className="td-cell-2">{data.projectData.order_income * 0.9 - (data.goukei ? data.goukei.jissekiJikanGoukei : 0 * data.projectData.internal_unit_price) + data.ritu.kousuuZan}</td>
                                 </tr>
                             </tbody>
                         </table>

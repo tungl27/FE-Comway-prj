@@ -75,14 +75,14 @@ export default function FormEdit({ staffId }) {
         if (lastName === '') {
             errorLastName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!iskanji(lastName)) {
-            errorLastName = process.env.REACT_APP_REQUIRED_2_BYTE_KANJI_ERROR
+            errorLastName = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorLastName = ""
         }
         if (firstName === '') {
             errorFirstName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!iskanji(firstName)) {
-            errorFirstName = process.env.REACT_APP_REQUIRED_2_BYTE_KANJI_ERROR
+            errorFirstName = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorFirstName = ""
         }
@@ -90,14 +90,14 @@ export default function FormEdit({ staffId }) {
         if (lastNameFurigana === '') {
             errorLastNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(lastNameFurigana)) {
-            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
         } else {
             errorLastNameFurigana = ""
         }
         if (firstNameFurigana === '') {
             errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(firstNameFurigana)) {
-            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_HIRAGANA_ERRORs
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
         } else {
             errorFirstNameFurigana = ""
         }

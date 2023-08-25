@@ -15,6 +15,9 @@ export default function OrderPlanActualInput() {
     // const [projectID, setProjectID] = useState([])
     const projectID = new URLSearchParams(params).get("id");
     const rituF = (data) => {
+        if(!data.details){
+            return ''
+        }
         let kongetu = new Date().getMonth() + 2
         let keikakubi = 0
         do {
@@ -33,6 +36,9 @@ export default function OrderPlanActualInput() {
     }
 
     const rituG = (data) => {
+        if(!data.details){
+            return ''
+        }
         let kongetu = new Date().getMonth() + 1
         let keikakubi = 0
         do {
@@ -342,6 +348,68 @@ export default function OrderPlanActualInput() {
                     jissekiJikanGoukei,
                     yoteiGenkaGoukei,
                     jissekiGenkaGoukei
+                }
+            }
+            console.log(data)
+            const keikakubi = rituF(data)
+            const kousuuZan = rituG(data)
+            data = { ...data, ritu: { keikakubi: keikakubi, kousuuZan: kousuuZan } }
+        }
+        else {
+            data = {
+                ...data, goukei: {
+                    yoteiJikan04gatu: '',
+                    yoteiJikan05gatu: '',
+                    yoteiJikan06gatu: '',
+                    yoteiJikan07gatu: '',
+                    yoteiJikan08gatu: '',
+                    yoteiJikan09gatu: '',
+                    yoteiJikan10gatu: '',
+                    yoteiJikan11gatu: '',
+                    yoteiJikan12gatu: '',
+                    yoteiJikan01gatu: '',
+                    yoteiJikan02gatu: '',
+                    yoteiJikan03gatu: '',
+                    yoteiGenka04gatu: '',
+                    yoteiGenka05gatu: '',
+                    yoteiGenka06gatu: '',
+                    yoteiGenka07gatu: '',
+                    yoteiGenka08gatu: '',
+                    yoteiGenka09gatu: '',
+                    yoteiGenka10gatu: '',
+                    yoteiGenka11gatu: '',
+                    yoteiGenka12gatu: '',
+                    yoteiGenka01gatu: '',
+                    yoteiGenka02gatu: '',
+                    yoteiGenka03gatu: '',
+                    jissekiJikan04gatu: '',
+                    jissekiJikan05gatu: '',
+                    jissekiJikan06gatu: '',
+                    jissekiJikan07gatu: '',
+                    jissekiJikan08gatu: '',
+                    jissekiJikan09gatu: '',
+                    jissekiJikan10gatu: '',
+                    jissekiJikan11gatu: '',
+                    jissekiJikan12gatu: '',
+                    jissekiJikan01gatu: '',
+                    jissekiJikan02gatu: '',
+                    jissekiJikan03gatu: '',
+                    jissekiGenka04gatu: '',
+                    jissekiGenka05gatu: '',
+                    jissekiGenka06gatu: '',
+                    jissekiGenka07gatu: '',
+                    jissekiGenka08gatu: '',
+                    jissekiGenka09gatu: '',
+                    jissekiGenka10gatu: '',
+                    jissekiGenka11gatu: '',
+                    jissekiGenka12gatu: '',
+                    jissekiGenka01gatu: '',
+                    jissekiGenka02gatu: '',
+                    jissekiGenka03gatu: '',
+                    yoteiJikanGoukei: '',
+                    jissekiJikanGoukei: '',
+                    yoteiGenkaGoukei: '',
+                    jissekiGenkaGoukei: ''
                 }
             }
             console.log(data)

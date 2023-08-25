@@ -93,6 +93,7 @@ label[for=price] {
     height: 3px;
     margin-top: 1px;
     text-align: center;
+    width: 100px;
 }
 
 .gatu-cell {
@@ -303,4 +304,5 @@ label[for=price] {
 }
 .select-staff{
     width: auto;
+    max-width: 96px;
 }
