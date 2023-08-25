@@ -1,13 +1,13 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
-import "./FormCreate.css";
+import './FormCreate.css'
 import Selection from "../Selection/Selection";
 import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF } from "../../theme/configApi";
 
-const options = [{ label: '一般', value: 0 }, { label: 'パートナー', value: 1 }]
+const options = [{ label: '社員', value: 0 }, { label: 'パートナー', value: 1 }]
 
 export default function FormCreate() {
     const [lastName, setLastName] = useState("");
@@ -132,20 +132,6 @@ export default function FormCreate() {
                     </p>
                 </div>
             </div>
-          </div>
-          <div className="text-center">
-            <button
-              type="button"
-              id="regist"
-              className="btn btn-primary"
-              onClick={() => submitHandler()}
-            >
-              登録
-            </button>
-          </div>
-          <p className="message">{message}</p>
-        </div>
-      </div>
-    </Fragment>
-  );
+        </Fragment>
+    )
 }
