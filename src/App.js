@@ -42,28 +42,11 @@ function App() {
 
               <Route path="/order/actual" element={<Protected Cmp={OrderPlanActualInput} />} />
 
-              {/* <Route path="/" element={<Login />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/home" element={<Menu />} />
-              <Route path="/staff/list" element={<StaffList />} />
-              <Route path="/staff/new" element={<CreateStaff />} />
-              <Route path="/staff/detail" element={<EditViewStaff />} />
-
-              <Route path="/order/list" element={<OrderList />} />
-              <Route path="/order/new" element={<CreateOrder />} />
-              <Route path="/order/detail" element={<EditOrder />} />
-
-              <Route path="/order/actual" element={<OrderPlanActualInput />} /> */}
             </Routes>
           </BrowserRouter>
         </SetBreadcrumbsContext.Provider>
       </BreadcrumbsContext.Provider>
-      {/* <br></br>
-      <OrderList breadcrumbs={breadcrumbs} />
-      <StaffList breadcrumbs={breadcrumbs}></StaffList>
 
-      <CreateOrder breadcrumbs={breadcrumbs}></CreateOrder>
-      <CreateStaff breadcrumbs={breadcrumbs}></CreateStaff> */}
     </Fragment>
   );
 }
