@@ -9,7 +9,7 @@ export default function InputCalenda({ id, title, value, required, editable, set
             <div className="d-flex justify-content-between">
                 <label htmlFor={id} className={required ? 'required' : ''}>{title}</label>
                 <div>
-                    <input id={id} className={!editable ? 'read-only' : ''}
+                    <input id={id} className={!editable ? 'input-component read-only' : 'input-component'}
                         readOnly={!editable}
                         name={title} type="date" value={value} placeholder="" title=""
                         onChange={(e) => onChange(e)}

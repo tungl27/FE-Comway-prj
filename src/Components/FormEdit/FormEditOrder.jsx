@@ -158,7 +158,7 @@ export default function FormEditOrder({ OrderID }) {
                 <div className="form-edit-order">
                     <div>
                         <p className="form-title">
-                            スタッフ情報編集画面
+                            オーダー情報編集画面
                         </p>
                         <div className="edit-order-inputs-group">
                             <Input id={'id'} value={id} required={true} setValue={setId} title={'オーダーID'} editable={false} ></Input>
@@ -167,8 +167,8 @@ export default function FormEditOrder({ OrderID }) {
                             <Input id={'edit-order-customerName'} value={customerName} required={false} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
                             <InputCalenda id={'orderDate'} value={orderDate} required={false} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
                             <Selection id={'status'} title={'ステータス'} options={options} required={true} value={status} errorMsg={error.status} setValue={setStatus}></Selection>
-                            <Input id={'edit-order-orderIncome'} value={orderIncome} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitOrderEdit1">円</span>
-                            <Input id={'internalUnitPrice'} value={internalUnitPrice} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitOrderEdit2">円/Manhour</span>
+                            <Input type={'number'} id={'edit-order-orderIncome'} value={orderIncome} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitOrderEdit1">円</span>
+                            <Input type={'number'} id={'internalUnitPrice'} value={internalUnitPrice} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitOrderEdit2">円/Manhour</span>
                         </div>
                     </div>
                     <div className="text-center">
@@ -184,7 +184,7 @@ export default function FormEditOrder({ OrderID }) {
                 <p>Do you want to save edited data?</p>
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => navigate('order/list')}>No</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/order/list')}>No</button>
                 </div>
             </ReactModal>
         </Fragment>
