@@ -25,57 +25,49 @@ export default function Breadcrumb() {
     ];
     const url = window.location.href
     const path = url.split('/')
-    for (const p of path) {
-        if (p === 'staff') {
+    if (path.indexOf('staff') !== -1) {
+        breadcrumbs.push({
+            title: "スタッフ一覧",
+            url: "/staff/list"
+        })
+        if (path.indexOf('new') !== -1) {
             breadcrumbs.push({
-                title: "スタッフ一覧",
-                url: "/staff/list"
+                title: "スタッフ登録",
+                url: "/staff/new"
             })
         } else
-            if (p === 'new') {
+            if (path.indexOf('detail') !== -1) {
                 breadcrumbs.push({
-                    title: "スタッフ登録",
-                    url: "/staff/new"
+                    title: "スタッフ情報編集",
+                    url: "/staff/detail"
+                })
+            }
+    } else
+        if (path.indexOf('order')) {
+            breadcrumbs.push({
+                title: "オーダー一覧",
+                url: "/order/list"
+            })
+            if (path.indexOf('new') !== -1) {
+                breadcrumbs.push({
+                    title: "オーダー登録",
+                    url: "/order/new"
                 })
             } else
-                if (p === 'detail') {
+                if (path.indexOf('detail')) {
                     breadcrumbs.push({
-                        title: "スタッフ情報編集",
-                        url: "/staff/detail"
+                        title: "オーダー情報編集",
+                        url: "/order/detail"
                     })
                 } else
-                    if (p === 'order') {
+                    if (path.indexOf('actual')) {
                         breadcrumbs.push({
-                            title: "オーダー一覧",
-                            url: "/order/list"
+                            title: "オーダー登録",
+                            url: "/order/actual"
                         })
-                    } else
-                        if (p === 'new') {
-                            breadcrumbs.push({
-                                title: "オーダー登録",
-                                url: "/order/new"
-                            })
-                        } else
-                            if (p === 'detail') {
-                                breadcrumbs.push({
-                                    title: "オーダー情報編集",
-                                    url: "/order/detail"
-                                })
-                            } else
-                                if (p.startsWith('actual')) {
-                                    breadcrumbs.push({
-                                        title: "オーダー登録",
-                                        url: "/order/actual"
-                                    })
-                                }
-                                else
-                                    if (p.startsWith('detail')) {
-                                        breadcrumbs.push({
-                                            title: "スタッフ情報編集",
-                                            url: "/staff/detail"
-                                        })
-                                    }
-    }
+                    }
+
+        }
 
     console.log(path)
     const navigate = useNavigate()
