@@ -15,7 +15,7 @@ const customStyles = {
     },
 };
 
-const modelPlace = ['/staff/new', '/staff/detail', 'order/new', 'order/detail']
+const modelPlace = ['/staff/new', '/staff/detail', '/order/new', '/order/detail', '/order/actual']
 export default function Breadcrumb() {
     const [showModal, setShowModal] = useState(false)
     const [index, setIndex] = useState(0)
@@ -62,7 +62,7 @@ export default function Breadcrumb() {
                                     url: "/order/detail"
                                 })
                             } else
-                                if (p === 'actual') {
+                                if (p.startsWith('actual')) {
                                     breadcrumbs.push({
                                         title: "オーダー登録",
                                         url: "/order/actual"

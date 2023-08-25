@@ -3,7 +3,7 @@
   color: red;
 }
 
-input {
+.input-component{
   width: 314px;
   height: 36px;
   background: inherit;

@@ -25,6 +25,7 @@ label[for=name] {
     height: 20px;
     width: 159px;
     font-size: smaller;
+    background-color: #FFFFFF;
 }
 
 label[for=orderNo] {
@@ -35,6 +36,7 @@ label[for=orderNo] {
     height: 20px;
     width: 159px;
     font-size: smaller;
+    background-color: #FFFFFF;
 }
 
 label[for=customerName] {
@@ -45,6 +47,7 @@ label[for=customerName] {
     height: 20px;
     width: 159px;
     font-size: smaller;
+    background-color: #FFFFFF;
 }
 
 label[for=price] {
@@ -56,6 +59,7 @@ label[for=price] {
     width: 133px;
     font-size: smaller;
     margin-right: 26px;
+    background-color: #FFFFFF;
 }
 
 .form-title {
@@ -254,14 +258,18 @@ label[for=price] {
 
 .absolute-img1 {
     position: absolute;
-    top: 155px;
-    left: -2px;
+    top: 163px;
+    left: 3px;
+    width: auto;
+    height: 25px;
 }
 
 .absolute-img2 {
     position: absolute;
-    top: 165px;
-    left: 9px;
+    top: 168px;
+    left: 10px;
+    width: auto;
+    height: 14px;
 }
 
 .div-button {
@@ -271,7 +279,8 @@ label[for=price] {
 .vertical-scroll-table {
     display: table-caption;
     height: 473px;
-    overflow-y: auto
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
 }
 
 .hide-scroll-bar::-webkit-scrollbar {
@@ -285,4 +294,13 @@ label[for=price] {
 .show-scroll-bar {
     display: block;
     padding-right: 15px;
+}
+.input-enable{
+    height: 36px;
+    width: -webkit-fill-available;
+    border: 0px;
+    text-align: center;
+}
+.select-staff{
+    width: auto;
 }

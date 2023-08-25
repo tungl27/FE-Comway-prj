@@ -7,12 +7,26 @@ import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF, EDIT_STAFF, GET_STAFF_BY_ID } from "../../theme/configApi";
 import { useNavigate } from "react-router-dom";
+import ReactModal from "react-modal";
 
 const options = [{ label: '一般', value: 0 }, { label: 'パートナー', value: 1 }]
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 export default function FormEdit({ staffId }) {
     const refButton = useRef(null)
     const navigate = useNavigate()
+    const [showModal, setShowModal] = useState(false)
+
     const [staffInfo, setStaffInfo] = useState({})
 
 
@@ -152,13 +166,20 @@ export default function FormEdit({ staffId }) {
                     </div>
                     <div className="text-center">
                         <button type="button" id="change" className="btn btn-primary" onClick={() => submitHandler()} ref={refButton}>更新</button>
-                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => navigate('/staff/list')}>キャンセル</button>
+                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => setShowModal(true)}>キャンセル</button>
                     </div>
                     <p className="message">
                         {message}
                     </p>
                 </div>
             </div>
+            <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
+                <p>Do you want to save edited data?</p>
+                <div className="d-flex justify-content-between">
+                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/staff/list')}>No</button>
+                </div>
+            </ReactModal>
         </Fragment>
     )
 }

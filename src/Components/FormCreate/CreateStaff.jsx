@@ -132,20 +132,6 @@ export default function FormCreate() {
                     </p>
                 </div>
             </div>
-          </div>
-          <div className="text-center">
-            <button
-              type="button"
-              id="regist"
-              className="btn btn-primary"
-              onClick={() => submitHandler()}
-            >
-              登録
-            </button>
-          </div>
-          <p className="message">{message}</p>
-        </div>
-      </div>
-    </Fragment>
-  );
+        </Fragment >
+    );
 }
