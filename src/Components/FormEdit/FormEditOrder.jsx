@@ -10,6 +10,7 @@ import axios from "axios";
 import { CREATE_ORDER, EDIT_ORDER, GET_ORDER_BY_ID } from "../../theme/configApi";
 import { useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
+import addComma from "../../utils/addComma";
 
 const customStyles = {
     content: {
@@ -48,8 +49,8 @@ export default function FormEditOrder({ OrderID }) {
         setOrderNo(orderInfo.order_number)
         setCustomeName(orderInfo.client_name)
         setStatus(orderInfo.status)
-        setOrderIncome(orderInfo.order_income)
-        setInternalUnitPrice(orderInfo.internal_unit_price)
+        setOrderIncome(addComma(orderInfo.order_income))
+        setInternalUnitPrice(addComma(orderInfo.internal_unit_price))
     }, [orderInfo])
 
     const [id, setId] = useState("");
@@ -167,8 +168,8 @@ export default function FormEditOrder({ OrderID }) {
                             <Input id={'edit-order-customerName'} value={customerName} required={false} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
                             <InputCalenda id={'orderDate'} value={orderDate} required={false} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
                             <Selection id={'status'} title={'ステータス'} options={options} required={true} value={status} errorMsg={error.status} setValue={setStatus}></Selection>
-                            <Input type={'number'} id={'edit-order-orderIncome'} value={orderIncome} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitOrderEdit1">円</span>
-                            <Input type={'number'} id={'internalUnitPrice'} value={internalUnitPrice} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitOrderEdit2">円/Manhour</span>
+                            <Input id={'edit-order-orderIncome'} value={addComma(orderIncome)} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitOrderEdit1">円</span>
+                            <Input id={'internalUnitPrice'} value={addComma(internalUnitPrice)} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitOrderEdit2">円/Manhour</span>
                         </div>
                     </div>
                     <div className="text-center">

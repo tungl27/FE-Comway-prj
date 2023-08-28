@@ -55,11 +55,10 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
     }
 
     const newStaff = () => {
-        if (data.details) {
+        if (data.details && data.remainingStaffs) {
             data.details = [{
                 "planActualData": {
                     "id": '',
-                    "project_id": data.projectData.id,
                     "this_year_04_plan": '',
                     "this_year_04_actual": '',
                     "this_year_05_plan": '',
@@ -93,11 +92,10 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                     { 'yoteiGenka': '', 'yoteiJikan': '', 'jissekiJikan': '', 'jissekiGenka': '' }
             }, ...data.details]
         }
-        else {
+        else if(data.remainingStaffs){
             data.details = [{
                 "planActualData": {
                     "id": '',
-                    "project_id": data.projectData.id,
                     "this_year_04_plan": '',
                     "this_year_04_actual": '',
                     "this_year_05_plan": '',
@@ -150,13 +148,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
             return { ...detail.planActualData, staff_id: detail.staffData.staff_id }
         })
         console.log(postData)
-        // const fileData = JSON.stringify(data.details);
-        // const blob = new Blob([fileData], { type: "text/plain" });
-        // const url = URL.createObjectURL(blob);
-        // const link = document.createElement('a');
-        // link.download = 'filename.json';
-        // link.href = url;
-        // link.click();
+   
         await axios.post(REGIST_ACTUAL_PLAN, { ...postData, 'IDLoginUser': localStorage.getItem('IDLoginUser') })
     }
     return (
