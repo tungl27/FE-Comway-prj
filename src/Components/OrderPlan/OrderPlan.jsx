@@ -42,19 +42,11 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
         });
     }
 
-    // useEffect(() => {
-    //     const subCatContainer = $(".vertical-scroll-table");
-    //     subCatContainer.on('scroll', function () {
-    //         subCatContainer.scrollTop($(this).scrollTop());
-    //     })
-    // }, []);
-
     useEffect(() => {
         setName(data.projectData === undefined ? '' : data.projectData.project_name)
         setOrderNo(data.projectData === undefined ? '' : data.projectData.order_number)
         setCustomeName(data.projectData === undefined ? '' : data.projectData.client_name)
         setPrice(data.projectData === undefined ? '' : data.projectData.internal_unit_price)
-        console.log(data)
     }, [data])
     const editPlan = (e, index) => {
         data.details[index].planActualData[e.currentTarget.name] = e.currentTarget.value
@@ -152,15 +144,20 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
     }
 
     const handleSubmit = async () => {
-        console.log(data)
-        const fileData = JSON.stringify(data);
-        const blob = new Blob([fileData], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.download = 'filename.json';
-        link.href = url;
-        link.click();
-        await axios.post(REGIST_ACTUAL_PLAN, { ...data, 'IDLoginUser': localStorage.getItem('IDLoginUser') })
+        let postData = data
+        postData.details.map((detail, index) => {
+            postData.details[index].planActualData = { ...detail.planActualData, staff_id: detail.staffData.staff_id }
+            return { ...detail.planActualData, staff_id: detail.staffData.staff_id }
+        })
+        console.log(postData)
+        // const fileData = JSON.stringify(data.details);
+        // const blob = new Blob([fileData], { type: "text/plain" });
+        // const url = URL.createObjectURL(blob);
+        // const link = document.createElement('a');
+        // link.download = 'filename.json';
+        // link.href = url;
+        // link.click();
+        await axios.post(REGIST_ACTUAL_PLAN, { ...postData, 'IDLoginUser': localStorage.getItem('IDLoginUser') })
     }
     return (
         <Fragment>

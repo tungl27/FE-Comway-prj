@@ -255,6 +255,9 @@ label[for=price] {
     z-index: 2;
     text-align: center;
     border: 2px solid #797979;
+    max-height: 24px;
+    max-width: 102px;
+    overflow: hidden;
 }
 
 .absolute-img1 {
