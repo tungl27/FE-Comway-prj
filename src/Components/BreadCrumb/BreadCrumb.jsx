@@ -24,7 +24,7 @@ export default function Breadcrumb() {
         // { title: "スタッフ一覧", url: "stafflist" },
     ];
     const url = window.location.href
-    const path = url.split('/')
+    const path = url.split('?')[0].split('/')
     if (path.indexOf('staff') !== -1) {
         breadcrumbs.push({
             title: "スタッフ一覧",
@@ -54,13 +54,13 @@ export default function Breadcrumb() {
                     url: "/order/new"
                 })
             } else
-                if (path.indexOf('detail')) {
+                if (path.indexOf('detail') !== -1) {
                     breadcrumbs.push({
                         title: "オーダー情報編集",
                         url: "/order/detail"
                     })
                 } else
-                    if (path.indexOf('actual')) {
+                    if (path.indexOf('actual') !== -1) {
                         breadcrumbs.push({
                             title: "オーダー登録",
                             url: "/order/actual"
