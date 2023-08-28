@@ -80,7 +80,7 @@ export default function CreateOrder() {
         if (internalUnitPrice === '') {
             errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkNumber(orderDate)) {
-            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
+            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_1_BYTE_ERROR
         } else {
             errorInternalUnitPrice = ""
         }
@@ -95,8 +95,8 @@ export default function CreateOrder() {
             formdata.append('client_name', customerName)
             formdata.append('order_date', orderDate)
             formdata.append('status', status)
-            formdata.append('order_income', orderIncome)
-            formdata.append('internal_unit_price', internalUnitPrice)
+            formdata.append('order_income', orderIncome.replaceAll(',', ''))
+            formdata.append('internal_unit_price', internalUnitPrice.replaceAll(',', ''))
             formdata.append('IDLoginUser', localStorage.getItem('IDLoginUser'))
             await axios.post(CREATE_ORDER, formdata).then((respone) => {
                 if (respone.data.message === 'New Project ID is successfully inserted!') {

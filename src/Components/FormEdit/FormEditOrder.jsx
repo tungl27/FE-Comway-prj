@@ -135,8 +135,8 @@ export default function FormEditOrder({ OrderID }) {
             formdata.append('client_name', customerName)
             formdata.append('order_date', orderDate)
             formdata.append('status', status)
-            formdata.append('order_income', orderIncome)
-            formdata.append('internal_unit_price', internalUnitPrice)
+            formdata.append('order_income', orderIncome.replaceAll(',', ''))
+            formdata.append('internal_unit_price', internalUnitPrice.replaceAll(',', ''))
             formdata.append('IDLoginUser', localStorage.getItem('IDLoginUser'))
             await axios.post(EDIT_ORDER, formdata).then((respone) => {
                 if (respone.data === 'Edited Project Successfully') {
