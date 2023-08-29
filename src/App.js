@@ -11,22 +11,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Menu from "./pages/Menu";
 import {
-  BreadcrumbsContext,
-  SetBreadcrumbsContext,
-} from "./State/BreadcrumbContext";
+  Edited,
+  SetEdited,
+} from "./State/editContext";
 import Protected from "./theme/Protected";
 
-const breadcrumb = [
-  { title: "メニュー", url: "/home" },
-];
-
 function App() {
-  const [breadcrumbs, setBreadcrumbs] = useState(breadcrumb);
+  const [edit, setEdit] = useState(false);
 
   return (
     <Fragment>
-      <BreadcrumbsContext.Provider value={breadcrumbs}>
-        <SetBreadcrumbsContext.Provider value={setBreadcrumbs}>
+      <Edited.Provider value={edit}>
+        <SetEdited.Provider value={setEdit}>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
@@ -44,8 +40,8 @@ function App() {
 
             </Routes>
           </BrowserRouter>
-        </SetBreadcrumbsContext.Provider>
-      </BreadcrumbsContext.Provider>
+        </SetEdited.Provider>
+      </Edited.Provider>
 
     </Fragment>
   );

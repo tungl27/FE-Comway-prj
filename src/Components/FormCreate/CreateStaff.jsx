@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import './FormCreate.css'
 import Selection from "../Selection/Selection";
@@ -6,6 +6,7 @@ import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF } from "../../theme/configApi";
+import { SetEdited } from "../../State/editContext";
 
 const options = [{ label: '社員', value: 0 }, { label: 'パートナー', value: 1 }]
 
@@ -26,6 +27,14 @@ export default function FormCreate() {
 
     const refButton = useRef(null)
 
+    const setEdited = useContext(SetEdited)
+    useEffect(() => {
+        if ((lastName ?? firstName ?? lastNameFurigana ?? firstNameFurigana) === '') {
+            setEdited(false)
+        } else {
+            setEdited(true)
+        }
+    }, [lastName, firstName, lastNameFurigana, firstNameFurigana, staff_type])
     const submitHandler = async () => {
         let errorLastName = ''
         let errorFirstName = ''
