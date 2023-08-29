@@ -9,6 +9,7 @@ export default function StaffTable({
   tableData,
   pageSize,
   deleteStaff,
+  sortTableRequire
 }) {
   const [currentData, setCurent] = useState([]);
 
@@ -27,42 +28,42 @@ export default function StaffTable({
     setCurent(tableData.slice(startIndexData, endIndexData));
   }, [activePage, tableData]);
 
-  function sortData(data, config) {
-    if (!config) {
-      return data;
-    }
+  // function sortData(data, config) {
+  //   if (!config) {
+  //     return data;
+  //   }
 
-    const { key, direction } = config;
+  //   const { key, direction } = config;
 
-    const sortedData = [...data];
-    sortedData.sort((a, b) => {
-      if (a[key] < b[key]) {
-        return direction === "asc" ? -1 : 1;
-      }
-      if (a[key] > b[key]) {
-        return direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
+  //   const sortedData = [...data];
+  //   sortedData.sort((a, b) => {
+  //     if (a[key] < b[key]) {
+  //       return direction === "asc" ? -1 : 1;
+  //     }
+  //     if (a[key] > b[key]) {
+  //       return direction === "asc" ? 1 : -1;
+  //     }
+  //     return 0;
+  //   });
 
-    return sortedData;
-  }
+  //   return sortedData;
+  // }
 
-  const [sortConfig, setSortConfig] = useState(null);
+  // const [sortConfig, setSortConfig] = useState(null);
 
-  function sortTable(key) {
-    let direction = "asc";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "asc"
-    ) {
-      direction = "desc";
-    }
-    setSortConfig({ key, direction });
-  }
+  // function sortTable(key) {
+  //   let direction = "asc";
+  //   if (
+  //     sortConfig &&
+  //     sortConfig.key === key &&
+  //     sortConfig.direction === "asc"
+  //   ) {
+  //     direction = "desc";
+  //   }
+  //   setSortConfig({ key, direction });
+  // }
 
-  const sortedData = sortData(currentData, sortConfig);
+  // const sortedData = sortData(currentData, sortConfig);
 
   return (
     <Fragment>
@@ -73,13 +74,13 @@ export default function StaffTable({
               <th style={{ width: "10%" }}>No</th>
               <th
                 style={{ width: "25%" }}
-                onClick={() => sortTable("last_name")}
+                onClick={() => sortTableRequire("last_name")}
               >
                 氏名
               </th>
               <th
                 style={{ width: "30%" }}
-                onClick={() => sortTable("last_name_furigana")}
+                onClick={() => sortTableRequire("last_name_furigana")}
               >
                 氏名（振り）
               </th>
@@ -88,7 +89,7 @@ export default function StaffTable({
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((row, index) => (
+            {currentData.map((row, index) => (
               <tr key={row.id} className={index % 2 === 0 ? "even-row2" : ""}>
                 <td>{(activePage - 1) * pageSize + index + 1}</td>
                 <td>{`${row.last_name}${row.first_name}`}</td>

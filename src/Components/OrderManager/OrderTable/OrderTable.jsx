@@ -13,10 +13,10 @@ export default function OrderTableComponent({
   tableData,
   pageSize,
   deleteOrder,
+  sortTableRequire,
 }) {
   const [currentData, setCurent] = useState([]);
 
-  const sortedData = sortData(currentData, sortConfig);
   useEffect(() => {
     const startIndexData = (activePage - 1) * pageSize;
     const endIndexData = activePage * pageSize;
@@ -32,40 +32,39 @@ export default function OrderTableComponent({
     setShowPopup(true);
   };
 
-  function sortData(data, config) {
-    if (!config) {
-      return data;
-    }
+  // function sortData(data, config) {
+  //   if (!config) {
+  //     return data;
+  //   }
 
-    const { key, direction } = config;
+  //   const { key, direction } = config;
 
-    const sortedData = [...data];
-    sortedData.sort((a, b) => {
-      if (a[key] < b[key]) {
-        return direction === "asc" ? -1 : 1;
-      }
-      if (a[key] > b[key]) {
-        return direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
+  //   const sortedData = [...data];
+  //   sortedData.sort((a, b) => {
+  //     if (a[key] < b[key]) {
+  //       return direction === "asc" ? -1 : 1;
+  //     }
+  //     if (a[key] > b[key]) {
+  //       return direction === "asc" ? 1 : -1;
+  //     }
+  //     return 0;
+  //   });
 
-    return sortedData;
-  }
+  //   return sortedData;
+  // }
 
-  const [sortConfig, setSortConfig] = useState(null);
-
-  function sortTableRequire(key) {
-    let direction = "asc";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "asc"
-    ) {
-      direction = "desc";
-    }
-    setSortConfig({ key, direction });
-  }
+  // function sortTableRequire(key) {
+  //   console.log("Dsdsdsd")
+  //   let direction = "asc";
+  //   if (
+  //     sortConfig &&
+  //     sortConfig.key === key &&
+  //     sortConfig.direction === "asc"
+  //   ) {
+  //     direction = "desc";
+  //   }
+  //   setSortConfig({ key, direction });
+  // }
 
   return (
     <Fragment>
@@ -101,7 +100,7 @@ export default function OrderTableComponent({
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((row, index) => (
+            {currentData.map((row, index) => (
               <tr key={index} className={index % 2 === 0 ? "even-row2" : ""}>
                 <td>{(activePage - 1) * pageSize + index + 1}</td>
                 <td>{row.order_number}</td>

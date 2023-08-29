@@ -29,13 +29,12 @@ export default function OrderList() {
 
   useEffect(() => {
     fetchData(searchFillter);
+    // const sortedData = sortData(tableData, sortConfig);
   }, []);
 
   const fetchData = async (searchValue) => {
     try {
-      // const searchParams = new URLSearchParams(searchValue);
-      // const url = `${SEARCH_ORDER_LIST}?${searchParams.toString()}`;
-      // const response = await axios.get(url);
+     
       const response = await axios.post(SEARCH_ORDER_LIST, {
         order_number: searchValue?.orderNo || "",
         project_name: searchValue?.projectName || "",
@@ -44,10 +43,19 @@ export default function OrderList() {
         IDLoginUser: localStorage.getItem("IDLoginUser"),
       });
 
-      setTableData(response.data);
+      if (Array.isArray(response.data)) {
+        const sortedData = sortData(response.data, sortConfig);
+        setTableData(sortedData);
+        const totalRecord = response.data.length; // Số lượng bản ghi trong response.data
+        setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
+      } else {
+        setTableData([]);
+        setTotalRecord(0);
+      }
 
-      const totalRecord = response.data.length; // Số lượng bản ghi trong response.data
-      setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
+      // setTableData(response.data);
+      // const totalRecord = response.data.length; // Số lượng bản ghi trong response.data
+      // setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -68,12 +76,50 @@ export default function OrderList() {
     }
   };
 
+  const [sortConfig, setSortConfig] = useState(null);
+  function sortData(data, config) {
+    if (!config) {
+      return data;
+    }
+
+    const { key, direction } = config;
+
+    const sortedData = [...data];
+    sortedData.sort((a, b) => {
+      if (a[key] < b[key]) {
+        return direction === "asc" ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return direction === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+
+    return sortedData;
+  }
+
+  function sortTableRequire(key) {
+    // changeFilterSort(key);
+    let direction = "asc";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "asc"
+    ) {
+      direction = "desc";
+    }
+    // setSortConfig((prevSortConfig) => ({ ...prevSortConfig, key, direction }));
+    setSortConfig({ key, direction });
+    const sortedData = sortData(tableData, { key, direction });
+    setTableData(sortedData);
+  }
+
   return (
     <Fragment>
       <Header />
       <Breadcrumb breadcrumbs={breadcrumbs} />
 
-      <div className=" container-fluid d-flex justify-content-center align-items-center">
+      <div className="container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle d-flex flex-column  position-relative  ">
           <OrderSearchComponent
             setSearchFiller={setSearchFiller}
@@ -89,6 +135,7 @@ export default function OrderList() {
               activePage={activePage}
               pageSize={pageSize}
               totalRecords
+              sortTableRequire={sortTableRequire}
             />
           </div>
 

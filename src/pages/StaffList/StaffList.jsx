@@ -26,15 +26,44 @@ export default function StaffList() {
     fetchData(searchFillter);
   }, []);
 
+  const [sortConfig, setSortConfig] = useState(null);
+  function sortData(data, config) {
+    if (!config) {
+      return data;
+    }
+
+    const { key, direction } = config;
+
+    const sortedData = [...data];
+    sortedData.sort((a, b) => {
+      if (a[key] < b[key]) {
+        return direction === "asc" ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return direction === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+
+    return sortedData;
+  }
+
+  function sortTableRequire(key) {
+    let direction = "asc";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "asc"
+    ) {
+      direction = "desc";
+    }
+    // setSortConfig((prevSortConfig) => ({ ...prevSortConfig, key, direction }));
+    setSortConfig({ key, direction });
+    const sortedData = sortData(tableData, { key, direction });
+    setTableData(sortedData);
+  }
   const fetchData = async (searchValueParams) => {
     try {
-      // const response = await axios.post(SEARCH_ORDER_LIST, {
-      //   order_number: searchValue?.orderNo || "",
-      //   project_name: searchValue?.projectName || "",
-      //   client_name: searchValue?.clientName || "",
-      //   status: searchValue?.status || "",
-      // });
-
       const params = {
         name: searchValueParams.nameSearch,
         staff_type: searchValueParams.staffType,
@@ -43,13 +72,15 @@ export default function StaffList() {
 
       const response = await axios.post(SEARCH_STAFF_LIST, params);
 
-      // const searchParams = new URLSearchParams(params);
-      // const url = `${SEARCH_STAFF_LIST}?${searchParams.toString()}`;
-      // const response = await axios.get(url);
-      setTableData(response.data);
-      console.log(response.data);
-      const totalRecord = response.data?.length; //Số lượng bản ghi trong response.data
-      setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
+      if (Array.isArray(response.data)) {
+        const sortedData = sortData(response.data, sortConfig);
+        setTableData(sortedData);
+        const totalRecord = response.data.length; // Số lượng bản ghi trong response.data
+        setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
+      } else {
+        setTableData([]);
+        setTotalRecord(0);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -94,6 +125,7 @@ export default function StaffList() {
               tableData={tableData}
               pageSize={pageSize}
               deleteStaff={deleteStaff}
+              sortTableRequire={sortTableRequire}
             />
           </div>
 
