@@ -135,6 +135,27 @@ export default function FormEdit({ staffId }) {
                         navigate('/staff/list')
                     }, 5000);
                 }
+                else {
+                    let errorLastName = ''
+                    let errorFirstName = ''
+                    let errorLastNameFurigana = ''
+                    let errorFirstNameFurigana = ''
+                    let errorstaff_type = ''
+                    if (respone.data?.last_name) {
+                        errorLastName = respone.data?.last_name
+                    }else {
+                        errorLastName = ''
+                    }
+                    if (respone.data?.first_name){
+                        errorFirstName =  respone.data?.first_name
+                    }else {
+                        errorFirstName = ''
+                    }
+                    setError({
+                        ...error, lastName: errorLastName, firstName: errorFirstName,
+                        lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, staff_type: errorstaff_type
+                    })
+                }
             }).catch((err) => {
                 console.log(err)
             })
