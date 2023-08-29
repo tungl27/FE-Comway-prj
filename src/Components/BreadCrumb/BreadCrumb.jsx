@@ -1,7 +1,6 @@
 import { Fragment, useContext, useState, useEffect } from "react";
 import './BreadCrumb.css'
 import { useNavigate } from "react-router-dom";
-import { BreadcrumbsContext, SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
 import ReactModal from "react-modal";
 import { Edited, SetEdited } from "../../State/editContext";
 
