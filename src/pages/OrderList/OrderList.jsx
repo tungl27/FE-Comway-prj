@@ -6,6 +6,7 @@ import Pagination from "../../Components/Pagination/Pagination";
 import Breadcrumb from "../../Components/BreadCrumb/BreadCrumb";
 import OrderTableComponent from "../../Components/OrderManager/OrderTable/OrderTable";
 import OrderSearchComponent from "../../Components/OrderManager/OrderSearchComponent/OrderSearchComponent";
+import OrderSearchComponentcopy from "../../Components/OrderManager/OrderSearchComponent/OrderSearchComponentcopy";
 import { BreadcrumbsContext } from "../../State/BreadcrumbContext";
 import axios from "axios";
 import { DELETE_ORDER, SEARCH_ORDER_LIST } from "../../theme/configApi";
@@ -34,7 +35,6 @@ export default function OrderList() {
 
   const fetchData = async (searchValue) => {
     try {
-     
       const response = await axios.post(SEARCH_ORDER_LIST, {
         order_number: searchValue?.orderNo || "",
         project_name: searchValue?.projectName || "",
@@ -121,6 +121,14 @@ export default function OrderList() {
 
       <div className="container-fluid d-flex justify-content-center align-items-center">
         <div className="containerStyle d-flex flex-column  position-relative  ">
+          {/* <OrderSearchComponentcopy
+            setSearchFiller={setSearchFiller}
+            fetchData={fetchData}
+            setActivePage={setActivePage}
+            totalRecords={totalRecords}
+          /> */}
+
+
           <OrderSearchComponent
             setSearchFiller={setSearchFiller}
             fetchData={fetchData}

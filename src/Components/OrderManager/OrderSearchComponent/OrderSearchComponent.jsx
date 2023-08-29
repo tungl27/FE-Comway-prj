@@ -27,9 +27,6 @@ export default function OrderSearchComponent({
   });
   const { orderNo, clientName, projectName, status } = stateSearch;
 
-  // const updateFilter = (data) =>
-  // setStateSearch((prevData) => ({ ...prevData, ...data }));
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStateSearch((prevData) => ({
@@ -45,38 +42,24 @@ export default function OrderSearchComponent({
   };
 
   return (
-    <div
-      className="row"
-      style={{ fontSize: 13, marginLeft: 0, marginRight: 0 }}
-    >
-      <div className="col-lg-3 col-no-padding ">
-        <h4
-          style={{
-            fontWeight: "bold",
-            marginTop: 5,
-          }}
-        >
-          オーダー一覧画面
-        </h4>
+    <div className="row component-order-search">
+      <div id="left-component-order-search" className=" col-no-padding ">
+        <span className="header-order">オーダー一覧画面</span>
+
         <Link to={"/order/new"}>
-          <button className="regisBtn" style={{ marginTop: 10 }}>
-            新規登録
-          </button>
+          <button className="regisBtn regis-btn-order">新規登録</button>
         </Link>
+
+        <div style={{ fontSize: 14 }}>検索件数：{totalRecords || 0} 件</div>
       </div>
 
       <div
-        className="col-lg-7 searchOrderContainer  h-100 py-2 "
-        style={{ marginLeft: -10, marginRight: 0 }}
+        id="center-component-order-search"
+        className="searchOrderContainer  h-100 py-2 "
       >
         <div className="row  ">
-          <div className=" col-lg-6 d-flex  px-1 align-items-center  ">
-            <label
-              className="col-md-12 col-lg-12"
-              style={{ width: "33%", fontSize: 13 }}
-            >
-              オーダーNo.
-            </label>
+          <div className="col-md-12  col-lg-6 d-flex   align-items-center  ">
+            <label className="col-md-12 col-lg-4">オーダーNo.</label>
             <input
               value={orderNo}
               name="orderNo"
@@ -84,97 +67,90 @@ export default function OrderSearchComponent({
               type="text"
               placeholder=""
               title=""
-              className="inputText"
-              style={{ width: "67%" }}
+              className="inputText col-md-12 col-lg-8"
             />
           </div>
-          <div
-            className=" col-lg-6 d-flex align-items-center   "
-            style={{
-              paddingRight: 20,
-              paddingLeft: 5,
-            }}
-          >
-            <label className=" label_custom_right">顧客名</label>
+          <div className="col-md-12 col-lg-6 d-flex align-items-center   ">
+            <label className="col-md-12 col-lg-4">顧客名</label>
             <input
               type="text"
               placeholder=""
               name="clientName"
               value={clientName}
               onChange={handleChange}
-              className="inputText"
-              style={{ width: "70%" }}
+              className="inputText col-md-12 col-lg-8"
             />
           </div>
         </div>
 
         <div className="row mt-2  ">
           <div
-            className=" col-lg-6 d-flex px-1 h-100"
+            className=" col-lg-6 d-flex h-100"
             style={{
               alignItems: "center",
             }}
           >
-            <label style={{ width: "33%" }}>案件名</label>
+            <label className="col-md-12 col-lg-4">案件名</label>
             <input
               type="text"
               name="projectName"
               value={projectName}
               onChange={handleChange}
               placeholder=""
-              className="inputText"
+              className="inputText col-md-12 col-lg-8"
               title=""
-              style={{ width: "67%" }}
             />
           </div>
 
-          <div
-            className="col-lg-6 col-md-12 d-flex align-items-center h-100"
-            style={{
-              marginLeft: -3,
-              padding: 0,
-            }}
-          >
-            <label style={{ fontSize: 12, width: "25%" }}>ステータス</label>
-            <div
-              style={{
-                width: "50%",
-              }}
+          <div className="col-lg-6 col-md-12 d-flex align-items-center h-100">
+            <label className="col-md-12 col-lg-4">ステータス</label>
+            <select
+              id={"selectedOfficeOrderList"}
+              value={status}
+              name="status"
+              onChange={handleChange}
             >
-              <select
-                id={"selectedOfficeOrderList"}
-                value={status}
-                name="status"
-                onChange={handleChange}
-              >
-                {options.map((option, index) => {
-                  return (
-                    <option key={index} value={option.value}>
-                      {option.label}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-
-            <button
-              style={{
-                width: "25%",
-              }}
-              className="button-order-search border"
-              type="input"
-              onClick={() => {
-                actionSearch();
-              }}
-            >
-              検索
-            </button>
+              {options.map((option, index) => {
+                return (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
       </div>
 
-      <div className="col-lg-2  d-flex justify-content-end align-items-end  ">
-        <span style={{ fontSize: 15 }}>検索件数：{totalRecords || 0} 件</span>
+      <div
+        id="right-component-order-search"
+        className=" d-flex justify-content-center align-items-center border  "
+      >
+        <button
+          style={{ backgroundColor: "#929292", color: "red" }}
+          className="button-order-search border"
+          type="input"
+          onClick={() => {
+            setStateSearch({
+              orderNo: "",
+              clientName: "",
+              projectName: "",
+              status: "",
+            });
+          }}
+        >
+          クリア
+        </button>
+
+        <button
+          className="button-order-search border"
+          type="input"
+          onClick={() => {
+            actionSearch();
+          }}
+        >
+          検索
+        </button>
       </div>
     </div>
   );
