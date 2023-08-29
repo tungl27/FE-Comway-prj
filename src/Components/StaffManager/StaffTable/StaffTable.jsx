@@ -1,12 +1,16 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import "./staffTable.css";
 import { Link } from "react-router-dom";
 import DialogConfirm from "../../Popup/DialogConfirm";
 import staffTypeConvert from "../../../utils/staffTypeConvert";
 
-export default function StaffTable({ activePage, tableData, pageSize, deleteStaff }) {
-
-  const [curentData, setCurent] = useState([]);
+export default function StaffTable({
+  activePage,
+  tableData,
+  pageSize,
+  deleteStaff,
+}) {
+  const [currentData, setCurent] = useState([]);
 
   // state delelte
   const [showPopup, setShowPopup] = useState(false);
@@ -23,6 +27,43 @@ export default function StaffTable({ activePage, tableData, pageSize, deleteStaf
     setCurent(tableData.slice(startIndexData, endIndexData));
   }, [activePage, tableData]);
 
+  function sortData(data, config) {
+    if (!config) {
+      return data;
+    }
+
+    const { key, direction } = config;
+
+    const sortedData = [...data];
+    sortedData.sort((a, b) => {
+      if (a[key] < b[key]) {
+        return direction === "asc" ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return direction === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+
+    return sortedData;
+  }
+
+  const [sortConfig, setSortConfig] = useState(null);
+
+  function sortTable(key) {
+    let direction = "asc";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "asc"
+    ) {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  }
+
+  const sortedData = sortData(currentData, sortConfig);
+
   return (
     <Fragment>
       <div className="mt-4">
@@ -30,14 +71,24 @@ export default function StaffTable({ activePage, tableData, pageSize, deleteStaf
           <thead className="table-head">
             <tr>
               <th style={{ width: "10%" }}>No</th>
-              <th style={{ width: "25%" }}>氏名</th>
-              <th style={{ width: "30%" }}>氏名（振り）</th>
+              <th
+                style={{ width: "25%" }}
+                onClick={() => sortTable("last_name")}
+              >
+                氏名
+              </th>
+              <th
+                style={{ width: "30%" }}
+                onClick={() => sortTable("last_name_furigana")}
+              >
+                氏名（振り）
+              </th>
               <th style={{ width: "15%" }}>職制</th>
               <th style={{ width: "20%" }}></th>
             </tr>
           </thead>
           <tbody>
-            {curentData.map((row, index) => (
+            {sortedData.map((row, index) => (
               <tr key={row.id} className={index % 2 === 0 ? "even-row2" : ""}>
                 <td>{(activePage - 1) * pageSize + index + 1}</td>
                 <td>{`${row.last_name}${row.first_name}`}</td>
@@ -68,7 +119,7 @@ export default function StaffTable({ activePage, tableData, pageSize, deleteStaf
         onClose={() => setShowPopup(false)}
         acceptAction={() => deleteStaff(deletedStaffId)}
         title="Confirm"
-        body="選択した注文情報を削除しますか"
+        body="Do you want to delete selected staff info?"
       ></DialogConfirm>
     </Fragment>
   );

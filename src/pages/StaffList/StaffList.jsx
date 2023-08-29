@@ -42,13 +42,12 @@ export default function StaffList() {
       };
 
       const response = await axios.post(SEARCH_STAFF_LIST, params);
-      console.log(response.data);
 
       // const searchParams = new URLSearchParams(params);
       // const url = `${SEARCH_STAFF_LIST}?${searchParams.toString()}`;
       // const response = await axios.get(url);
-
       setTableData(response.data);
+      console.log(response.data);
       const totalRecord = response.data?.length; //Số lượng bản ghi trong response.data
       setTotalRecord(totalRecord); // Gán giá trị tổng số trang cho state
     } catch (error) {
