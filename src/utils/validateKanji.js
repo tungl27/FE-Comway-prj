@@ -5,7 +5,7 @@ export default function iskanji(fullStr) {
             || fullStr[i] >= '\u30a0   ' && fullStr[i] <= '\u30ff' || fullStr[i] >= '\uff00  ' && fullStr[i] <= '\uff9f'
             || fullStr[i] >= '\u4e00  ' && fullStr[i] <= '\u9faf' || fullStr[i] >= '\u3400  ' && fullStr[i] <= '\u4dbf') {
             kanji = true
-            console.log(fullStr[i], kanji)
+            // console.log(fullStr[i], kanji)
         } else {
             return false;
         }

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import Selection from "../Selection/Selection";
 import './FormEdit.css'
@@ -11,6 +11,7 @@ import { CREATE_ORDER, EDIT_ORDER, GET_ORDER_BY_ID } from "../../theme/configApi
 import { useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
 import addComma from "../../utils/addComma";
+import { SetEdited } from "../../State/editContext";
 
 const customStyles = {
     content: {
@@ -72,6 +73,15 @@ export default function FormEditOrder({ OrderID }) {
     });
     const navigate = useNavigate()
     const refButton = useRef(null)
+    const setEdited = useContext(SetEdited)
+
+    useEffect(() => {
+        if ((name ?? orderNo ?? customerName ?? orderDate ?? status ?? orderIncome ?? internalUnitPrice) === '') {
+            setEdited(false)
+        } else {
+            setEdited(true)
+        }
+    }, [name, orderNo, status, orderIncome, internalUnitPrice, customerName, orderDate])
 
     const submitHandler = async () => {
         let errorName = ''

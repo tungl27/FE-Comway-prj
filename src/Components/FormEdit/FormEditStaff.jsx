@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import Selection from "../Selection/Selection";
 import './FormEdit.css'
@@ -8,6 +8,7 @@ import axios from "axios";
 import { EDIT_STAFF, GET_STAFF_BY_ID } from "../../theme/configApi";
 import { useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
+import { SetEdited } from "../../State/editContext";
 
 const options = [{ label: '社員', value: 0 }, { label: 'パートナー', value: 1 }]
 
@@ -65,6 +66,15 @@ export default function FormEdit({ staffId }) {
         firstNameFurigana: "",
         staff_type: ""
     });
+
+    const setEdited = useContext(SetEdited)
+    useEffect(() => {
+        if ((lastName ?? firstName ?? lastNameFurigana ?? firstNameFurigana) === '') {
+            setEdited(false)
+        } else {
+            setEdited(true)
+        }
+    }, [lastName, firstName, lastNameFurigana, firstNameFurigana, staff_type])
 
     const submitHandler = async () => {
         let errorLastName = ''
@@ -134,6 +144,27 @@ export default function FormEdit({ staffId }) {
                         refButton.current.disabled = false
                         navigate('/staff/list')
                     }, 5000);
+                }
+                else {
+                    let errorLastName = ''
+                    let errorFirstName = ''
+                    let errorLastNameFurigana = ''
+                    let errorFirstNameFurigana = ''
+                    let errorstaff_type = ''
+                    if (respone.data?.last_name) {
+                        errorLastName = respone.data?.last_name
+                    } else {
+                        errorLastName = ''
+                    }
+                    if (respone.data?.first_name) {
+                        errorFirstName = respone.data?.first_name
+                    } else {
+                        errorFirstName = ''
+                    }
+                    setError({
+                        ...error, lastName: errorLastName, firstName: errorFirstName,
+                        lastNameFurigana: errorLastNameFurigana, firstNameFurigana: errorFirstNameFurigana, staff_type: errorstaff_type
+                    })
                 }
             }).catch((err) => {
                 console.log(err)

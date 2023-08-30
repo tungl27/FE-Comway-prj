@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import './FormCreate.css'
 import Selection from "../Selection/Selection";
@@ -6,6 +6,7 @@ import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF } from "../../theme/configApi";
+import { SetEdited } from "../../State/editContext";
 
 const options = [{ label: '社員', value: 0 }, { label: 'パートナー', value: 1 }]
 
@@ -26,6 +27,14 @@ export default function FormCreate() {
 
     const refButton = useRef(null)
 
+    const setEdited = useContext(SetEdited)
+    useEffect(() => {
+        if ((lastName ?? firstName ?? lastNameFurigana ?? firstNameFurigana) === '') {
+            setEdited(false)
+        } else {
+            setEdited(true)
+        }
+    }, [lastName, firstName, lastNameFurigana, firstNameFurigana, staff_type])
     const submitHandler = async () => {
         let errorLastName = ''
         let errorFirstName = ''
@@ -50,14 +59,14 @@ export default function FormCreate() {
         if (lastNameFurigana === '') {
             errorLastNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(lastNameFurigana)) {
-            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorLastNameFurigana = ""
         }
         if (firstNameFurigana === '') {
             errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(firstNameFurigana)) {
-            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorFirstNameFurigana = ""
         }
@@ -116,9 +125,9 @@ export default function FormCreate() {
                                 title={'苗字'} editable={true} errorMsg={error.lastName}></Input>
                             <Input id={'firstname-create'} value={firstName} required={true} setValue={setFirstName}
                                 title={'名前'} editable={true} errorMsg={error.firstName}></Input>
-                            <Input id={'lastnamefurigana-create'} value={lastNameFurigana} required={false} setValue={setLastNameFurigana}
+                            <Input id={'lastnamefurigana-create'} value={lastNameFurigana} required={true} setValue={setLastNameFurigana}
                                 title={'苗字（ふりがな）'} editable={true} errorMsg={error.lastNameFurigana}></Input>
-                            <Input id={'firstnamefurigana-create'} value={firstNameFurigana} required={false} setValue={setFirstNameFurigana}
+                            <Input id={'firstnamefurigana-create'} value={firstNameFurigana} required={true} setValue={setFirstNameFurigana}
                                 title={'名前（ふりがな）'} editable={true} errorMsg={error.firstNameFurigana}></Input>
                             <Selection id={'staff_type-create'} title={'職制'} options={options} required={true} value={staff_type}
                                 setValue={setStaff_type} errorMsg={error.staff_type}></Selection>

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import './FormCreate.css'
 import InputCalenda from "../Input/InputCalenda";
@@ -9,6 +9,7 @@ import checkNumber from "../../utils/checkNumber";
 import axios from "axios";
 import { CREATE_ORDER } from "../../theme/configApi";
 import addComma from "../../utils/addComma";
+import { SetEdited } from "../../State/editContext";
 
 
 
@@ -16,13 +17,13 @@ const options = [{ label: '実行中', value: 0 }, { label: '非活性', value: 
 
 export default function CreateOrder() {
     const refButton = useRef(null)
-    const [name, setName] = useState("全社支払合算機能");
-    const [orderNo, setOrderNo] = useState("CIS2023–020");
-    const [customerName, setCustomeName] = useState("トーテス");
-    const [orderDate, setOrderDate] = useState("2023-08-04");
+    const [name, setName] = useState("");
+    const [orderNo, setOrderNo] = useState("");
+    const [customerName, setCustomeName] = useState("");
+    const [orderDate, setOrderDate] = useState("");
     const [status, setStatus] = useState('');
-    const [orderIncome, setOrderIncome] = useState("4854000");
-    const [internalUnitPrice, setInternalUnitPrice] = useState("4573");
+    const [orderIncome, setOrderIncome] = useState("");
+    const [internalUnitPrice, setInternalUnitPrice] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState({
         name: "",
@@ -34,6 +35,14 @@ export default function CreateOrder() {
         internalUnitPrice: "",
     });
 
+    const setEdited = useContext(SetEdited)
+    useEffect(() => {
+        if((name ?? orderNo ?? customerName ?? orderDate ?? status ?? orderIncome ?? internalUnitPrice) === ''){
+            setEdited(false)
+        }else{
+            setEdited(true)
+        }
+    }, [name, orderNo, status, orderIncome, internalUnitPrice, customerName, orderDate])
     const submitHandler = async () => {
         let errorName = ''
         let errorOrderNo = ''
@@ -134,11 +143,11 @@ export default function CreateOrder() {
                         <div className="order-inputs-group">
                             <Input id={'order-name'} value={name} required={true} setValue={setName} title={'案件名'} editable={true} errorMsg={error.name}></Input>
                             <Input id={'create-orderNo'} value={orderNo} required={true} setValue={setOrderNo} title={'オーダーNo.'} editable={true} errorMsg={error.orderNo}></Input>
-                            <Input id={'order-customerName'} value={customerName} required={false} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
-                            <InputCalenda id={'orderDate'} value={orderDate} required={false} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
+                            <Input id={'order-customerName'} value={customerName} required={true} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
+                            <InputCalenda id={'orderDate'} value={orderDate} required={true} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
                             <Selection id={'status'} title={'ステータス'} options={options} required={true} value={status} errorMsg={error.status} setValue={setStatus} ></Selection>
-                            <Input id={'order-orderIncome'} value={addComma(orderIncome)} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input> <span id="internalUnitPrice1">円</span>
-                            <Input id={'internalUnitPrice'} value={addComma(internalUnitPrice)} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitPrice2">円/Manhour</span>
+                            <Input id={'order-orderIncome'} value={addComma(orderIncome)} required={true} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input> <span id="internalUnitPrice1">円</span>
+                            <Input id={'internalUnitPrice'} value={addComma(internalUnitPrice)} required={true} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitPrice2">円/Manhour</span>
                         </div>
                     </div>
                     <div className="text-center">

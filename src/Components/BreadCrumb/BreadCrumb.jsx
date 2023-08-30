@@ -1,8 +1,8 @@
 import { Fragment, useContext, useState, useEffect } from "react";
 import './BreadCrumb.css'
 import { useNavigate } from "react-router-dom";
-import { BreadcrumbsContext, SetBreadcrumbsContext } from "../../State/BreadcrumbContext";
 import ReactModal from "react-modal";
+import { Edited, SetEdited } from "../../State/editContext";
 
 const customStyles = {
     content: {
@@ -19,6 +19,8 @@ const modelPlace = ['/staff/new', '/staff/detail', '/order/new', '/order/detail'
 export default function Breadcrumb() {
     const [showModal, setShowModal] = useState(false)
     const [index, setIndex] = useState(0)
+    const edited = useContext(Edited)
+    const setEdited = useContext(SetEdited)
     let breadcrumbs = [
         { title: "メニュー", url: "/home" }
         // { title: "スタッフ一覧", url: "stafflist" },
@@ -73,7 +75,7 @@ export default function Breadcrumb() {
     const navigate = useNavigate()
     const doModal = (index) => {
         // console.log(breadcrumbs[[breadcrumbs.length - 1]].url)
-        if (modelPlace.indexOf(breadcrumbs[breadcrumbs.length - 1].url) > -1 && index < breadcrumbs.length - 1) {
+        if (modelPlace.indexOf(breadcrumbs[breadcrumbs.length - 1].url) > -1 && index < breadcrumbs.length - 1 && edited) {
             setShowModal(true)
             setIndex(index)
         } else if (index < breadcrumbs.length - 1) {
@@ -88,6 +90,7 @@ export default function Breadcrumb() {
     }
     const directTo = () => {
         if (index < breadcrumbs.length - 1) {
+            setEdited(false)
             navigate(breadcrumbs[index].url)
         }
     }

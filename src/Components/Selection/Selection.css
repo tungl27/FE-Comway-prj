@@ -1,4 +1,4 @@
-select{
+select {
     width: 314px;
     height: 36px;
     padding: 2px 2px 2px 2px;
@@ -19,8 +19,14 @@ select{
     border-image: initial;
     border-radius: 3px;
 }
-.errorMsg{
+
+.errorMsg {
     color: red;
     font-size: smaller;
     margin: 0;
-  }
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}
