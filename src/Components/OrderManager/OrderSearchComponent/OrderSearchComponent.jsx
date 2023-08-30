@@ -1,8 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import "./orderSearchComponent.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { SEARCH_ORDER_LIST } from "../../../theme/configApi";
 
 export default function OrderSearchComponent({
   setSearchFiller,
