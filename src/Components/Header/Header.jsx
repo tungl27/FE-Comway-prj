@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from "react";
 import "./header.css";
-import circle from "../../images/u5.svg";
-import stick from "../../images/u6.svg";
+import logoutImg from "../../images/logout.png";
+import userImg from "../../images/user.svg";
 import { useNavigate } from "react-router-dom";
 
 export default function Header({ account, isLoginPage = false }) {
@@ -10,6 +10,7 @@ export default function Header({ account, isLoginPage = false }) {
   const navigative = useNavigate();
   const logoutAction = () => {
     localStorage.removeItem("IDLoginUser");
+    localStorage.removeItem("username");
     navigative("/login");
   };
   return (
@@ -18,36 +19,29 @@ export default function Header({ account, isLoginPage = false }) {
         <p className="titleHeader">オーダー実績管理システム</p>
 
         <div
-          className={`logoutButton`}
+          className="div-container-button-header "
           style={{ display: !isLoginPage ? "flex" : "none" }}
-          onClick={logoutAction}
         >
-          <div className="iconLogout">
-            <img className="circle" src={circle} alt="" srcSet="" />
-            <img className="stick" src={stick} alt="" srcSet="" />
-          </div>
+          <div className="div-button-header">
+            <div
+              className="button-label  "
+              style={{ cursor: "pointer" }}
+              onClick={logoutAction}
+            >
+              <img className="logoutImg" src={logoutImg} alt="" />
+              <div className="">ログアウト</div>
+            </div>
 
-          <div className="logoutLable">ログアウト</div>
+            <div className=" button-label">
+              <img className="logoutImg" src={userImg} alt="" srcSet="" />
+              <div className="label-name-user">
+                sdfsdlfjsdjfdspfjpdfpodsjfposdjfpodsfjdspofsdojfsdfdsf
+                {/* {localStorage.getItem("username") || ""} */}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Fragment>
   );
 }
-// import { Fragment } from "react";
-// import './header.css'
-// import circle from '../../images/u5.svg'
-// import stick from '../../images/u6.svg'
-
-// export default function Header({ account }) {
-//     return (
-//         <Fragment>
-//             <div className="header">
-//                 <p className="title">
-//                     オーダー実績管理システム
-//                 </p>
-//                 <img className="circle" src={circle} alt="" srcSet="" />
-//                 <img className="stick" src={stick} alt="" srcSet="" />
-//                 <div className="logout">ログアウト</div>
-//             </div>
-//         </Fragment>
-//     )}

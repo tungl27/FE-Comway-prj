@@ -5,6 +5,8 @@ import Header from "../../Components/Header/Header";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { LOGIN } from "../../theme/configApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
   const navigative = useNavigate();
@@ -13,6 +15,7 @@ export default function Login() {
     userID: "2",
     Password: "123456",
   });
+  const [isShownPwd, setIsShownPwd] = useState(false);
 
   const { userID, Password } = stateLogin;
 
@@ -89,7 +92,6 @@ export default function Login() {
           }
         }
         setError(errors);
-        console.log(resData);
 
         // Neu thanh khong co loi nao
         const mesengerSus = resData?.message || "";
@@ -97,11 +99,8 @@ export default function Login() {
           Object.keys(errors).length === 0 &&
           mesengerSus === "Successfully"
         ) {
-          localStorage.setItem(
-            "IDLoginUser",
-            resData?.IDLoginUser
-            // JSON.stringify()
-          );
+          localStorage.setItem("IDLoginUser", resData?.IDLoginUser);
+          localStorage.setItem("username", resData?.username || "dsfdf");
           navigative("/home");
         }
       } catch (error) {}
@@ -145,14 +144,22 @@ export default function Login() {
               <label>パスワード</label>
             </div>
 
-            <div className="col-10  col-lg-4">
+            <div className="col-10  col-lg-4 " style={{ position: "relative" }}>
               <input
+                style={{ paddingRight: 50 }}
                 className="inputText "
                 value={Password}
                 onChange={handleChange}
                 name="Password"
-                type="text"
+                type={isShownPwd ? "text" : "password"}
               />
+              <div className="div-password-toggle ">
+                <FontAwesomeIcon
+                  className="password-eye"
+                  onClick={() => setIsShownPwd(!isShownPwd)}
+                  icon={isShownPwd ? faEye : faEyeSlash}
+                />
+              </div>
             </div>
           </div>
 
@@ -172,7 +179,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={signIn}
-                className="border buttonLogin"
+                className="btn buttonLogin "
               >
                 ログイン
               </button>

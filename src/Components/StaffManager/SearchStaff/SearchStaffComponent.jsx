@@ -43,7 +43,7 @@ export default function SearchStaffComponent({
             style={{
               fontWeight: "bold",
               textAlign: "center",
-              marginTop: 5,
+              // marginTop: 5,
             }}
           >
             スタッフ一覧画面
@@ -59,7 +59,7 @@ export default function SearchStaffComponent({
               <div className="col-sm-7">
                 <input
                   type="name"
-                  className=" inputSearch"
+                  className="inputSearch"
                   name="nameSearch"
                   value={nameSearch}
                   placeholder="山田太郎"
@@ -68,11 +68,12 @@ export default function SearchStaffComponent({
               </div>
             </div>
 
-            <div className=" row  align-items-center ">
-              <label className="col-sm-2  d-flex ">職制</label>
+            <div className="row align-items-center">
+              <label className="col-sm-2 d-flex">職制</label>
               <div className="col-sm-7">
                 <select
                   name="staffType"
+                  className="inputSearch"
                   id={"selectedOfficeStaffList"}
                   value={staffType}
                   onChange={handleChange}

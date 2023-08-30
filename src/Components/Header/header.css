@@ -2,16 +2,14 @@
   background-color: #f2f2f2;
   border: 2px solid #02a7f0;
   padding: 2px;
-  text-align: center;
   height: 100px;
   line-height: 100px;
   width: 1007px;
-
   position: relative;
   margin: auto;
-  display: flex;
+  /* display: flex; */
   /* padding-bottom: 0px; */
-  margin-bottom: 0px;
+  /* margin-bottom: 0px; */
 }
 
 @media only screen and (min-width: 0px) {
@@ -27,6 +25,8 @@
 }
 
 .titleHeader {
+  text-align: center;
+
   font-family: "HiraginoSans-W7", "Hiragino Sans W7", "Hiragino Sans W4",
     "Hiragino Sans", sans-serif;
   font-weight: 700;
@@ -36,87 +36,52 @@
   width: 100%;
 }
 
-.logoutLable {
-  position: absolute;
-  right: 20px;
-  top: 0px;
-}
-
-.circle {
-  position: absolute;
-  top: 40px;
-  left: 10px;
-}
-
-.stick {
-  position: absolute;
-  left: 20px;
-  top: 30px;
-}
-
-.logoutButton {
-  width: 150px;
+.div-container-button-header {
+  width: 160px;
   height: 100%;
   position: absolute;
   top: 0px;
   right: 0px;
-  cursor: pointer;
+  bottom: 0px;
+  flex-direction: column;
 }
-.iconLogout {
-  position: relative;
-  width: 50px;
+.div-button-header {
   height: 100%;
-}
-
-/* .header {
-  background-color: #f2f2f2;
-  border: 2px solid #02a7f0;
-  padding: 2px;
-  text-align: center;
-  height: 99px;
-  line-height: 99px;
-  width: 1007px;
+  width: 100%;
+  flex-direction: column;
   position: relative;
-  margin: auto;
+  display: flex;
+  padding: 10px 0px;
 }
 
-@media only screen and (min-width: 0px) {
-  .header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+.button-label {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.button-label div {
+  height: 50px;
+  width: 90%;
+  /* max-width: ; */
+
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
 }
 
-@media only screen and (min-width: 768px) {
-  .header {
-    width: 1007px;
-  }
+.label-name-user {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100px;
+  /* max-width: 100%; */
+  padding-right: 10px;
+  margin-right: 10px;
 }
 
-.title {
-  font-family: "HiraginoSans-W7", "Hiragino Sans W7", "Hiragino Sans W4",
-    "Hiragino Sans", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 25px;
-  color: rgba(163, 0, 20, 0.5686274509803921);
+.logoutImg {
+  height: 30px;
+  width: 30px;
 }
-
-.logout {
-  position: absolute;
-  right: 20px;
-  top: 0px;
-}
-
-.circle {
-  position: absolute;
-  right: 104px;
-  top: 41px;
-}
-
-.stick {
-  position: absolute;
-  right: 113px;
-  top: 30px;
-} */
