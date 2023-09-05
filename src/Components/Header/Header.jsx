@@ -35,8 +35,8 @@ export default function Header({ account, isLoginPage = false }) {
             <div className=" button-label">
               <img className="logoutImg" src={userImg} alt="" srcSet="" />
               <div className="label-name-user">
-                sdfsdlfjsdjfdspfjpdfpodsjfposdjfpodsfjdspofsdojfsdfdsf
-                {/* {localStorage.getItem("username") || ""} */}
+                
+                {localStorage.getItem("username") || ""}
               </div>
             </div>
           </div>

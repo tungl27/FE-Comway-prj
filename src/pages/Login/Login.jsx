@@ -12,8 +12,8 @@ export default function Login() {
   const navigative = useNavigate();
 
   const [stateLogin, setStateLogin] = useState({
-    userID: "2",
-    Password: "123456",
+    userID: "3",
+    Password: "2222222@",
   });
   const [isShownPwd, setIsShownPwd] = useState(false);
 
@@ -100,7 +100,7 @@ export default function Login() {
           mesengerSus === "Successfully"
         ) {
           localStorage.setItem("IDLoginUser", resData?.IDLoginUser);
-          localStorage.setItem("username", resData?.username || "dsfdf");
+          localStorage.setItem("username", resData?.username || "");
           navigative("/home");
         }
       } catch (error) {}
