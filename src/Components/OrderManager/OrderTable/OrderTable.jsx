@@ -13,8 +13,9 @@ export default function OrderTableComponent({
   tableData,
   pageSize,
   deleteOrder,
+  sortTableRequire,
 }) {
-  const [curentData, setCurent] = useState([]);
+  const [currentData, setCurent] = useState([]);
 
   useEffect(() => {
     const startIndexData = (activePage - 1) * pageSize;
@@ -31,6 +32,39 @@ export default function OrderTableComponent({
     setShowPopup(true);
   };
 
+  // function sortData(data, config) {
+  //   if (!config) {
+  //     return data;
+  //   }
+
+  //   const { key, direction } = config;
+
+  //   const sortedData = [...data];
+  //   sortedData.sort((a, b) => {
+  //     if (a[key] < b[key]) {
+  //       return direction === "asc" ? -1 : 1;
+  //     }
+  //     if (a[key] > b[key]) {
+  //       return direction === "asc" ? 1 : -1;
+  //     }
+  //     return 0;
+  //   });
+
+  //   return sortedData;
+  // }
+
+  // function sortTableRequire(key) {
+  //   console.log("Dsdsdsd")
+  //   let direction = "asc";
+  //   if (
+  //     sortConfig &&
+  //     sortConfig.key === key &&
+  //     sortConfig.direction === "asc"
+  //   ) {
+  //     direction = "desc";
+  //   }
+  //   setSortConfig({ key, direction });
+  // }
 
   return (
     <Fragment>
@@ -39,9 +73,24 @@ export default function OrderTableComponent({
           <thead className="table-head">
             <tr>
               <th style={{ width: "5%" }}>No</th>
-              <th style={{ width: "15%" }}>オーダーNo.</th>
-              <th style={{ width: "30%" }}>案件名</th>
-              <th style={{ width: "20%" }}>顧客名</th>
+              <th
+                style={{ width: "15%" }}
+                onClick={() => sortTableRequire("order_number")}
+              >
+                オーダーNo.
+              </th>
+              <th
+                style={{ width: "30%" }}
+                onClick={() => sortTableRequire("project_name")}
+              >
+                案件名
+              </th>
+              <th
+                style={{ width: "20%" }}
+                onClick={() => sortTableRequire("client_name")}
+              >
+                顧客名
+              </th>
               <th style={{ width: "10%" }}>ステータス</th>
               <th style={{ width: "20%" }}>
                 <div
@@ -51,7 +100,7 @@ export default function OrderTableComponent({
             </tr>
           </thead>
           <tbody>
-            {curentData.map((row, index) => (
+            {currentData.map((row, index) => (
               <tr key={index} className={index % 2 === 0 ? "even-row2" : ""}>
                 <td>{(activePage - 1) * pageSize + index + 1}</td>
                 <td>{row.order_number}</td>
@@ -85,7 +134,7 @@ export default function OrderTableComponent({
         onClose={() => setShowPopup(false)}
         acceptAction={() => deleteOrder(deletedId)}
         title="Confirm"
-        body="選択した注文情報を削除しますか"
+        body="Do you want to delete selected order info?"
       ></DialogConfirm>
     </Fragment>
   );
