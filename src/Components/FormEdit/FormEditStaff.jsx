@@ -137,7 +137,7 @@ export default function FormEdit({ staffId }) {
                 "Condition_staff_list": false
             }).then((respone) => {
                 if (respone.data?.message === 'Staff is edited') {
-                    setMessage(process.env.REACT_APP_CREATE_STAFF_SUCCESS)
+                    setMessage(process.env.REACT_APP_UPDATE_STAFF_SUCCESS)
                     refButton.current.disabled = true
                     setTimeout(() => {
                         setMessage('')
