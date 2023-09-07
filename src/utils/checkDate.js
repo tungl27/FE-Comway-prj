@@ -1,6 +1,6 @@
 export default function checkDate(dateStr) {
     // First check for the pattern
-    var regex_date = /^\d{4}\-\d{1,2}\-\d{1,2}$/;
+    var regex_date = /^\d{4}-\d{1,2}-\d{1,2}$/;
 
     if (!regex_date.test(dateStr)) {
         return false;

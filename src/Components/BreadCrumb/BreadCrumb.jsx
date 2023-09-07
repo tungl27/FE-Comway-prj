@@ -90,7 +90,6 @@ export default function Breadcrumb() {
     }
     const directTo = () => {
         if (index < breadcrumbs.length - 1) {
-            setEdited(false)
             navigate(breadcrumbs[index].url)
         }
     }
