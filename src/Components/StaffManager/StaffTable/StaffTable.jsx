@@ -9,7 +9,7 @@ export default function StaffTable({
   tableData,
   pageSize,
   deleteStaff,
-  sortTableRequire
+  sortTableRequire,
 }) {
   const [currentData, setCurent] = useState([]);
 
@@ -119,8 +119,8 @@ export default function StaffTable({
         show={showPopup}
         onClose={() => setShowPopup(false)}
         acceptAction={() => deleteStaff(deletedStaffId)}
-        title="Confirm"
-        body="Do you want to delete selected staff info?"
+        title="確認"
+        body={process.env.REACT_APP_CONFIRM_DELETE_STAFF}
       ></DialogConfirm>
     </Fragment>
   );

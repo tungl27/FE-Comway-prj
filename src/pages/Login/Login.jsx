@@ -36,12 +36,12 @@ export default function Login() {
     const { userID, Password } = data;
     const errors = {};
     if (userID.trim() === "") {
-      errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID + "BEFORE";
+      errors.errorUserID = process.env.REACT_APP_LOGIN_REQUIRED_ID ;
     }
 
     if (Password.trim() === "") {
       errors.errorPassword =
-        process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD + "BEFORE";
+        process.env.REACT_APP_LOGIN_REQUIRED_PASSWORD ;
     }
 
     return errors;
