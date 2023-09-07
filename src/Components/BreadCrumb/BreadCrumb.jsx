@@ -112,10 +112,10 @@ export default function Breadcrumb() {
                 </ul>
             </div>
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
-                <p>Do you want to save edited data?</p>
+                <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => directTo()}>No</button>
+                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => directTo()}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment>

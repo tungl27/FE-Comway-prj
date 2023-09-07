@@ -133,8 +133,8 @@ export default function OrderTableComponent({
         show={showPopup}
         onClose={() => setShowPopup(false)}
         acceptAction={() => deleteOrder(deletedId)}
-        title="Confirm"
-        body="Do you want to delete selected order info?"
+        title="確認"
+        body="オーダー情報を削除してよろしいですか。"
       ></DialogConfirm>
     </Fragment>
   );

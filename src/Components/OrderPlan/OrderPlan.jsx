@@ -782,7 +782,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                 </div>
             </div>
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
-                <p>Do you want to save edited data?</p>
+                <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
                     <button className="btn btn-secondary" onClick={() => navigate('/order/list')}>No</button>
@@ -791,8 +791,8 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
             <ReactModal isOpen={indexDelete !== ''} style={customStyles} ariaHideApp={false} >
                 <p>Do you want to delete selected row?</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary" onClick={() => removeStaff(indexDelete)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => setIndexDelete('')}>No</button>
+                    <button className="btn btn-primary" onClick={() => removeStaff(indexDelete)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => setIndexDelete('')}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment >

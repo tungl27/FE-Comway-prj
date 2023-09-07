@@ -122,14 +122,14 @@ export default function FormEditOrder({ OrderID }) {
         if (orderIncome === '') {
             errorOrderIncome = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkDate(orderDate)) {
-            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorOrderIncome = ""
         }
         if (internalUnitPrice === '') {
             errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkNumber(orderDate)) {
-            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorInternalUnitPrice = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorInternalUnitPrice = ""
         }
@@ -192,10 +192,10 @@ export default function FormEditOrder({ OrderID }) {
                 </div>
             </div>
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
-                <p>Do you want to save edited data?</p>
+                <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => navigate('/order/list')}>No</button>
+                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/order/list')}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment>

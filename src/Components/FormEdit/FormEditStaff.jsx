@@ -100,14 +100,14 @@ export default function FormEdit({ staffId }) {
         if (lastNameFurigana === '') {
             errorLastNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(lastNameFurigana)) {
-            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorLastNameFurigana = ""
         }
         if (firstNameFurigana === '') {
             errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(firstNameFurigana)) {
-            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorFirstNameFurigana = ""
         }
@@ -137,7 +137,7 @@ export default function FormEdit({ staffId }) {
                 "Condition_staff_list": false
             }).then((respone) => {
                 if (respone.data?.message === 'Staff is edited') {
-                    setMessage(process.env.REACT_APP_CREATE_STAFF_SUCCESS)
+                    setMessage(process.env.REACT_APP_EDIT_STAFF_SUCCESS)
                     refButton.current.disabled = true
                     setTimeout(() => {
                         setMessage('')
@@ -205,10 +205,10 @@ export default function FormEdit({ staffId }) {
                 </div>
             </div>
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
-                <p>Do you want to save edited data?</p>
+                <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => navigate('/staff/list')}>No</button>
+                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/staff/list')}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment>

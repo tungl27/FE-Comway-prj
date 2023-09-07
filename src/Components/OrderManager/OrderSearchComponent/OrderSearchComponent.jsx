@@ -122,7 +122,7 @@ export default function OrderSearchComponent({
 
       <div
         id="right-component-order-search"
-        className=" d-flex justify-content-center align-items-center border  "
+        className=" d-flex justify-content-center align-items-center"
       >
         <button
           style={{ backgroundColor: "#929292", color: "red" }}

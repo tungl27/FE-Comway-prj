@@ -82,7 +82,7 @@ export default function CreateOrder() {
         if (orderIncome === '') {
             errorOrderIncome = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!checkDate(orderDate)) {
-            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorOrderIncome = ""
         }
