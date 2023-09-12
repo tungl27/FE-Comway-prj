@@ -71,8 +71,6 @@ export default function CreateOrder() {
         console.log(!iskanji(name), 'kajiname')
         if (name === '') {
             errorName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
-        } else if (!iskanji(name)) {
-            errorName = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorName = ""
         }
@@ -98,8 +96,6 @@ export default function CreateOrder() {
         }
         if (orderIncome === '') {
             errorOrderIncome = process.env.REACT_APP_REQUIRED_FIELD_ERROR
-        } else if (!checkDate(orderDate)) {
-            errorOrderIncome = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorOrderIncome = ""
         }

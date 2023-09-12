@@ -98,8 +98,6 @@ export default function FormEditOrder({ OrderID }) {
         console.log(!iskanji(name), 'kajiname')
         if (name === '') {
             errorName = process.env.REACT_APP_REQUIRED_FIELD_ERROR
-        } else if (!iskanji(name)) {
-            errorName = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorName = ""
         }
@@ -159,7 +157,7 @@ export default function FormEditOrder({ OrderID }) {
                     setTimeout(() => {
                         refButton.current.disabled = false
                         // navigate('/order/list')
-                        navigate('/order/list', {state: { prePage: prePage }})
+                        navigate('/order/list', { state: { prePage: prePage } })
 
                     }, 500);
                 }
@@ -200,8 +198,8 @@ export default function FormEditOrder({ OrderID }) {
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
                 <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary"  onClick={() => setShowModal(false)}>はい</button>
-                    <button className="btn btn-secondary"  onClick={() => navigate('/order/list' , {state: { prePage: prePage }})}>いいえ</button>
+                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/order/list', { state: { prePage: prePage } })}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment>
