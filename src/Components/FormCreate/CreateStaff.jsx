@@ -161,7 +161,7 @@ export default function FormCreate() {
                 <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-primary"  onClick={() => setShowModal(false)}>はい</button>
-                    <button className="btn btn-secondary"  onClick={() => navigate('/order/list')}>いいえ</button>
+                    <button className="btn btn-secondary"  onClick={() => navigate('/staff/list')}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment >
