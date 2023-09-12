@@ -31,9 +31,9 @@ export default function OrderPlanActualInput() {
                 minimumIntegerDigits: 2,
                 useGrouping: false
             })
-            keikakubi += parseInt(data.goukei['yoteiJikan' + formattedNumber + 'gatu'] - data.goukei['jissekiJikan' + formattedNumber + 'gatu'])
+            keikakubi += parseInt(data.goukei['yoteiGenka' + formattedNumber + 'gatu'] - data.goukei['jissekiGenka' + formattedNumber + 'gatu'])
         } while (kongetu !== 4)
-        return keikakubi * data.projectData.internal_unit_price
+        return keikakubi
     }
 
     const rituG = (data) => {
@@ -51,9 +51,9 @@ export default function OrderPlanActualInput() {
                 minimumIntegerDigits: 2,
                 useGrouping: false
             })
-            keikakubi += parseInt(data.goukei['yoteiJikan' + formattedNumber + 'gatu'])
+            keikakubi += parseInt(data.goukei['yoteiGenka' + formattedNumber + 'gatu'])
         } while (kongetu !== 3)
-        return keikakubi * data.projectData.internal_unit_price
+        return keikakubi
     }
     const sumHorizontalData = (data) => {
         if (data.details) {
@@ -217,56 +217,56 @@ export default function OrderPlanActualInput() {
             let jissekiJikanGoukei = 0;
             let jissekiGenkaGoukei = 0;
             data.details.map((detail) => {
-                yoteiJikan04gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_04_plan === '' ? 0 : detail.planActualData.this_year_04_plan) : 0
-                yoteiJikan05gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_05_plan === '' ? 0 : detail.planActualData.this_year_05_plan) : 0
-                yoteiJikan06gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_06_plan === '' ? 0 : detail.planActualData.this_year_06_plan) : 0
-                yoteiJikan07gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_07_plan === '' ? 0 : detail.planActualData.this_year_07_plan) : 0
-                yoteiJikan08gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_08_plan === '' ? 0 : detail.planActualData.this_year_08_plan) : 0
-                yoteiJikan09gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_09_plan === '' ? 0 : detail.planActualData.this_year_09_plan) : 0
-                yoteiJikan10gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_10_plan === '' ? 0 : detail.planActualData.this_year_10_plan) : 0
-                yoteiJikan11gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_11_plan === '' ? 0 : detail.planActualData.this_year_11_plan) : 0
-                yoteiJikan12gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_12_plan === '' ? 0 : detail.planActualData.this_year_12_plan) : 0
-                yoteiJikan01gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.nextyear_01_plan === '' ? 0 : detail.planActualData.nextyear_01_plan) : 0
-                yoteiJikan02gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.nextyear_02_plan === '' ? 0 : detail.planActualData.nextyear_02_plan) : 0
-                yoteiJikan03gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.nextyear_03_plan === '' ? 0 : detail.planActualData.nextyear_03_plan) : 0
-                yoteiGenka04gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_04_plan === '' ? 0 : detail.planActualData.this_year_04_plan) : 0
-                yoteiGenka05gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_05_plan === '' ? 0 : detail.planActualData.this_year_05_plan) : 0
-                yoteiGenka06gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_06_plan === '' ? 0 : detail.planActualData.this_year_06_plan) : 0
-                yoteiGenka07gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_07_plan === '' ? 0 : detail.planActualData.this_year_07_plan) : 0
-                yoteiGenka08gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_08_plan === '' ? 0 : detail.planActualData.this_year_08_plan) : 0
-                yoteiGenka09gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_09_plan === '' ? 0 : detail.planActualData.this_year_09_plan) : 0
-                yoteiGenka10gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_10_plan === '' ? 0 : detail.planActualData.this_year_10_plan) : 0
-                yoteiGenka11gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_11_plan === '' ? 0 : detail.planActualData.this_year_11_plan) : 0
-                yoteiGenka12gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_12_plan === '' ? 0 : detail.planActualData.this_year_12_plan) : 0
-                yoteiGenka01gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.nextyear_01_plan === '' ? 0 : detail.planActualData.nextyear_01_plan) : 0
-                yoteiGenka02gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.nextyear_02_plan === '' ? 0 : detail.planActualData.nextyear_02_plan) : 0
-                yoteiGenka03gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.nextyear_03_plan === '' ? 0 : detail.planActualData.nextyear_03_plan) : 0
-                jissekiJikan04gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_04_actual === '' ? 0 : detail.planActualData.this_year_04_actual) : 0
-                jissekiJikan05gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_05_actual === '' ? 0 : detail.planActualData.this_year_05_actual) : 0
-                jissekiJikan06gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_06_actual === '' ? 0 : detail.planActualData.this_year_06_actual) : 0
-                jissekiJikan07gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_07_actual === '' ? 0 : detail.planActualData.this_year_07_actual) : 0
-                jissekiJikan08gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_08_actual === '' ? 0 : detail.planActualData.this_year_08_actual) : 0
-                jissekiJikan09gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_09_actual === '' ? 0 : detail.planActualData.this_year_09_actual) : 0
-                jissekiJikan10gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_10_actual === '' ? 0 : detail.planActualData.this_year_10_actual) : 0
-                jissekiJikan11gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_11_actual === '' ? 0 : detail.planActualData.this_year_11_actual) : 0
-                jissekiJikan12gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.this_year_12_actual === '' ? 0 : detail.planActualData.this_year_12_actual) : 0
-                jissekiJikan01gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.nextyear_01_actual === '' ? 0 : detail.planActualData.nextyear_01_actual) : 0
-                jissekiJikan02gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.nextyear_02_actual === '' ? 0 : detail.planActualData.nextyear_02_actual) : 0
-                jissekiJikan03gatu += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.planActualData.nextyear_03_actual === '' ? 0 : detail.planActualData.nextyear_03_actual) : 0
-                jissekiGenka04gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_04_actual === '' ? 0 : detail.planActualData.this_year_04_actual) : 0
-                jissekiGenka05gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_05_actual === '' ? 0 : detail.planActualData.this_year_05_actual) : 0
-                jissekiGenka06gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_06_actual === '' ? 0 : detail.planActualData.this_year_06_actual) : 0
-                jissekiGenka07gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_07_actual === '' ? 0 : detail.planActualData.this_year_07_actual) : 0
-                jissekiGenka08gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_08_actual === '' ? 0 : detail.planActualData.this_year_08_actual) : 0
-                jissekiGenka09gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_09_actual === '' ? 0 : detail.planActualData.this_year_09_actual) : 0
-                jissekiGenka10gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_10_actual === '' ? 0 : detail.planActualData.this_year_10_actual) : 0
-                jissekiGenka11gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_11_actual === '' ? 0 : detail.planActualData.this_year_11_actual) : 0
-                jissekiGenka12gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.this_year_12_actual === '' ? 0 : detail.planActualData.this_year_12_actual) : 0
-                jissekiGenka01gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.nextyear_01_actual === '' ? 0 : detail.planActualData.nextyear_01_actual) : 0
-                jissekiGenka02gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.nextyear_02_actual === '' ? 0 : detail.planActualData.nextyear_02_actual) : 0
-                jissekiGenka03gatu += parseInt(detail.staffData.staff_type) === 1 ? parseInt(detail.planActualData.nextyear_03_actual === '' ? 0 : detail.planActualData.nextyear_03_actual) : 0
-                yoteiJikanGoukei += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.goukei.yoteiJikan) : 0
-                jissekiJikanGoukei += parseInt(detail.staffData.staff_type) === 0 ? parseInt(detail.goukei.jissekiJikan) : 0
+                yoteiJikan04gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_04_plan === '' ? 0 : detail.planActualData.this_year_04_plan) : 0
+                yoteiJikan05gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_05_plan === '' ? 0 : detail.planActualData.this_year_05_plan) : 0
+                yoteiJikan06gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_06_plan === '' ? 0 : detail.planActualData.this_year_06_plan) : 0
+                yoteiJikan07gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_07_plan === '' ? 0 : detail.planActualData.this_year_07_plan) : 0
+                yoteiJikan08gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_08_plan === '' ? 0 : detail.planActualData.this_year_08_plan) : 0
+                yoteiJikan09gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_09_plan === '' ? 0 : detail.planActualData.this_year_09_plan) : 0
+                yoteiJikan10gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_10_plan === '' ? 0 : detail.planActualData.this_year_10_plan) : 0
+                yoteiJikan11gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_11_plan === '' ? 0 : detail.planActualData.this_year_11_plan) : 0
+                yoteiJikan12gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_12_plan === '' ? 0 : detail.planActualData.this_year_12_plan) : 0
+                yoteiJikan01gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.nextyear_01_plan === '' ? 0 : detail.planActualData.nextyear_01_plan) : 0
+                yoteiJikan02gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.nextyear_02_plan === '' ? 0 : detail.planActualData.nextyear_02_plan) : 0
+                yoteiJikan03gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.nextyear_03_plan === '' ? 0 : detail.planActualData.nextyear_03_plan) : 0
+                yoteiGenka04gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_04_plan === '' ? 0 : detail.planActualData.this_year_04_plan) : 0
+                yoteiGenka05gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_05_plan === '' ? 0 : detail.planActualData.this_year_05_plan) : 0
+                yoteiGenka06gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_06_plan === '' ? 0 : detail.planActualData.this_year_06_plan) : 0
+                yoteiGenka07gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_07_plan === '' ? 0 : detail.planActualData.this_year_07_plan) : 0
+                yoteiGenka08gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_08_plan === '' ? 0 : detail.planActualData.this_year_08_plan) : 0
+                yoteiGenka09gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_09_plan === '' ? 0 : detail.planActualData.this_year_09_plan) : 0
+                yoteiGenka10gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_10_plan === '' ? 0 : detail.planActualData.this_year_10_plan) : 0
+                yoteiGenka11gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_11_plan === '' ? 0 : detail.planActualData.this_year_11_plan) : 0
+                yoteiGenka12gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_12_plan === '' ? 0 : detail.planActualData.this_year_12_plan) : 0
+                yoteiGenka01gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.nextyear_01_plan === '' ? 0 : detail.planActualData.nextyear_01_plan) : 0
+                yoteiGenka02gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.nextyear_02_plan === '' ? 0 : detail.planActualData.nextyear_02_plan) : 0
+                yoteiGenka03gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.nextyear_03_plan === '' ? 0 : detail.planActualData.nextyear_03_plan) : 0
+                jissekiJikan04gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_04_actual === '' ? 0 : detail.planActualData.this_year_04_actual) : 0
+                jissekiJikan05gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_05_actual === '' ? 0 : detail.planActualData.this_year_05_actual) : 0
+                jissekiJikan06gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_06_actual === '' ? 0 : detail.planActualData.this_year_06_actual) : 0
+                jissekiJikan07gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_07_actual === '' ? 0 : detail.planActualData.this_year_07_actual) : 0
+                jissekiJikan08gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_08_actual === '' ? 0 : detail.planActualData.this_year_08_actual) : 0
+                jissekiJikan09gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_09_actual === '' ? 0 : detail.planActualData.this_year_09_actual) : 0
+                jissekiJikan10gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_10_actual === '' ? 0 : detail.planActualData.this_year_10_actual) : 0
+                jissekiJikan11gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_11_actual === '' ? 0 : detail.planActualData.this_year_11_actual) : 0
+                jissekiJikan12gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.this_year_12_actual === '' ? 0 : detail.planActualData.this_year_12_actual) : 0
+                jissekiJikan01gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.nextyear_01_actual === '' ? 0 : detail.planActualData.nextyear_01_actual) : 0
+                jissekiJikan02gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.nextyear_02_actual === '' ? 0 : detail.planActualData.nextyear_02_actual) : 0
+                jissekiJikan03gatu += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.planActualData.nextyear_03_actual === '' ? 0 : detail.planActualData.nextyear_03_actual) : 0
+                jissekiGenka04gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_04_actual === '' ? 0 : detail.planActualData.this_year_04_actual) : 0
+                jissekiGenka05gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_05_actual === '' ? 0 : detail.planActualData.this_year_05_actual) : 0
+                jissekiGenka06gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_06_actual === '' ? 0 : detail.planActualData.this_year_06_actual) : 0
+                jissekiGenka07gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_07_actual === '' ? 0 : detail.planActualData.this_year_07_actual) : 0
+                jissekiGenka08gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_08_actual === '' ? 0 : detail.planActualData.this_year_08_actual) : 0
+                jissekiGenka09gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_09_actual === '' ? 0 : detail.planActualData.this_year_09_actual) : 0
+                jissekiGenka10gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_10_actual === '' ? 0 : detail.planActualData.this_year_10_actual) : 0
+                jissekiGenka11gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_11_actual === '' ? 0 : detail.planActualData.this_year_11_actual) : 0
+                jissekiGenka12gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.this_year_12_actual === '' ? 0 : detail.planActualData.this_year_12_actual) : 0
+                jissekiGenka01gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.nextyear_01_actual === '' ? 0 : detail.planActualData.nextyear_01_actual) : 0
+                jissekiGenka02gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.nextyear_02_actual === '' ? 0 : detail.planActualData.nextyear_02_actual) : 0
+                jissekiGenka03gatu += parseInt(detail.staffData.staff_type) === 1 ? parseFloat(detail.planActualData.nextyear_03_actual === '' ? 0 : detail.planActualData.nextyear_03_actual) : 0
+                yoteiJikanGoukei += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.goukei.yoteiJikan) : 0
+                jissekiJikanGoukei += parseInt(detail.staffData.staff_type) === 0 ? parseFloat(detail.goukei.jissekiJikan) : 0
                 yoteiGenkaGoukei += parseInt(detail.goukei.yoteiGenka)
                 jissekiGenkaGoukei += parseInt(detail.goukei.jissekiGenka)
             })
