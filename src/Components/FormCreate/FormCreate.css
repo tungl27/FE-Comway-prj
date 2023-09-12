@@ -70,3 +70,11 @@
     top: 340px;
     right: -95px;
 }
+
+#cancelRegis{
+    background-color: #AAAAAA !important;
+    border-color: #AAAAAA;
+    width: 119px;
+    height: 42px;
+    margin-left: 20px
+}

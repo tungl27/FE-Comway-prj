@@ -7,8 +7,8 @@ import checkDate from "../../utils/checkDate";
 import iskanji from "../../utils/validateKanji";
 import checkNumber from "../../utils/checkNumber";
 import axios from "axios";
-import { CREATE_ORDER, EDIT_ORDER, GET_ORDER_BY_ID } from "../../theme/configApi";
-import { useNavigate } from "react-router-dom";
+import { EDIT_ORDER, GET_ORDER_BY_ID } from "../../theme/configApi";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
 import addComma from "../../utils/addComma";
 import { SetEdited } from "../../State/editContext";
@@ -29,6 +29,10 @@ const options = [{ label: '実行中', value: 0 }, { label: '非活性', value: 
 export default function FormEditOrder({ OrderID }) {
     const [showModal, setShowModal] = useState(false)
     const [orderInfo, setOrderInfo] = useState({})
+
+    const location = useLocation();
+    const prePage = location.state.prePage || 1;
+
     useEffect(() => {
         const orderInfo = async () => {
             await axios.post(GET_ORDER_BY_ID, { "OrderID": OrderID, IDLoginUser: localStorage.getItem('IDLoginUser') }).then(respone => {
@@ -154,8 +158,10 @@ export default function FormEditOrder({ OrderID }) {
                     refButton.current.disabled = true
                     setTimeout(() => {
                         refButton.current.disabled = false
-                        navigate('/order/list')
-                    }, 1);
+                        // navigate('/order/list')
+                        navigate('/order/list', {state: { prePage: prePage }})
+
+                    }, 500);
                 }
             }).catch((err) => {
                 console.log(err)
@@ -175,11 +181,11 @@ export default function FormEditOrder({ OrderID }) {
                             <Input id={'id'} value={id} required={true} setValue={setId} title={'オーダーID'} editable={false} ></Input>
                             <Input id={'edit-order-name'} value={name} required={true} setValue={setName} title={'案件名'} editable={true} errorMsg={error.name}></Input>
                             <Input id={'edit-order-orderNo'} value={orderNo} required={true} setValue={setOrderNo} title={'オーダーNo.'} editable={true} errorMsg={error.orderNo}></Input>
-                            <Input id={'edit-order-customerName'} value={customerName} required={false} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
-                            <InputCalenda id={'orderDate'} value={orderDate} required={false} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
+                            <Input id={'edit-order-customerName'} value={customerName} required={true} setValue={setCustomeName} title={'顧客名'} editable={true} errorMsg={error.customerName}></Input>
+                            <InputCalenda id={'orderDate'} value={orderDate} required={true} setValue={setOrderDate} title={'オーダー日付'} editable={true} errorMsg={error.orderDate}></InputCalenda>
                             <Selection id={'status'} title={'ステータス'} options={options} required={true} value={status} errorMsg={error.status} setValue={setStatus}></Selection>
-                            <Input id={'edit-order-orderIncome'} value={addComma(orderIncome)} required={false} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitOrderEdit1">円</span>
-                            <Input id={'internalUnitPrice'} value={addComma(internalUnitPrice)} required={false} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitOrderEdit2">円/Manhour</span>
+                            <Input id={'edit-order-orderIncome'} value={addComma(orderIncome)} required={true} setValue={setOrderIncome} title={'受注額'} editable={true} errorMsg={error.orderIncome}></Input><span id="internalUnitOrderEdit1">円</span>
+                            <Input id={'internalUnitPrice'} value={addComma(internalUnitPrice)} required={true} setValue={setInternalUnitPrice} title={'社内単金'} editable={true} errorMsg={error.internalUnitPrice}></Input><span id="internalUnitOrderEdit2">円/Manhour</span>
                         </div>
                     </div>
                     <div className="text-center">
@@ -194,8 +200,8 @@ export default function FormEditOrder({ OrderID }) {
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
                 <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>はい</button>
-                    <button className="btn btn-secondary" onClick={() => navigate('/order/list')}>いいえ</button>
+                    <button className="btn btn-primary"  onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary"  onClick={() => navigate('/order/list' , {state: { prePage: prePage }})}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment>

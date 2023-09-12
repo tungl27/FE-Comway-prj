@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import React, { Fragment, useEffect ,useState } from "react";
 import "./staffTable.css";
-import { Link } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import DialogConfirm from "../../Popup/DialogConfirm";
 import staffTypeConvert from "../../../utils/staffTypeConvert";
 
@@ -11,6 +11,7 @@ export default function StaffTable({
   deleteStaff,
   sortTableRequire,
 }) {
+  const navigate = useNavigate();
   const [currentData, setCurent] = useState([]);
 
   // state delelte
@@ -27,43 +28,6 @@ export default function StaffTable({
     const endIndexData = activePage * pageSize;
     setCurent(tableData.slice(startIndexData, endIndexData));
   }, [activePage, tableData]);
-
-  // function sortData(data, config) {
-  //   if (!config) {
-  //     return data;
-  //   }
-
-  //   const { key, direction } = config;
-
-  //   const sortedData = [...data];
-  //   sortedData.sort((a, b) => {
-  //     if (a[key] < b[key]) {
-  //       return direction === "asc" ? -1 : 1;
-  //     }
-  //     if (a[key] > b[key]) {
-  //       return direction === "asc" ? 1 : -1;
-  //     }
-  //     return 0;
-  //   });
-
-  //   return sortedData;
-  // }
-
-  // const [sortConfig, setSortConfig] = useState(null);
-
-  // function sortTable(key) {
-  //   let direction = "asc";
-  //   if (
-  //     sortConfig &&
-  //     sortConfig.key === key &&
-  //     sortConfig.direction === "asc"
-  //   ) {
-  //     direction = "desc";
-  //   }
-  //   setSortConfig({ key, direction });
-  // }
-
-  // const sortedData = sortData(currentData, sortConfig);
 
   return (
     <Fragment>
@@ -97,9 +61,12 @@ export default function StaffTable({
                 <td>{staffTypeConvert(row.staff_type)}</td>
                 <td>
                   <div className="d-flex justify-content-center  ">
-                    <Link to={"/staff/detail?id=" + row.id}>
-                      <span className="edit-o-link">詳細</span>
-                    </Link>
+                    <span
+                      className="edit-link"
+                      onClick={() => navigate("/staff/detail?id=" + row.id , {state: { prePage: activePage }} )}
+                    >
+                      詳細
+                    </span>
 
                     <span
                       className="delete-link"

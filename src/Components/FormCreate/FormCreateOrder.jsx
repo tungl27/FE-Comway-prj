@@ -10,10 +10,23 @@ import axios from "axios";
 import { CREATE_ORDER } from "../../theme/configApi";
 import addComma from "../../utils/addComma";
 import { SetEdited } from "../../State/editContext";
+import ReactModal from "react-modal";
+import { useNavigate } from "react-router-dom";
 
 
 
 const options = [{ label: '実行中', value: 0 }, { label: '非活性', value: 1 }, { label: '保留', value: 2 }, { label: '完了', value: 3 }, { label: 'キャンセル', value: 4 }]
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 export default function CreateOrder() {
     const refButton = useRef(null)
@@ -34,6 +47,10 @@ export default function CreateOrder() {
         orderIncome: "",
         internalUnitPrice: "",
     });
+
+    const navigate = useNavigate()
+    const [showModal, setShowModal] = useState(false)
+
 
     const setEdited = useContext(SetEdited)
     useEffect(() => {
@@ -152,12 +169,22 @@ export default function CreateOrder() {
                     </div>
                     <div className="text-center">
                         <button ref={refButton} type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
+                        <button type="button" id="cancelRegis" className="btn btn-primary" onClick={() => setShowModal(true)}>キャンセル</button>
+
                     </div>
                     <p className="message">
                         {message}
                     </p>
                 </div>
             </div>
+
+            <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
+                <p>データを保存しますか。</p>
+                <div className="d-flex justify-content-between">
+                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/staff/list') }>いいえ</button>
+                </div>
+            </ReactModal>
         </Fragment>
     )
 }
