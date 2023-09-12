@@ -29,7 +29,7 @@ export default function DialogConfirm({
       <Modal.Body>{body}</Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={() => acceptButton()}>
-          Yes
+          はい
         </Button>
         <Button
           variant="danger"
@@ -37,7 +37,7 @@ export default function DialogConfirm({
             onClose();
           }}
         >
-          No
+          いいえ
         </Button>
       </Modal.Footer>
     </Modal>
@@ -49,4 +49,3 @@ DialogConfirm.propTypes = {
   onClose: PropTypes.func.isRequired,
   acceptAction: PropTypes.func.isRequired,
 };
-

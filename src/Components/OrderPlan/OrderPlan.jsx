@@ -66,6 +66,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
     let oldLeftPos = 0
     const onScLeft = (e) => {
         const left = e.currentTarget.scrollLeft
+        console.log(left)
         const numberCol = Math.ceil(left / 112)
         let newPosition = 0
         if (left < oldLeftPos && numberCol > 0) {
@@ -105,11 +106,12 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
         setName(data.projectData === undefined ? '' : data.projectData.project_name)
         setOrderNo(data.projectData === undefined ? '' : data.projectData.order_number)
         setCustomeName(data.projectData === undefined ? '' : data.projectData.client_name)
-        setPrice(data.projectData === undefined ? '' : data.projectData.internal_unit_price)
+        setPrice(data.projectData === undefined ? '' : addComma(data.projectData.internal_unit_price))
         updateStaffList()
     }, [data])
     const editPlan = (e, index) => {
         setEdited(true)
+        console.log(e.currentTarget.name)
         data.details[index].planActualData[e.currentTarget.name] = e.currentTarget.value ? (parseInt(e.currentTarget.value.toString().replaceAll(",", "")) >= 0 ? e.currentTarget.value.toString().replaceAll(",", "") : 0) : e.currentTarget.value
         const calData = sumHorizontalData(data)
         setData({ ...calData })
@@ -202,13 +204,12 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
     }
 
     const selectStaff = (e, index) => {
-        console.log(edited)
         setEdited(true)
         if (e && e.currentTarget) {
             const staffVal = e.currentTarget.value
             const tempData = data
-            tempData.details[index].staffData.staff_id = parseInt(staffVal.split(',')[0])
-            tempData.details[index].staffData.staff_type = parseInt(staffVal.split(',')[1])
+            tempData.details[index].staffData.staff_id = staffVal.split(',')[0]
+            tempData.details[index].staffData.staff_type = staffVal.split(',')[1]
             tempData.details[index].staffData.full_name = staffVal.split(',')[2]
             const calData = sumHorizontalData(tempData)
             setData({ ...calData })
@@ -234,12 +235,13 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
         data.details.splice(idx, 1)
         setData({ ...data })
         setIndexDelete('')
-
     }
     useEffect(() => {
+        console.log(staffList)
         const selectStaff = data.remainingStaffs ? data.remainingStaffs.filter(staff => {
-            return staffList.indexOf(staff.staff_id) === -1
+            return staffList.indexOf(staff.staff_id) === -1 ? staff : null
         }) : []
+        console.log(selectStaff)
         setStaffListSelection(selectStaff)
     }, [staffList])
     return (
@@ -612,7 +614,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                         </div>
 
                     </div>
-                    <div className="d-flex justify-content-between page-body-goukei">
+                    {data.details && <div className="d-flex justify-content-between page-body-goukei">
                         <table className="table-label-goukei">
                             <thead>
                                 <tr>
@@ -726,7 +728,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div>}
                     <div className="text-center div-button">
                         <button type="button" id="change" className="btn btn-primary" onClick={() => handleSubmit()}>登録</button>
                         <button type="button" id="cancel" className="btn btn-primary" onClick={() => { edited ? setShowModal(true) : navigate('/order/list') }}>キャンセル</button>
@@ -747,11 +749,11 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                 </tr>
                                 <tr>
                                     <td className="table-blue td-cell-2">計画済予算(C)</td>
-                                    <td className="td-cell-2">{data.goukei ? addComma(data.goukei.yoteiJikanGoukei * data.projectData.internal_unit_price) : 0}</td>
+                                    <td className="td-cell-2">{data.goukei ? addComma(data.goukei.yoteiGenkaGoukei) : 0}</td>
                                 </tr>
                                 <tr>
                                     <td className="table-blue td-cell-2">計画粗利(D)</td>
-                                    <td className="td-cell-2">{addComma((data.projectData.order_income * 0.9) - (data.goukei ? data.goukei.yoteiJikanGoukei * data.projectData.internal_unit_price : 0))}</td>
+                                    <td className="td-cell-2">{addComma((data.projectData.order_income * 0.9) - (data.goukei ? data.goukei.yoteiGenkaGoukei : 0))}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -762,7 +764,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                 <tr>
                                     <td rowSpan={4} className="table-orange col-shadow table-orange-border">実績</td>
                                     <td className="table-orange">使用済工数 (E)</td>
-                                    <td className="td-cell-2">{data.goukei ? addComma(data.goukei.jissekiJikanGoukei * data.projectData.internal_unit_price) : 0}</td>
+                                    <td className="td-cell-2">{data.goukei ? addComma(data.goukei.jissekiGenkaGoukei) : 0}</td>
                                 </tr>
                                 <tr>
                                     <td className="table-orange">計画比(F)</td>
@@ -774,7 +776,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                 </tr>
                                 <tr>
                                     <td className="table-orange">実行予算残(H)</td>
-                                    <td className="td-cell-2">{addComma(data.projectData.order_income * 0.9 - (data.goukei ? data.goukei.jissekiJikanGoukei * data.projectData.internal_unit_price : 0) + data.ritu.kousuuZan)}</td>
+                                    <td className="td-cell-2">{addComma(data.projectData.order_income * 0.9 - (data.goukei ? data.goukei.jissekiGenkaGoukei : 0) + data.ritu.kousuuZan)}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -782,7 +784,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                 </div>
             </div>
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
-                <p>Do you want to save edited data?</p>
+                <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
                     <button className="btn btn-secondary" onClick={() => navigate('/order/list')}>No</button>
@@ -791,8 +793,8 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
             <ReactModal isOpen={indexDelete !== ''} style={customStyles} ariaHideApp={false} >
                 <p>Do you want to delete selected row?</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary" onClick={() => removeStaff(indexDelete)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => setIndexDelete('')}>No</button>
+                    <button className="btn btn-primary" onClick={() => removeStaff(indexDelete)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => setIndexDelete('')}>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment >

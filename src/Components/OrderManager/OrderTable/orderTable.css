@@ -35,6 +35,10 @@
   text-decoration: underline;
 }
 
+.edit-o-link {
+  color: rgb(13, 110, 253);
+}
+
 .result-o-link {
   color: var(--main-blue-color);
   text-decoration: underline;

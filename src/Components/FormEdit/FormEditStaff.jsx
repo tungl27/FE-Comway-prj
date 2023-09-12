@@ -6,7 +6,7 @@ import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { EDIT_STAFF, GET_STAFF_BY_ID } from "../../theme/configApi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
 import { SetEdited } from "../../State/editContext";
 
@@ -26,6 +26,9 @@ const customStyles = {
 export default function FormEdit({ staffId }) {
     const refButton = useRef(null)
     const navigate = useNavigate()
+    const location = useLocation();
+    const prePage = location.state.prePage || 1;
+
     const [showModal, setShowModal] = useState(false)
 
     const [staffInfo, setStaffInfo] = useState({})
@@ -100,14 +103,14 @@ export default function FormEdit({ staffId }) {
         if (lastNameFurigana === '') {
             errorLastNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(lastNameFurigana)) {
-            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorLastNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorLastNameFurigana = ""
         }
         if (firstNameFurigana === '') {
             errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_FIELD_ERROR
         } else if (!isHiragana(firstNameFurigana)) {
-            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERRORs
+            errorFirstNameFurigana = process.env.REACT_APP_REQUIRED_2_BYTE_ERROR
         } else {
             errorFirstNameFurigana = ""
         }
@@ -137,13 +140,14 @@ export default function FormEdit({ staffId }) {
                 "Condition_staff_list": false
             }).then((respone) => {
                 if (respone.data?.message === 'Staff is edited') {
-                    setMessage(process.env.REACT_APP_UPDATE_STAFF_SUCCESS)
+                    setMessage(process.env.REACT_APP_EDIT_STAFF_SUCCESS)
                     refButton.current.disabled = true
+
                     setTimeout(() => {
                         setMessage('')
                         refButton.current.disabled = false
-                        navigate('/staff/list')
-                    }, 5000);
+                        navigate('/staff/list', {state: { prePage: prePage }})
+                    }, 500);
                 }
                 else {
                     let errorLastName = ''
@@ -205,10 +209,10 @@ export default function FormEdit({ staffId }) {
                 </div>
             </div>
             <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
-                <p>Do you want to save edited data?</p>
+                <p>データを保存しますか。</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>yes</button>
-                    <button className="btn btn-secondary" onClick={() => navigate('/staff/list')}>No</button>
+                    <button className="btn btn-primary" onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/staff/list', {state: { prePage: prePage }}) }>いいえ</button>
                 </div>
             </ReactModal>
         </Fragment>

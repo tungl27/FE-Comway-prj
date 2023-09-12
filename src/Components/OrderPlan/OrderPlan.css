@@ -169,10 +169,11 @@ label[for=price] {
     width: 907px;
     margin-top: -35px;
 }
+
 .page-body-goukei {
     margin-left: 25px;
     width: 907px;
-    margin-top: -40px;
+    margin-top: -2px;
 }
 
 .second-table {
@@ -180,7 +181,7 @@ label[for=price] {
 }
 
 .div-second-table {
-    height: 495px;
+    height: fit-content;
     width: 706px;
 }
 
@@ -223,9 +224,11 @@ label[for=price] {
     width: 673px;
     height: fit-content;
 }
+
 .scroll-table::-webkit-scrollbar {
     display: none;
 }
+
 .scroll-table-goukei {
     position: absolute;
     left: 259px;
@@ -262,9 +265,9 @@ label[for=price] {
 }
 
 .tables-flex {
-    position: relative;
-    top: -724px;
-    right: -353px;
+    position: absolute;
+    top: 2px;
+    right: 63px;
     width: 516px;
 }
 
@@ -276,18 +279,21 @@ label[for=price] {
     font-size: 13px;
     width: 230px;
 }
-.table-blue-border{
+
+.table-blue-border {
     border-top: 2px solid #80FFFF;
     border-bottom: 2px solid #80FFFF;
     border-right: 2px solid #797979;
     border-block-end: unset;
 }
-.table-orange-border{
+
+.table-orange-border {
     border-top: 2px solid #FACD91;
     border-bottom: 2px solid #FACD91;
     border-right: 2px solid #797979;
     border-block-end: unset;
 }
+
 .td-cell-2 {
     position: relative;
     z-index: 2;
@@ -356,13 +362,16 @@ label[for=price] {
     left: 226px;
     width: 32px;
 }
+
 .table-label-goukei {
     width: 200px;
 }
-.input-jisseki{
+
+.input-jisseki {
     background-color: #80FFFF;
 }
-.delete-icon{
+
+.delete-icon {
     color: red;
     position: absolute;
     top: 2px;

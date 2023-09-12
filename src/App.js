@@ -7,13 +7,11 @@ import OrderList from "./pages/OrderList/OrderList";
 import CreateOrder from "./pages/CreateOrder";
 import CreateStaff from "./pages/CreateStaff";
 import EditViewStaff from "./pages/EditViewStaff";
-import { HashRouter as BrowserRouter, Route, Routes } from "react-router-dom";
+// import { HashRouter as BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Menu from "./pages/Menu";
-import {
-  Edited,
-  SetEdited,
-} from "./State/editContext";
+import { Edited, SetEdited } from "./State/editContext";
 import Protected from "./theme/Protected";
 
 function App() {
@@ -62,7 +60,6 @@ function App() {
           </BrowserRouter>
         </SetEdited.Provider>
       </Edited.Provider>
-
     </Fragment>
   );
 }

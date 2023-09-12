@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import "./Pagination.css";
 import preB from "../../images/u68.svg";
 import forwardButton from "../../images/u67.svg";
+import { useLocation } from "react-router-dom";
 
 export default function Pagination({
   activepage,
@@ -9,9 +10,20 @@ export default function Pagination({
   setActive,
   pageSize,
 }) {
+
   const [totalPage, setTotalPage] = useState(
     Math.ceil(totalRecords / pageSize)
   );
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if ( location.state && location.state.prePage !== null  ) {
+      const prePage = location.state.prePage;
+      console.log(prePage);
+      setActive(parseInt(prePage));
+    }
+  }, [location.state]);
 
   useEffect(() => {
     setTotalPage(Math.ceil(totalRecords / pageSize));
@@ -24,20 +36,8 @@ export default function Pagination({
     }
   }, [totalPage]);
 
-  // let pageRange = [];
-  // for (let i = 0; i < 3; i++) {
-  //   if (activepage === 1 && i <= totalPage) {
-  //     pageRange.push(i + 1);
-  //   } else if (activepage < totalPage ) {
-  //     pageRange.push(activepage - 1 + i);
-  //   } else if (activepage === totalPage) {
-  //     pageRange.push(activepage - 2 + i);
-  //   }
-  // }
+  
 
-  // const [pageRange, setPageRange] = useState([]);
-
-  // useEffect(() => {
   let pageRange = [];
 
   if (activepage <= totalPage) {
@@ -73,11 +73,6 @@ export default function Pagination({
     }
   };
 
-  //   useEffect(() => {
-  //     if (totalPage < activepage) {
-  //       setActive(totalPage);
-  //     }
-  //   }, [totalPage]);
   return (
     <Fragment>
       {totalRecords > 10 && (

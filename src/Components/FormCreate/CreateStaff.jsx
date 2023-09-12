@@ -7,7 +7,19 @@ import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF } from "../../theme/configApi";
 import { SetEdited } from "../../State/editContext";
+import ReactModal from "react-modal";
+import { useNavigate } from "react-router-dom";
 
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 const options = [{ label: '社員', value: 0 }, { label: 'パートナー', value: 1 }]
 
 export default function FormCreate() {
@@ -26,6 +38,8 @@ export default function FormCreate() {
     });
 
     const refButton = useRef(null)
+    const navigate = useNavigate()
+    const [showModal, setShowModal] = useState(false)
 
     const setEdited = useContext(SetEdited)
     useEffect(() => {
@@ -135,12 +149,21 @@ export default function FormCreate() {
                     </div>
                     <div className="text-center">
                         <button ref={refButton} type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
+                        <button type="button" id="cancelRegis" className="btn btn-primary" onClick={() => setShowModal(true)}>キャンセル</button>
+
                     </div>
                     <p className="message">
                         {message}
                     </p>
                 </div>
             </div>
+            <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false} >
+                <p>データを保存しますか。</p>
+                <div className="d-flex justify-content-between">
+                    <button className="btn btn-primary"  onClick={() => setShowModal(false)}>はい</button>
+                    <button className="btn btn-secondary"  onClick={() => navigate('/staff/list')}>いいえ</button>
+                </div>
+            </ReactModal>
         </Fragment >
     );
 }

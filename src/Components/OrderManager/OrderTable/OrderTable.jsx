@@ -1,10 +1,6 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./orderTable.css";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { DELETE_ORDER } from "../../../theme/configApi";
-import Dialog from "../../Popup/DialogConfirm";
-import { Button, Modal } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import DialogConfirm from "../../Popup/DialogConfirm";
 import statusConvert from "../../../utils/convertStatus";
 
@@ -16,6 +12,7 @@ export default function OrderTableComponent({
   sortTableRequire,
 }) {
   const [currentData, setCurent] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const startIndexData = (activePage - 1) * pageSize;
@@ -31,40 +28,6 @@ export default function OrderTableComponent({
     setDeletedId(id);
     setShowPopup(true);
   };
-
-  // function sortData(data, config) {
-  //   if (!config) {
-  //     return data;
-  //   }
-
-  //   const { key, direction } = config;
-
-  //   const sortedData = [...data];
-  //   sortedData.sort((a, b) => {
-  //     if (a[key] < b[key]) {
-  //       return direction === "asc" ? -1 : 1;
-  //     }
-  //     if (a[key] > b[key]) {
-  //       return direction === "asc" ? 1 : -1;
-  //     }
-  //     return 0;
-  //   });
-
-  //   return sortedData;
-  // }
-
-  // function sortTableRequire(key) {
-  //   console.log("Dsdsdsd")
-  //   let direction = "asc";
-  //   if (
-  //     sortConfig &&
-  //     sortConfig.key === key &&
-  //     sortConfig.direction === "asc"
-  //   ) {
-  //     direction = "desc";
-  //   }
-  //   setSortConfig({ key, direction });
-  // }
 
   return (
     <Fragment>
@@ -109,9 +72,16 @@ export default function OrderTableComponent({
                 <td> {statusConvert(row.status)}</td>
                 <td>
                   <div className="d-flex justify-content-between px-2">
-                    <Link to={"/order/detail?id=" + row.id}>
-                      <span className="edit-o-link">詳細</span>
-                    </Link>
+                    <span
+                      className="edit-o-link"
+                      onClick={() =>
+                        navigate("/order/detail?id=" + row.id, {
+                          state: { prePage: activePage },
+                        })
+                      }
+                    >
+                      詳細
+                    </span>
                     <span
                       className="delete-o-link"
                       onClick={() => handlDeleteSeleted(row.id)}
@@ -133,8 +103,8 @@ export default function OrderTableComponent({
         show={showPopup}
         onClose={() => setShowPopup(false)}
         acceptAction={() => deleteOrder(deletedId)}
-        title="Confirm"
-        body="Do you want to delete selected order info?"
+        title="確認"
+        body="オーダー情報を削除してよろしいですか。"
       ></DialogConfirm>
     </Fragment>
   );
