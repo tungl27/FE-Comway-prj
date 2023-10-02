@@ -293,6 +293,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                             </table>
 
                         </div>
+
                         <div className="div-second-table d-flex justify-content-between">
                             <table className="table-gap">
                                 <thead>
@@ -310,7 +311,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
 
                                 </tbody>
                             </table>
-                            <div className="scroll-table d-flex justify-content-between">
+                            <div className="scroll-table">
                                 <table className="second-table">
                                     <thead>
                                         <tr className="table-column">
@@ -583,7 +584,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                     </tbody>}
                                 </table>
 
-                                <table>
+                                {/* <table>
                                     <thead className="show-scroll-bar">
                                         <tr className="gatu-cell">
                                             <td colSpan={2} className="gatu-cell">合計</td>
@@ -608,8 +609,34 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                         })}
 
                                     </tbody>}
-                                </table>
+                                </table> */}
                             </div>
+                            <table>
+                                    <thead>
+                                        <tr className="gatu-cell">
+                                            <td colSpan={2} className="gatu-cell">合計</td>
+                                        </tr>
+                                        <tr className="table-column">
+                                            <td className="jikan-cell">作業 <br />時間</td>
+                                            <td className="genka-cell">社内  <br />原価</td>
+                                        </tr>
+                                    </thead>
+                                    {<tbody className="vertical-scroll-table" onScroll={(e) => { onSc(e) }}>
+                                        {data.details && data.details.map((detail, index) => {
+                                            return (<>
+                                                <tr key={index + 'sumyotei'} className="table-naiyo table-column" >
+                                                    <td className="naiyo td-cell">{addComma(detail.goukei.yoteiJikan)}</td>
+                                                    <td className="naiyo td-cell">{addComma(detail.goukei.yoteiGenka)}</td>
+                                                </tr >
+                                                <tr key={2 * index + 'sumjisseki'} className="table-naiyo jisseki table-colum">
+                                                    <td className="naiyo td-cell">{addComma(detail.goukei.jissekiJikan)}</td>
+                                                    <td className="naiyo td-cell">{addComma(detail.goukei.jissekiGenka)}</td>
+                                                </tr>
+                                            </>)
+                                        })}
+
+                                    </tbody>}
+                                </table>
 
                         </div>
 
@@ -710,8 +737,10 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                     </tr>
                                 </tbody>
                             </table>
-                            <table>
-                                <thead className="show-scroll-bar">
+                        
+                        </div>
+                        <table>
+                                <thead className="">
                                     <tr className="table-column">
                                         <td colSpan={2} className="gatu-cell-fake"></td>
                                     </tr>
@@ -727,7 +756,6 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
                     </div>}
                     <div className="text-center div-button">
                         <button type="button" id="change" className="btn btn-primary" onClick={() => handleSubmit()}>登録</button>

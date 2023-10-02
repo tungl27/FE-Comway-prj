@@ -217,11 +217,20 @@ label[for=price] {
     height: 65px;
 }
 
-.scroll-table {
+/* .scroll-table {
     position: absolute;
     left: 259px;
     overflow-x: auto;
     width: 673px;
+    height: fit-content;
+} */
+
+.scroll-table {
+    position: absolute;
+    left: 259px;
+    overflow-x: auto;
+    /* 112 * 5 */
+    width: 560px;  
     height: fit-content;
 }
 
@@ -233,7 +242,8 @@ label[for=price] {
     position: absolute;
     left: 259px;
     overflow-x: auto;
-    width: 673px;
+    /* width: 673px; */
+    width: 560px; 
     height: fit-content;
 }
 
