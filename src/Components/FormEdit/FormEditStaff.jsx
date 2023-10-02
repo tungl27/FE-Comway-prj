@@ -191,9 +191,9 @@ export default function FormEdit({ staffId }) {
                                 title={'苗字'} editable={true} errorMsg={error.lastName}></Input>
                             <Input id={'firstname'} value={firstName} required={true} setValue={setFirstName}
                                 title={'名前'} editable={true} errorMsg={error.firstName}></Input>
-                            <Input id={'lastnamefurigana'} value={lastNameFurigana} required={false} setValue={setLastNameFurigana}
+                            <Input id={'lastnamefurigana'} value={lastNameFurigana} required={true} setValue={setLastNameFurigana}
                                 title={'苗字（ふりがな）'} editable={true} errorMsg={error.lastNameFurigana}></Input>
-                            <Input id={'firstnamefurigana'} value={firstNameFurigana} required={false} setValue={setFirstNameFurigana}
+                            <Input id={'firstnamefurigana'} value={firstNameFurigana} required={true} setValue={setFirstNameFurigana}
                                 title={'名前（ふりがな）'} editable={true} errorMsg={error.firstNameFurigana}></Input>
                             <Selection id={'staff_type'} title={'職制'} options={options} required={true} value={staff_type}
                                 setValue={setStaff_type} errorMsg={error.staff_type}></Selection>

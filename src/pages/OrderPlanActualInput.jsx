@@ -16,6 +16,10 @@ export default function OrderPlanActualInput() {
     // const [projectID, setProjectID] = useState([])
     const projectID = new URLSearchParams(params).get("id");
     const setEdited = useContext(SetEdited)
+
+    const location = useLocation();
+    const prePage = location.state.prePage || 1;
+
     const rituF = (data) => {
         if(!data.details){
             return ''
@@ -437,7 +441,7 @@ export default function OrderPlanActualInput() {
         <Fragment>
             <Header></Header>
             <BreadCrumb breadcrumbs={breadcrumbs}></BreadCrumb>
-            <OrderPlan data={projectData} setData={setProjectData} sumHorizontalData={sumHorizontalData} sumVertical={sumVertical} rituF={rituF} rituG={rituG}></OrderPlan>
+            <OrderPlan data={projectData} setData={setProjectData} prePage={prePage} sumHorizontalData={sumHorizontalData} sumVertical={sumVertical} rituF={rituF} rituG={rituG}></OrderPlan>
             <Footer></Footer>
         </Fragment>
     )

@@ -6,7 +6,7 @@ import iskanji from "../../utils/validateKanji";
 import isHiragana from "../../utils/validataHiragana";
 import axios from "axios";
 import { CREATE_STAFF } from "../../theme/configApi";
-import { SetEdited } from "../../State/editContext";
+import { SetEdited, Edited } from "../../State/editContext";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router-dom";
 
@@ -42,13 +42,23 @@ export default function FormCreate() {
     const [showModal, setShowModal] = useState(false)
 
     const setEdited = useContext(SetEdited)
+    const edited = useContext(Edited)
     useEffect(() => {
-        if ((lastName ?? firstName ?? lastNameFurigana ?? firstNameFurigana) === '') {
+        if (   
+            (lastName === '' || lastName === null || lastName === undefined) &&
+            (firstName === '' || firstName === null || firstName === undefined) &&
+            (lastNameFurigana === '' || lastNameFurigana === null || lastNameFurigana === undefined) &&
+            (firstNameFurigana === '' || firstNameFurigana === null || firstNameFurigana === undefined) &&
+            (staff_type === '' || staff_type === null || staff_type === undefined)
+  ) {
             setEdited(false)
         } else {
             setEdited(true)
         }
+      
     }, [lastName, firstName, lastNameFurigana, firstNameFurigana, staff_type])
+
+
     const submitHandler = async () => {
         let errorLastName = ''
         let errorFirstName = ''
@@ -149,7 +159,8 @@ export default function FormCreate() {
                     </div>
                     <div className="text-center">
                         <button ref={refButton} type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
-                        <button type="button" id="cancelRegis" className="btn btn-primary" onClick={() => setShowModal(true)}>キャンセル</button>
+                        <button type="button" id="cancelRegis" className="btn btn-primary" onClick={() => { edited ? setShowModal(true) : navigate('/staff/list') } }>キャンセル</button>
+                        {/* <button type="button" id="cancelRegis" className="btn btn-primary" onClick={() =>   console.log(edited ) }> キャンセル</button> */}
 
                     </div>
                     <p className="message">

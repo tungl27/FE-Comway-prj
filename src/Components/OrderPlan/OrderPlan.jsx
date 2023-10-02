@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
 
-export default function OrderPlan({ data, setData, sumHorizontalData, sumVertical, rituF, rituG }) {
+export default function OrderPlan({ data, setData, sumHorizontalData, sumVertical, rituF, rituG, prePage }) {
     const navigate = useNavigate()
     const [name, setName] = useState(data.projectData === undefined ? '' : data.projectData.project_name);
     const [orderNo, setOrderNo] = useState(data.projectData === undefined ? '' : data.projectData.order_number);
@@ -731,7 +731,7 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                     </div>}
                     <div className="text-center div-button">
                         <button type="button" id="change" className="btn btn-primary" onClick={() => handleSubmit()}>登録</button>
-                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => { edited ? setShowModal(true) : navigate('/order/list') }}>キャンセル</button>
+                        <button type="button" id="cancel" className="btn btn-primary" onClick={() => { edited ? setShowModal(true) :  navigate('/order/list', { state: { prePage: prePage } }) }} >キャンセル</button>
                     </div>
                     {data.projectData && data.goukei && <div className="tables-flex d-flex justify-content-between">
                         <table className="table-top">

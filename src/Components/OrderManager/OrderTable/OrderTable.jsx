@@ -88,9 +88,22 @@ export default function OrderTableComponent({
                     >
                       削除
                     </span>
-                    <Link to={"/order/actual?id=" + row.id}>
+                    {/* <Link to={"/order/actual?id=" + row.id}>
                       <span className="result-o-link">実績入力</span>
-                    </Link>
+                    </Link> */}
+
+                    {/* <Link to={"/order/actual?id=" + row.id}> */}
+                    <span
+                      className="result-o-link"
+                      onClick={() =>
+                        navigate("/order/actual?id=" + row.id, {
+                          state: { prePage: activePage },
+                        })
+                      }
+                    >
+                      実績入力
+                    </span>
+                    {/* </Link> */}
                   </div>
                 </td>
               </tr>
