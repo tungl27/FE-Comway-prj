@@ -9,7 +9,7 @@ import checkNumber from "../../utils/checkNumber";
 import axios from "axios";
 import { CREATE_ORDER } from "../../theme/configApi";
 import addComma from "../../utils/addComma";
-import { SetEdited } from "../../State/editContext";
+import { SetEdited, Edited } from "../../State/editContext";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router-dom";
 
@@ -53,8 +53,22 @@ export default function CreateOrder() {
 
 
     const setEdited = useContext(SetEdited)
+    const edited = useContext(Edited)
     useEffect(() => {
-        if((name ?? orderNo ?? customerName ?? orderDate ?? status ?? orderIncome ?? internalUnitPrice) === ''){
+        if(
+            // (name ?? orderNo ?? customerName ?? orderDate ?? status ?? orderIncome ?? internalUnitPrice) === ''
+        
+            (name === '' || name === null || name === undefined) &&
+            (orderNo === '' || orderNo === null || orderNo === undefined) &&
+            (customerName === '' || customerName === null || customerName === undefined) &&
+            (orderDate === '' || orderDate === null || orderDate === undefined) &&
+            (status === '' || status === null || status === undefined) &&
+            (orderIncome === '' || orderIncome === null || orderIncome === undefined)&&
+            (internalUnitPrice === '' || internalUnitPrice === null || internalUnitPrice === undefined)
+            
+            
+            
+        ){
             setEdited(false)
         }else{
             setEdited(true)
@@ -165,7 +179,10 @@ export default function CreateOrder() {
                     </div>
                     <div className="text-center">
                         <button ref={refButton} type="button" id="regist" className="btn btn-primary" onClick={() => submitHandler()}>登録</button>
-                        <button type="button" id="cancelRegis" className="btn btn-primary" onClick={() => setShowModal(true)}>キャンセル</button>
+                        <button type="button" id="cancelRegis" className="btn btn-primary"
+                        onClick={() => { edited ? setShowModal(true) : navigate('/order/list') } }
+                        // onClick={() => setShowModal(true)}
+                        >キャンセル</button>
 
                     </div>
                     <p className="message">

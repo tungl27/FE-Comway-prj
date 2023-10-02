@@ -734,48 +734,49 @@ export default function OrderPlan({ data, setData, sumHorizontalData, sumVertica
                         <button type="button" id="cancel" className="btn btn-primary" onClick={() => { edited ? setShowModal(true) :  navigate('/order/list', { state: { prePage: prePage } }) }} >キャンセル</button>
                     </div>
                     {data.projectData && data.goukei && <div className="tables-flex d-flex justify-content-between">
-                        <table className="table-top">
+                    <table className="table-top">
                             <thead>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td rowSpan={4} className="table-blue col-shadow table-blue-border">予定</td>
-                                    <td className="table-blue td-cell-2">受注額（A）</td>
+                                    <td rowSpan={4} className="table-orange  col-shadow table-orange-border">予定</td>
+                                    <td className=" table-orange td-cell-2">受注額（A）</td>
                                     <td className="td-cell-2">{addComma(data.projectData.order_income)}</td>
                                 </tr>
                                 <tr>
-                                    <td className="table-blue td-cell-2">実行予算(B)</td>
+                                    <td className="table-orange td-cell-2">実行予算(B)</td>
                                     <td className="td-cell-2">{addComma(data.projectData.order_income * 0.9)}</td>
                                 </tr>
                                 <tr>
-                                    <td className="table-blue td-cell-2">計画済予算(C)</td>
+                                    <td className="table-orange td-cell-2">計画済予算(C)</td>
                                     <td className="td-cell-2">{data.goukei ? addComma(data.goukei.yoteiGenkaGoukei) : 0}</td>
                                 </tr>
                                 <tr>
-                                    <td className="table-blue td-cell-2">計画粗利(D)</td>
+                                    <td className="table-orange td-cell-2">計画粗利(D)</td>
                                     <td className="td-cell-2">{addComma((data.projectData.order_income * 0.9) - (data.goukei ? data.goukei.yoteiGenkaGoukei : 0))}</td>
                                 </tr>
                             </tbody>
                         </table>
+
                         <table className="table-top">
                             <thead>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td rowSpan={4} className="table-orange col-shadow table-orange-border">実績</td>
-                                    <td className="table-orange">使用済工数 (E)</td>
+                                    <td rowSpan={4} className="table-blue col-shadow table-blue-border">実績</td>
+                                    <td className="table-blue  td-cell-2">使用済工数 (E)</td>
                                     <td className="td-cell-2">{data.goukei ? addComma(data.goukei.jissekiGenkaGoukei) : 0}</td>
                                 </tr>
                                 <tr>
-                                    <td className="table-orange">計画比(F)</td>
+                                    <td className="table-blue  td-cell-2">計画比(F)</td>
                                     <td className="td-cell-2">{addComma(data.ritu.keikakubi)}</td>
                                 </tr>
                                 <tr>
-                                    <td className="table-orange">予定工数残(G)</td>
+                                    <td className="table-blue  td-cell-2">予定工数残(G)</td>
                                     <td className="td-cell-2">{addComma(data.ritu.kousuuZan)}</td>
                                 </tr>
                                 <tr>
-                                    <td className="table-orange">実行予算残(H)</td>
+                                    <td className="table-blue  td-cell-2">実行予算残(H)</td>
                                     <td className="td-cell-2">{addComma(data.projectData.order_income * 0.9 - (data.goukei ? data.goukei.jissekiGenkaGoukei : 0) + data.ritu.kousuuZan)}</td>
                                 </tr>
                             </tbody>
